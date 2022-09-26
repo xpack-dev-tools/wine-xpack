@@ -58,7 +58,7 @@
     "properties": {
       "appName": "WineHQ",
       "appLCName": "wine",
-      "platforms": "all",
+      "platforms": "linux-x64",
       "LIQUIDJS": "liquidjs '{ \"APP_NAME\": \"{{ properties.appName }}\", \"APP_LC_NAME\": \"{{ properties.appLCName }}\", \"platforms\": \"{{ properties.platforms }}\" }'"
     },
     "actions": {
