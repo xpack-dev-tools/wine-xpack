@@ -214,25 +214,6 @@ binaries.
 The tests results are available from the
 [Actions](https://github.com/xpack-dev-tools/wine-xpack/actions/) page.
 
-Since GitHub Actions provides a single version of macOS, the
-multi-version macOS tests run on Travis.
-
-To trigger the Travis test, use the xPack action:
-
-- `trigger-travis-macos`
-
-This is equivalent to:
-
-```sh
-bash ${HOME}/Work/wine-xpack.git/scripts/helper/tests/trigger-travis-macos.sh
-```
-
-This script requires the `TRAVIS_COM_TOKEN` variable to be present
-in the environment.
-
-The test results are available from
-[Travis CI](https://app.travis-ci.com/github/xpack-dev-tools/wine-xpack/builds/).
-
 ### Manual tests
 
 Install the binaries on all platforms.
@@ -336,13 +317,13 @@ watching this project.
 
 - select the `xpack-develop` branch
 - check the latest commits `npm run git-log`
-- update `CHANGELOG.md`, add a line like _- v6.17.0-1.1 published on npmjs.com_
+- update `CHANGELOG.md`, add a line like _* v6.17.0-1.1 published on npmjs.com_
 - commit with a message like _CHANGELOG: publish npm v6.17.0-1.1_
 - `npm pack` and check the content of the archive, which should list
   only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`;
   possibly adjust `.npmignore`
-- `npm version 6.17.0-1.1`; the first 5 numbers are the same as the
-  GitHub release; the sixth number is the npm specific version
+- `npm version 6.17.0-1.1`; the first 4 numbers are the same as the
+  GitHub release; the fifth number is the npm specific version
 - the commits and the tag should have been pushed by the `postversion` script;
   if not, push them with `git push origin --tags`
 - `npm publish --tag next` (use `--access public` when publishing for
