@@ -305,13 +305,15 @@ function test_wine()
   echo
   echo "Checking the wine shared libraries..."
 
-  show_libs "$(realpath ${test_bin_path}/wine64)"
+  local wine64_realpath="$(realpath ${test_bin_path}/wine64)"
+
+  show_libs "${wine64_realpath}"
   show_libs "$(realpath ${test_bin_path}/winebuild)"
 
   show_libs "$(realpath ${test_bin_path}/winegcc)"
   show_libs "$(realpath ${test_bin_path}/wineg++)"
 
-  libwine=$(find ${test_bin_path}/../lib* -name 'libwine.so')
+  libwine=$(find "$(dirname ${wine64_realpath})"/../lib* -name 'libwine.so')
   if [ ! -z "${libwine}" ]
   then
     show_libs "$(realpath ${libwine})"
@@ -341,7 +343,7 @@ function test_wine()
   # As a side effect, the "${HOME}/.wine" folder is created
   # and populated with lots of files., so subsequent runs
   # will no longer have to do it.
-  local netstat=$(find "${test_bin_path}"/../lib* -name netstat.exe)
+  local netstat=$(find  "$(dirname ${wine64_realpath})"/../lib* -name netstat.exe)
   run_app "${test_bin_path}/wine64" ${netstat}
 
 }
