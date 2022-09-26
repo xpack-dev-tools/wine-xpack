@@ -328,6 +328,8 @@ function test_wine()
   # run_app "${test_bin_path}/wineg++" --version
 
   run_app "${test_bin_path}/winebuild" --version
+
+  run_verbose mkdir -p ${HOME}/.wine
   run_app "${test_bin_path}/winecfg" --version
   # run_app "${test_bin_path}/wineconsole" dir
 
