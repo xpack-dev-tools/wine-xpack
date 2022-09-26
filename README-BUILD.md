@@ -30,12 +30,10 @@ For native builds, see the `build-native.sh` script.
   the URL of the xPack build scripts repository
 - <https://github.com/xpack-dev-tools/build-helper> - the URL of the
   xPack build helper, used as the `scripts/helper` submodule
-- <https://gitlab.kitware.com/wine/wine> - the URL of the original WineHQ repo
-- <https://github.com/Kitware/WineHQ> - the URL of the GitHub fork
 
 The original releases are distributed via
 
-- <https://github.com/Kitware/WineHQ/releases>
+- <https://dl.winehq.org/wine/source/>
 
 ### Branches
 
@@ -110,7 +108,8 @@ not be accepted by bash.
 ## Versioning
 
 The version string is an extension to semver, the format looks like `6.17.0-1`.
-It includes the three digits with the original WineHQ version and a fourth
+It includes the two digits with the original WineHQ version, a `.0`
+third digit to make it semver compliant, and a fourth
 digit with the xPack release number.
 
 When publishing on the **npmjs.com** server, a fifth digit is appended.
@@ -211,144 +210,15 @@ archives and their SHA signatures, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/wine-*/deploy
-total 102876
--rw-rw-r-- 1 ilg ilg 24994587 Sep 29 11:53 xpack-wine-6.17.0-1-linux-x64.tar.gz
--rw-rw-r-- 1 ilg ilg      104 Sep 29 11:53 xpack-wine-6.17.0-1-linux-x64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 28469621 Sep 29 11:58 xpack-wine-6.17.0-1-win32-x64.zip
--rw-rw-r-- 1 ilg ilg      101 Sep 29 11:58 xpack-wine-6.17.0-1-win32-x64.zip.sha
-```
-
-### Build the Arm GNU/Linux binaries
-
-The supported Arm architectures are:
-
-- `armhf` for 32-bit devices
-- `aarch64` for 64-bit devices
-
-The current platform for Arm GNU/Linux production builds is Raspberry Pi OS,
-running on a pair of Raspberry Pi4s, for separate 64/32 binaries.
-The machine names are `xbbla64` and `xbbla32`.
-
-```sh
-caffeinate ssh xbbla64
-caffeinate ssh xbbla32
-```
-
-Before starting a build, check if Docker is started:
-
-```sh
-docker info
-```
-
-Before running a build for the first time, it is recommended to preload the
-docker images.
-
-```sh
-bash ${HOME}/Work/wine-xpack.git/scripts/helper/build.sh preload-images
-```
-
-The result should look similar to:
-
-```console
-$ docker images
-REPOSITORY       TAG                      IMAGE ID       CREATED          SIZE
-hello-world      latest                   46331d942d63   6 weeks ago     9.14kB
-ilegeul/ubuntu   arm64v8-18.04-xbb-v3.4   4e7f14f6c886   4 months ago    3.29GB
-ilegeul/ubuntu   arm32v7-18.04-xbb-v3.4   a3718a8e6d0f   4 months ago    2.92GB
-```
-
-Since the build takes a while, use `screen` to isolate the build session
-from unexpected events, like a broken
-network connection or a computer entering sleep.
-
-```sh
-screen -S wine
-
-sudo rm -rf ~/Work/wine-*-*
-bash ${HOME}/Work/wine-xpack.git/scripts/helper/build.sh --develop --arm64 --arm32
-```
-
-or, for development builds:
-
-```sh
-sudo rm -rf ~/Work/wine-*-*
-bash ${HOME}/Work/wine-xpack.git/scripts/helper/build.sh --develop --without-html --disable-tests --arm64 --arm32
-```
-
-To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
-`screen -r wine`; to kill the session use `Ctrl-a` `Ctrl-k` and confirm.
-
-About 50 minutes later, the output of the build script is a set of 2
-archives and their SHA signatures, created in the `deploy` folder:
-
-```console
-$ ls -l ~/Work/wine-*/deploy
-total 45744
--rw-rw-r-- 1 ilg ilg 23714604 Sep 29 09:14 xpack-wine-6.17.0-1-linux-arm64.tar.gz
--rw-rw-r-- 1 ilg ilg      106 Sep 29 09:14 xpack-wine-6.17.0-1-linux-arm64.tar.gz.sha
--rw-rw-r-- 1 ilg ilg 23114964 Sep 29 09:38 xpack-wine-6.17.0-1-linux-arm.tar.gz
--rw-rw-r-- 1 ilg ilg      104 Sep 29 09:38 xpack-wine-6.17.0-1-linux-arm.tar.gz.sha
-```
-
-### Build the macOS binaries
-
-The current platforms for macOS production builds are:
-
-- a macOS 10.13.6 running on a MacBook Pro 2011 with 32 GB of RAM and
-  a fast SSD; the machine name is `xbbmi`
-- a macOS 11.6.1 running on a Mac Mini M1 2020 with 16 GB of RAM;
-  the machine name is `xbbma`
-
-```sh
-caffeinate ssh xbbmi
-caffeinate ssh xbbma
-```
-
-To build the latest macOS version:
-
-```sh
-screen -S wine
-
-rm -rf ~/Work/wine-*-*
-caffeinate bash ${HOME}/Work/wine-xpack.git/scripts/helper/build.sh --develop --macos
-```
-
-or, for development builds:
-
-```sh
-rm -rf ~/Work/wine-arm-*-*
-caffeinate bash ${HOME}/Work/wine-xpack.git/scripts/helper/build.sh --develop --without-html --disable-tests --macos
-```
-
-To detach from the session, use `Ctrl-a` `Ctrl-d`; to reattach use
-`screen -r wine`; to kill the session use `Ctrl-a` `Ctrl-\` or
-`Ctrl-a` `Ctrl-k` and confirm.
-
-Several minutes later, the output of the build script is a compressed
-archive and its SHA signature, created in the `deploy` folder:
-
-```console
-$ ls -l ~/Work/wine-*/deploy
-total 38472
--rw-r--r--  1 ilg  staff  19689560 Sep 29 11:56 xpack-wine-6.17.0-1-darwin-x64.tar.gz
--rw-r--r--  1 ilg  staff       105 Sep 29 11:56 xpack-wine-6.17.0-1-darwin-x64.tar.gz.sha
+total 151928
+50860
+-rw-rw-rw- 1 ilg ilg 155566720 Sep 26 19:55 xpack-wine-6.17.0-1-linux-x64.tar.gz
+50861
+-rw-rw-rw- 1 ilg ilg       103 Sep 26 19:55 xpack-wine-6.17.0-1-linux-x64.tar.gz.sha
 ```
 
 ## Subsequent runs
 
-### Separate platform specific builds
-
-Instead of `--all`, you can use any combination of:
-
-```console
---linux64 --win64
-```
-
-On Arm, instead of `--all`, you can use any combination of:
-
-```console
---arm64 --arm32
-```
 
 ### `clean`
 
@@ -422,9 +292,7 @@ look like:
 
 ```console
 $ .../xpack-wine-6.17.0-1/bin/wine --version
-wine version 6.17.0-g290a19d
-
-WineHQ suite maintained and supported by Kitware (kitware.com/wine).
+wine-6.17
 ```
 
 ## Installed folders
@@ -437,27 +305,47 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/wine/6.17.0-1.1/.content
 /Users/ilg/Library/xPacks/\@xpack-dev-tools/wine/6.17.0-1.1/.content/
 ├── README.md
 ├── bin
-│   ├── ccmake
-│   ├── wine
-│   ├── cpack
-│   └── ctest
+│   ├── function_grep.pl
+│   ├── msidb
+│   ├── msiexec
+│   ├── notepad
+│   ├── regedit
+│   ├── regsvr32
+│   ├── widl
+│   ├── wine64
+│   ├── wine64-preloader
+│   ├── wineboot
+│   ├── winebuild
+│   ├── winecfg
+│   ├── wineconsole
+│   ├── winecpp -> winegcc
+│   ├── winedbg
+│   ├── winedump
+│   ├── winefile
+│   ├── wineg++ -> winegcc
+│   ├── winegcc
+│   ├── winemaker
+│   ├── winemine
+│   ├── winepath
+│   ├── wineserver
+│   ├── wmc
+│   └── wrc
 ├── distro-info
 │   ├── CHANGELOG.md
-│   ├── licenses
 │   ├── patches
 │   └── scripts
-├── doc
-│   └── wine-3.19
+├── include
+│   └── wine
+├── lib
+│   └── wine
 ├── libexec
-│   └── libncurses.6.dylib
+│   ├── libresolv-2.27.so
+│   └── libresolv.so.2 -> libresolv-2.27.so
 └── share
-    ├── aclocal
-    ├── bash-completion
-    ├── wine-3.19
-    ├── emacs
-    └── vim
+    ├── applications
+    └── wine
 
-14 directories, 7 files
+12 directories, 29 files
 ```
 
 No other files are installed in any system folders or other locations.
