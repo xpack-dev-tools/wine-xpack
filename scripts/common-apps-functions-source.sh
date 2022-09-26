@@ -13,91 +13,136 @@
 
 # -----------------------------------------------------------------------------
 
-function build_cmake()
+function wine_common_options()
 {
-  local cmake_version="$1"
+  config_options+=("--without-alsa")
+  config_options+=("--without-capi")
+  config_options+=("--without-cms")
+  config_options+=("--without-coreaudio")
+  config_options+=("--without-cups")
+  config_options+=("--without-dbus")
+  config_options+=("--without-faudio")
+  config_options+=("--without-fontconfig")
+  config_options+=("--without-freetype")
+  config_options+=("--without-gettext")
+  config_options+=("--without-gettextpo")
+  config_options+=("--without-gphoto")
+  config_options+=("--without-gnutls")
+  config_options+=("--without-gsm")
+  config_options+=("--without-gssapi")
+  config_options+=("--without-gstreamer")
+  config_options+=("--without-hal")
+  config_options+=("--without-inotify")
+  config_options+=("--without-jpeg")
+  config_options+=("--without-jxrlib")
+  config_options+=("--without-krb5")
+  config_options+=("--without-ldap")
+  config_options+=("--without-mpg123")
+  config_options+=("--without-netapi")
+  config_options+=("--without-openal")
+  config_options+=("--without-opengl")
+  config_options+=("--without-osmesa")
+  config_options+=("--without-oss")
+  config_options+=("--without-pcap")
+  config_options+=("--without-png")
+  config_options+=("--without-pulse")
+  config_options+=("--without-quicktime")
+  config_options+=("--without-sane")
+  config_options+=("--without-sdl")
+  config_options+=("--without-tiff")
+  config_options+=("--without-udev")
+  config_options+=("--without-usb")
+  config_options+=("--without-v4l2")
+  config_options+=("--without-vkd3d")
+  config_options+=("--without-vulkan")
+  config_options+=("--without-xcomposite")
+  config_options+=("--without-xcursor")
+  config_options+=("--without-xfixes")
+  config_options+=("--without-xinerama")
+  config_options+=("--without-xinput")
+  config_options+=("--without-xinput2")
+  config_options+=("--without-xml")
+  config_options+=("--without-xrandr")
+  config_options+=("--without-xrender")
+  config_options+=("--without-xshape")
+  config_options+=("--without-xshm")
+  config_options+=("--without-xslt")
+  config_options+=("--without-xxf86vm")
+  config_options+=("--without-x")
+}
 
-  # https://wine.org
-  # https://gitlab.kitware.com/wine/wine
-  # https://github.com/Kitware/WineHQ/releases
-  # https://github.com/Kitware/WineHQ/releases/download/v3.21.6/wine-3.21.6.tar.gz
+function build_wine()
+{
+  # https://www.winehq.org
+  # https://dl.winehq.org/wine/source/
+  # https://dl.winehq.org/wine/source/6.x/wine-6.17.tar.xz
 
-  # https://archlinuxarm.org/packages/aarch64/wine/files/PKGBUILD
+  # https://github.com/archlinux/svntogit-community/blob/packages/wine/trunk/PKGBUILD
 
-  # 22 Sep 2020, "3.18.3"
+  # 2017-09-16, "4.3"
+  # 2019-11-29, "4.21"
+  # Fails with a missing yywrap
+  # 2020-01-21, "5.0"
+  # 2020-02-02, "5.1"
+  # 2021-06-04, "6.10"
+  # 2020-11-20, "5.22"
+  # 2021-09-10, "6.17"
+  # 2021-11-05, "6.21"
+  # 2021-12-03, "6.23"
 
-  # Do not make them local!
-  # The folder name as resulted after being extracted from the archive.
-  local cmake_src_folder_name="wine-${cmake_version}"
+  local wine_version="$1"
 
-  local cmake_archive="${cmake_src_folder_name}.tar.gz"
-  local cmake_url="https://github.com/Kitware/WineHQ/releases/download/v{$cmake_version}/${cmake_archive}"
+  local wine_version_major="$(echo ${wine_version} | sed -e 's|\([0-9][0-9]*\)\.\([0-9][0-9]*\)|\1|')"
+  local wine_version_minor="$(echo ${wine_version} | sed -e 's|\([0-9][0-9]*\)\.\([0-9][0-9]*\)|\2|')"
 
-  # The folder name  for build, licenses, etc.
-  local cmake_folder_name="${cmake_src_folder_name}"
+  local wine_src_folder_name="wine-${wine_version}"
 
-  mkdir -pv "${LOGS_FOLDER_PATH}/${cmake_folder_name}"
+  local wine_archive="${wine_src_folder_name}.tar.xz"
 
-  local cmake_patch_file_name="wine-${cmake_version}.git.patch"
-  local cmake_stamp_file_path="${INSTALL_FOLDER_PATH}/stamp-${cmake_folder_name}-installed"
-  if [ ! -f "${cmake_stamp_file_path}" ]
+  if [ "${wine_version_minor}" != "0" ]
+  then
+    wine_version_minor="x"
+  fi
+  local wine_url="https://dl.winehq.org/wine/source/${wine_version_major}.${wine_version_minor}/${wine_archive}"
+
+  local wine_folder_name="${wine_src_folder_name}"
+
+  mkdir -pv "${LOGS_FOLDER_PATH}/${wine_folder_name}"
+
+  local wine_stamp_file_path="${STAMPS_FOLDER_PATH}/stamp-${wine_folder_name}-installed"
+  if [ ! -f "${wine_stamp_file_path}" ]
   then
 
     cd "${SOURCES_FOLDER_PATH}"
 
-    if [ ! -d "${SOURCES_FOLDER_PATH}/${cmake_src_folder_name}" ]
-    then
-      (
-        if [ ! -z ${CMAKE_GIT_URL+x} ]
-        then
-          cd "${SOURCES_FOLDER_PATH}"
-          git_clone "${CMAKE_GIT_URL}" "${CMAKE_GIT_BRANCH}" \
-              "${CMAKE_GIT_COMMIT}" "${cmake_src_folder_name}"
-        else
-          download_and_extract "${cmake_url}" "${cmake_archive}" \
-            "${cmake_src_folder_name}" "${cmake_patch_file_name}"
-        fi
-      )
-    fi
+    download_and_extract "${wine_url}" "${wine_archive}" \
+      "${wine_src_folder_name}"
 
+    # The 64-bit variant.
     (
-      mkdir -pv "${BUILD_FOLDER_PATH}/${cmake_folder_name}"
-      cd "${BUILD_FOLDER_PATH}/${cmake_folder_name}"
+      mkdir -pv "${BUILD_FOLDER_PATH}/${wine_folder_name}-64"
+      cd "${BUILD_FOLDER_PATH}/${wine_folder_name}-64"
 
+      # None so far.
       xbb_activate_installed_dev
 
-      CFLAGS="$(echo ${XBB_CPPFLAGS} ${XBB_CFLAGS} | sed -e 's|-O[0123s]||')"
-      CXXFLAGS="$(echo ${XBB_CPPFLAGS} ${XBB_CFLAGS} | sed -e 's|-O[0123s]||')"
+      CPPFLAGS="${XBB_CPPFLAGS}"
+      CFLAGS="${XBB_CFLAGS_NO_W}"
+      CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
 
-      LDFLAGS="$(echo ${XBB_CPPFLAGS} ${XBB_LDFLAGS_APP_STATIC_GCC} | sed -e 's|-O[0123s]||')"
+      LDFLAGS="${XBB_LDFLAGS_APP_STATIC_GCC}"
+      # LDFLAGS="${XBB_LDFLAGS_APP}"
       if [ "${TARGET_PLATFORM}" == "linux" ]
       then
         LDFLAGS+=" -Wl,-rpath,${LD_LIBRARY_PATH}"
       fi
 
-      if [ "${TARGET_PLATFORM}" == "darwin" ]
-      then
-        # With gcc-xbb it fails with:
-        # Authorization.h:193:14: error: variably modified ‘bytes’ at file scope
-        export CC=clang
-        export CXX=clang++
-        # clang: error: unsupported option '-static-libgcc'
-        LDFLAGS=$(echo ${LDFLAGS} | sed -e 's|-static-libgcc||')
-      fi
-
+      export CPPFLAGS
       export CFLAGS
       export CXXFLAGS
       export LDFLAGS
 
-      local build_type
-      if [ "${IS_DEBUG}" == "y" ]
-      then
-        build_type=Debug
-      else
-        build_type=Release
-      fi
-
-      if true # [ ! -f "CMakeCache.txt" ]
+      if [ ! -f "config.status" ]
       then
         (
           if [ "${IS_DEVELOP}" == "y" ]
@@ -106,200 +151,195 @@ function build_cmake()
           fi
 
           echo
-          echo "Running wine wine..."
+          echo "Running wine64 configure..."
+
+          if [ "${IS_DEVELOP}" == "y" ]
+          then
+            run_verbose bash "${SOURCES_FOLDER_PATH}/${wine_src_folder_name}/configure" --help
+          fi
 
           config_options=()
 
-          # If more verbosity is needed:
-          #  -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON
-          # Disable ccmake for now
-          # -DBUILD_CursesDialog=OFF
-          # Disable tests
-          # -DBUILD_TESTING=OFF
+          config_options+=("--prefix=${BINS_INSTALL_FOLDER_PATH}")
+          config_options+=("--mandir=${LIBS_INSTALL_FOLDER_PATH}/share/man")
 
-          # -DCMAKE_SYSTEM_NAME tricks it behave as when on Windows
+          config_options+=("--build=${BUILD}")
+          config_options+=("--host=${HOST}")
+          config_options+=("--target=${TARGET}")
 
-          # -DBUILD_CursesDialog=ON
-          # -DCMAKE_PREFIX_PATH="${LIBS_INSTALL_FOLDER_PATH}" \
+          config_options+=("--with-mingw")
+          config_options+=("--with-pthread")
+          config_options+=("--with-unwind")
 
-          config_options+=("-G" "Ninja")
+          wine_common_options
 
-          config_options+=("-DCMAKE_VERBOSE_MAKEFILE=ON")
-          config_options+=("-DCMAKE_BUILD_TYPE=${build_type}")
+          config_options+=("--enable-win64")
 
-          # config_options+=("-DBUILD_TESTING=ON")
-          config_options+=("-DBUILD_TESTING=OFF")
+          config_options+=("--disable-tests")
+          config_options+=("--disable-win16")
 
-          if [ "${TARGET_PLATFORM}" == "win32" ]
-          then
-            config_options+=("-DCMAKE_SYSTEM_NAME=Windows")
+          run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${wine_src_folder_name}/configure" \
+            "${config_options[@]}"
 
-            config_options+=("-DCMake_RUN_CXX_FILESYSTEM=0")
-            config_options+=("-DCMake_RUN_CXX_FILESYSTEM__TRYRUN_OUTPUT=")
-
-            # Windows does not need ncurses, since ccmake is not built.
-          elif [ "${TARGET_PLATFORM}" == "darwin" ]
-          then
-            # Hack
-            # https://gitlab.kitware.com/wine/wine/-/issues/20570#note_732291
-            config_options+=("-DBUILD_CursesDialog=ON")
-
-            # To search all packages in the given path:
-            # config_options+=("-DCMAKE_PREFIX_PATH=${LIBS_INSTALL_FOLDER_PATH}")
-
-            # To search only curses in the given path:
-            config_options+=("-DCurses_ROOT=${LIBS_INSTALL_FOLDER_PATH}")
-
-            # Hack: Otherwise the configure step fails with:
-            # WineHQ Error at CMakeLists.txt:107 (message):
-            # The C++ compiler does not support C++11 (e.g.  std::unique_ptr).
-            config_options+=("-DCMake_HAVE_CXX_UNIQUE_PTR=ON")
-          elif [ "${TARGET_PLATFORM}" == "linux" ]
-          then
-            config_options+=("-DBUILD_CursesDialog=ON")
-            config_options+=("-DCurses_ROOT=${LIBS_INSTALL_FOLDER_PATH}")
-          fi
-
-          # Warning: Expensive, it adds about 30 MB of files to the archive.
-          if [ "${WITH_HTML}" == "y" ]
-          then
-            config_options+=("-DSPHINX_HTML=ON")
-          else
-            config_options+=("-DSPHINX_HTML=OFF")
-          fi
-
-          config_options+=("-DCPACK_BINARY_7Z=ON")
-          config_options+=("-DCPACK_BINARY_ZIP=ON")
-
-          config_options+=("-DCMAKE_INSTALL_PREFIX=${APP_PREFIX}")
-
-          # The mingw build also requires RC pointing to windres.
-          run_verbose_timed wine \
-            "${config_options[@]}" \
-            \
-            "${SOURCES_FOLDER_PATH}/${cmake_src_folder_name}"
-
-        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${cmake_folder_name}/wine-output.txt"
+          cp "config.log" "${LOGS_FOLDER_PATH}/${wine_folder_name}/config-log-64-$(ndate).txt"
+        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${wine_folder_name}/configure-output-64-$(ndate).txt"
       fi
 
       (
         echo
-        echo "Running wine build..."
+        echo "Running wine64 make..."
 
-        if [ "${IS_DEVELOP}" == "y" ]
+        # Build.
+        run_verbose make -j ${JOBS} STRIP=true
+
+        run_verbose make install
+
+        # wine: Unhandled page fault on read access to 0000000000000108 at address 000000038B5B4C00 (thread 0114), starting debugger...
+        # run_verbose make test
+
+      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${wine_folder_name}/make-output-64-$(ndate).txt"
+    )
+
+    # -------------------------------------------------------------------------
+
+    if [ "${SKIP_WIN32:-}" != "y" ]
+    then
+      (
+        mkdir -pv "${BUILD_FOLDER_PATH}/${wine_folder_name}-32"
+        cd "${BUILD_FOLDER_PATH}/${wine_folder_name}-32"
+
+        # None so far.
+        xbb_activate_installed_dev
+
+        CPPFLAGS="${XBB_CPPFLAGS}"
+        CFLAGS="${XBB_CFLAGS_NO_W}"
+        CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
+
+        LDFLAGS="${XBB_LDFLAGS_APP_STATIC_GCC}"
+        # LDFLAGS="${XBB_LDFLAGS_APP}"
+        if [ "${TARGET_PLATFORM}" == "linux" ]
         then
-          run_verbose_timed wine \
-            --build . \
-            --parallel ${JOBS} \
-            --verbose \
-            --config "${build_type}"
-        else
-          run_verbose_timed wine \
-            --build . \
-            --parallel ${JOBS} \
-            --config "${build_type}"
+          LDFLAGS+=" -Wl,-rpath,${LD_LIBRARY_PATH}"
+        fi
+
+        export CPPFLAGS
+        export CFLAGS
+        export CXXFLAGS
+        export LDFLAGS
+
+        if [ ! -f "config.status" ]
+        then
+          (
+            if [ "${IS_DEVELOP}" == "y" ]
+            then
+              env | sort
+            fi
+
+            echo
+            echo "Running wine32 configure..."
+
+            if [ "${IS_DEVELOP}" == "y" ]
+            then
+              run_verbose bash "${SOURCES_FOLDER_PATH}/${wine_src_folder_name}/configure" --help
+            fi
+
+            config_options=()
+
+            config_options+=("--prefix=${BINS_INSTALL_FOLDER_PATH}")
+            config_options+=("--libdir=${BINS_INSTALL_FOLDER_PATH}/lib32")
+            config_options+=("--mandir=${LIBS_INSTALL_FOLDER_PATH}/share/man")
+
+            config_options+=("--build=${BUILD}")
+            config_options+=("--host=${HOST}")
+            config_options+=("--target=${TARGET}")
+
+            config_options+=("--with-mingw")
+            config_options+=("--with-pthread")
+            config_options+=("--with-unwind")
+
+            wine_common_options
+
+            config_options+=("--with-wine64=${BUILD_FOLDER_PATH}/${wine_folder_name}-64")
+
+            config_options+=("--disable-tests")
+            config_options+=("--disable-win16")
+
+            run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${wine_src_folder_name}/configure" \
+              "${config_options[@]}"
+
+            cp "config.log" "${LOGS_FOLDER_PATH}/${wine_folder_name}/config-log-32-$(ndate).txt"
+          ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${wine_folder_name}/configure-output-32-$(ndate).txt"
         fi
 
         (
-          # The install procedure runs some resulted executables, which require
-          # the libssl and libcrypt libraries from XBB.
-          xbb_activate_libs
-
           echo
-          echo "Running wine install..."
+          echo "Running wine32 make..."
 
-          run_verbose_timed wine \
-            --build . \
-            --config "${build_type}" \
-            -- \
-            install
+          # Build.
+          run_verbose make -j ${JOBS} STRIP=true
 
-        )
+          run_verbose make install
 
-      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${cmake_folder_name}/build-output.txt"
+          # wine: Unhandled page fault on read access to 0000000000000108 at address 000000038B5B4C00 (thread 0114), starting debugger...
+          # run_verbose make test
 
-      copy_license \
-        "${SOURCES_FOLDER_PATH}/${cmake_src_folder_name}" \
-        "${cmake_folder_name}"
-
-      (
-        cd "${BUILD_FOLDER_PATH}"
-
-        copy_cmake_logs "${cmake_folder_name}"
+        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${wine_folder_name}/make-output-32-$(ndate).txt"
       )
-    )
+    fi
 
-    touch "${cmake_stamp_file_path}"
+    hash -r
+
+    touch "${wine_stamp_file_path}"
 
   else
     echo "Component wine already installed."
   fi
 
-  tests_add "test_cmake"
+  test_functions+=("test_wine")
 }
 
-# -----------------------------------------------------------------------------
-
-function test_cmake()
+function test_wine()
 {
-  echo
-  echo "Running the binaries..."
+  (
+    # xbb_activate_installed_bin
 
-  if [ -d "xpacks/.bin" ]
-  then
-    TEST_BIN_PATH="$(pwd)/xpacks/.bin"
-  elif [ -d "${APP_PREFIX}/bin" ]
-  then
-    TEST_BIN_PATH="${APP_PREFIX}/bin"
-  else
-    echo "Wrong folder."
-    exit 1
-  fi
+    echo
+    echo "Checking the wine shared libraries..."
 
-  apps_names=("wine" "ctest" "cpack")
-  if [ "${TARGET_PLATFORM}" != "win32" ]
-  then
-    apps_names+=("ccmake")
-  fi
+    show_libs "$(realpath ${BINS_INSTALL_FOLDER_PATH}/bin/wine64)"
+    show_libs "$(realpath ${BINS_INSTALL_FOLDER_PATH}/bin/winebuild)"
 
-  for app in ${apps_names[@]}
-  do
-    run_app "${TEST_BIN_PATH}/${app}" --version
-    run_app "${TEST_BIN_PATH}/${app}" --help
-  done
+    show_libs "$(realpath ${BINS_INSTALL_FOLDER_PATH}/bin/winegcc)"
+    show_libs "$(realpath ${BINS_INSTALL_FOLDER_PATH}/bin/wineg++)"
 
-  # ---------------------------------------------------------------------------
+    libwine=$(find ${BINS_INSTALL_FOLDER_PATH}/lib* -name 'libwine.so')
+    if [ ! -z "${libwine}" ]
+    then
+      show_libs "$(realpath ${libwine})"
+    fi
 
-  # wine is not happy when started via wine, since it tries to
-  # execute various other tools (like it tries to get the version of ninja).
-  if [ "${TARGET_PLATFORM}" != "win32" ]
-  then
-    (
-      local test_folder_path="$(mktemp /tmp/wine-test-itself.XXXXX)"
+    echo
+    echo "Testing if wine binaries start properly..."
 
-      # Simple test, generate itself.
-      rm -rf "${test_folder_path}"
-      mkdir -pv "${test_folder_path}"
+    # First check if the program is able to tell its version.
+    run_app "${BINS_INSTALL_FOLDER_PATH}/bin/wine64" --version
 
-      cd "${test_folder_path}"
+    # Require gcc-xbs
+    # run_app "${BINS_INSTALL_FOLDER_PATH}/bin/winegcc" --version
+    # run_app "${BINS_INSTALL_FOLDER_PATH}/bin/wineg++" --version
 
-      if [ "${IS_DEVELOP}" == "y" ]
-      then
-        env | sort
-      fi
+    run_app "${BINS_INSTALL_FOLDER_PATH}/bin/winebuild" --version
+    run_app "${BINS_INSTALL_FOLDER_PATH}/bin/winecfg" --version
+    # run_app "${BINS_INSTALL_FOLDER_PATH}/bin/wineconsole" dir
 
-      echo
-      echo "Testing if it can generate itself..."
-
-      # xbb_activate
-      run_app "${TEST_BIN_PATH}/wine" \
-        "-DCMAKE_USE_OPENSSL=OFF" \
-        "${SOURCES_FOLDER_PATH}/wine-${CMAKE_VERSION}"
-    )
-  fi
-
-  echo
-  echo "Local tests completed successfuly."
+    # This test should check if the program is able to start
+    # a simple executable.
+    # As a side effect, the "${HOME}/.wine" folder is created
+    # and populated with lots of files., so subsequent runs
+    # will no longer have to do it.
+    local netstat=$(find "${BINS_INSTALL_FOLDER_PATH}"/lib* -name netstat.exe)
+    run_app "${BINS_INSTALL_FOLDER_PATH}/bin/wine64" ${netstat}
+  )
 }
 
 # -----------------------------------------------------------------------------
