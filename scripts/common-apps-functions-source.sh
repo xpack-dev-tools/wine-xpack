@@ -305,11 +305,11 @@ function test_wine()
   echo
   echo "Checking the wine shared libraries..."
 
-  show_libs "$(realpath ${BINS_INSTALL_FOLDER_PATH}/bin/wine64)"
-  show_libs "$(realpath ${BINS_INSTALL_FOLDER_PATH}/bin/winebuild)"
+  show_libs "$(realpath ${test_bin_path}/wine64)"
+  show_libs "$(realpath ${test_bin_path}/winebuild)"
 
-  show_libs "$(realpath ${BINS_INSTALL_FOLDER_PATH}/bin/winegcc)"
-  show_libs "$(realpath ${BINS_INSTALL_FOLDER_PATH}/bin/wineg++)"
+  show_libs "$(realpath ${test_bin_path}/winegcc)"
+  show_libs "$(realpath ${test_bin_path}/wineg++)"
 
   libwine=$(find ${BINS_INSTALL_FOLDER_PATH}/lib* -name 'libwine.so')
   if [ ! -z "${libwine}" ]
@@ -321,23 +321,23 @@ function test_wine()
   echo "Testing if wine binaries start properly..."
 
   # First check if the program is able to tell its version.
-  run_app "${BINS_INSTALL_FOLDER_PATH}/bin/wine64" --version
+  run_app "${test_bin_path}/wine64" --version
 
   # Require gcc-xbs
-  # run_app "${BINS_INSTALL_FOLDER_PATH}/bin/winegcc" --version
-  # run_app "${BINS_INSTALL_FOLDER_PATH}/bin/wineg++" --version
+  # run_app "${test_bin_path}/winegcc" --version
+  # run_app "${test_bin_path}/wineg++" --version
 
-  run_app "${BINS_INSTALL_FOLDER_PATH}/bin/winebuild" --version
-  run_app "${BINS_INSTALL_FOLDER_PATH}/bin/winecfg" --version
-  # run_app "${BINS_INSTALL_FOLDER_PATH}/bin/wineconsole" dir
+  run_app "${test_bin_path}/winebuild" --version
+  run_app "${test_bin_path}/winecfg" --version
+  # run_app "${test_bin_path}/wineconsole" dir
 
   # This test should check if the program is able to start
   # a simple executable.
   # As a side effect, the "${HOME}/.wine" folder is created
   # and populated with lots of files., so subsequent runs
   # will no longer have to do it.
-  local netstat=$(find "${BINS_INSTALL_FOLDER_PATH}"/lib* -name netstat.exe)
-  run_app "${BINS_INSTALL_FOLDER_PATH}/bin/wine64" ${netstat}
+  local netstat=$(find "${test_bin_path}"/../lib* -name netstat.exe)
+  run_app "${test_bin_path}/wine64" ${netstat}
 
 }
 
