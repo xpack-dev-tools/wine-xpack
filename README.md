@@ -116,8 +116,9 @@ For more details please read the
 
 ### Versioning
 
-The version strings used by the WineHQ project are three number strings
-like `6.17.0`; to this string the xPack distribution adds a four number,
+The version strings used by the WineHQ project are two number strings
+like `6.17`; to make it semver compatible, `.0` is added as the third digit;
+the xPack distribution adds a four number,
 but since semver allows only three numbers, all additional ones can
 be added only as pre-release strings, separated by a dash,
 like `6.17.0-1`. When published as a npm package, the version gets
