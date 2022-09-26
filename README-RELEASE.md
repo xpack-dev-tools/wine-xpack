@@ -326,8 +326,8 @@ watching this project.
   GitHub release; the fifth number is the npm specific version
 - the commits and the tag should have been pushed by the `postversion` script;
   if not, push them with `git push origin --tags`
-- `npm publish --tag next` (use `--access public` when publishing for
-  the first time)
+- `npm publish --tag next` (use `npm publish --access public`
+  when publishing for the first time; add the `next` tag)
 
 After a few moments the version will be visible at:
 
