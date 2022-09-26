@@ -102,7 +102,7 @@ Before the real build, run a test build on the development machine (`wksi`)
 or the production machines (`xbbma`, `xbbmi`):
 
 ```sh
-rm -rf ~/Work/wine-*-*
+rm -rf ~/Work/wine-[0-9]*-*
 
 caffeinate bash ${HOME}/Work/wine-xpack.git/scripts/helper/build.sh --develop --macos
 ```
@@ -110,7 +110,7 @@ caffeinate bash ${HOME}/Work/wine-xpack.git/scripts/helper/build.sh --develop --
 Similarly on the Intel Linux (`xbbli`):
 
 ```sh
-sudo rm -rf ~/Work/wine-*-*
+sudo rm -rf ~/Work/wine-[0-9]*-*
 
 bash ${HOME}/Work/wine-xpack.git/scripts/helper/build.sh --develop --linux64
 ```
