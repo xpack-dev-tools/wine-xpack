@@ -329,9 +329,12 @@ function test_wine()
 
   run_app "${test_bin_path}/winebuild" --version
 
-  run_verbose mkdir -p ${HOME}/.wine
+  # When running in Docker with the home mounted, wine throws:
+  # wine: '/github/home' is not owned by you, refusing to create a configuration directory there
+  # To avoid it, create the .wine folder beforehand.
+  run_verbose mkdir -p "${HOME}/.wine"
+
   run_app "${test_bin_path}/winecfg" --version
-  # run_app "${test_bin_path}/wineconsole" dir
 
   # This test should check if the program is able to start
   # a simple executable.
