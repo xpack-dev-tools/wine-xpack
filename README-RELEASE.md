@@ -241,23 +241,19 @@ On GNU/Linux and macOS systems, use:
 
 ```sh
 .../xpack-wine-6.17.0-1/bin/wine --version
-wine version 6.17.0
-
-WineHQ suite maintained and supported by Kitware (kitware.com/wine).
+wine-6.17
 ```
 
 On Windows use:
 
 ```dos
 ...\xpack-wine-6.17.0-1\bin\wine --version
-wine version 6.17.0
-
-WineHQ suite maintained and supported by Kitware (kitware.com/wine).
+wine-6.17
 ```
 
 ## Create a new GitHub pre-release draft
 
-- in `CHANGELOG.md`, add the release date and a message like _- v6.17.0-1 released_
+- in `CHANGELOG.md`, add the release date and a message like _* v6.17.0-1 released_
 - commit with _CHANGELOG update_
 - check and possibly update the `templates/body-github-release-liquid.md`
 - push the `xpack-develop` branch
