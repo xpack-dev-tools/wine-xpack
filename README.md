@@ -1,2 +1,4 @@
 # wine-xpack
-A binary xPack with WineHQ, the Windows compatibility layer
+
+This project does not use the `master` branch, please
+switch to the `xpack` branch to get the project files.
