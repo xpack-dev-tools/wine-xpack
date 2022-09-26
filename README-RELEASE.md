@@ -317,7 +317,7 @@ watching this project.
 
 - open the `package.json` file
 - check if the links in the `bin` property cover the actual binaries
-- if necessary, also check on Windows
+- rename `winewidl`
 
 ## Update package.json binaries
 
