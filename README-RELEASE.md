@@ -82,7 +82,7 @@ but in the version specific release page.
 
 - open the `CHANGELOG.md` file
 - check if all previous fixed issues are in
-- add a new entry like _- v6.17.0-1 prepared_
+- add a new entry like _* v6.17.0-1 prepared_
 - commit with a message like _prepare v6.17.0-1_
 
 Note: if you missed to update the `CHANGELOG.md` before starting the build,
