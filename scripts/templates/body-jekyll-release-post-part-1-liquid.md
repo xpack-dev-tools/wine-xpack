@@ -4,8 +4,9 @@ title:  xPack WineHQ v{{ RELEASE_VERSION }} released
 summary: "Version **{{ RELEASE_VERSION }}** is a new release; it follows the upstream release."
 
 version: "{{ RELEASE_VERSION }}"
-upstream_version: "3.22.6"
-upstream_release_date: "28 Jul 2022"
+upstream_version: "6.17"
+upstream_version_major: "6"
+upstream_release_date: "2021-09-10"
 npm_subversion: "1"
 download_url: https://github.com/xpack-dev-tools/wine-xpack/releases/tag/v{{ RELEASE_VERSION }}/
 
@@ -23,16 +24,10 @@ tags:
 ---
 
 [The xPack WineHQ](https://xpack.github.io/wine/)
-is a standalone cross-platform binary distribution of
-[WineHQ](http://wine.org).
+is a standalone binary distribution of
+[WineHQ](http://www.winehq.org).
 
-There are separate binaries for **Windows** (Intel 64-bit),
-**macOS** (Intel 64-bit, Apple Silicon 64-bit)
-and **GNU/Linux** (Intel 64-bit, Arm 32/64-bit).
-
-{% raw %}{% include note.html content="The main targets for the Arm binaries
-are the **Raspberry Pi** class devices (armv7l and aarch64;
-armv6 is not supported)." %}{% endraw %}
+There are binaries **GNU/Linux** (Intel 64-bit).
 
 ## Download
 
@@ -43,14 +38,6 @@ The binary files are available from GitHub [Releases]({% raw %}{{ page.download_
 - GNU/Linux Intel 64-bit: any system with **GLIBC 2.27** or higher
   (like Ubuntu 18 or later, Debian 10 or later, RedHat 8 later,
   Fedora 29 or later, etc)
-- GNU/Linux Arm 32/64-bit: any system with **GLIBC 2.27** or higher
-  (like Raspberry Pi OS, Ubuntu 18 or later, Debian 10 or later, RedHat 8 later,
-  Fedora 29 or later, etc)
-- Intel Windows 64-bit: Windows 7 with the Universal C Runtime
-  ([UCRT](https://support.microsoft.com/en-us/topic/update-for-universal-c-runtime-in-windows-c0514201-7fe6-95a3-b0a5-287930f3560c)),
-  Windows 8, Windows 10
-- Intel macOS 64-bit: 10.13 or later
-- Apple Silicon macOS 64-bit: 11.6 or later
 
 ## Install
 
@@ -112,19 +99,17 @@ xpm uninstall --global @xpack-dev-tools/wine
 ## Compliance
 
 The **xPack WineHQ** is based on the official
-[WineHQ](https://wine.org), with minimal changes.
+[WineHQ](https://www.winehq.org), with no changes.
 
 The current version is based on:
 
 - WineHQ release
-[{% raw %}{{ page.upstream_version }}{% endraw %}](https://github.com/Kitware/WineHQ/releases/tag/v{% raw %}{{ page.upstream_version }}{% endraw %}/)
+[{% raw %}{{ page.upstream_version }}{% endraw %}](https://dl.winehq.org/wine/source/{% raw %}{{ page.upstream_version_major }}{% endraw %}.x/)
 from {% raw %}{{ page.upstream_release_date }}{% endraw %}.
 
 ## Changes
 
-Compared to the upstream version, the Windows version also supports
-spawning scripts via `cmd.exe /c`. These scripts are used by **npm**/**xpm**
-to redirect invocations to the central packages repository.
+- none
 
 ## Bug fixes
 
@@ -163,16 +148,11 @@ Please note that previous versions, up to mid-2020, used `DT_RUNPATH`, which
 has a priority lower than `LD_LIBRARY_PATH`, and does not tolerate setting
 it in the environment.
 
-### `@rpath` and `@loader_path`
-
-Similarly, on macOS, the binaries are adjusted with `install_name_tool` to use a
-relative path.
-
 ## Documentation
 
 The current WineHQ documentation is available online from:
 
-- [https://wine.org/documentation/](https://wine.org/documentation/)
+- [https://www.winehq.org/documentation/](https://www.winehq.org/documentation/)
 
 ## Build
 
@@ -195,7 +175,6 @@ Before publishing, a set of simple tests were performed on an exhaustive
 set of platforms. The results are available from:
 
 - [GitHub Actions](https://github.com/xpack-dev-tools/wine-xpack/actions/)
-- [Travis CI](https://app.travis-ci.com/github/xpack-dev-tools/wine-xpack/builds/)
 
 ## Tests
 
