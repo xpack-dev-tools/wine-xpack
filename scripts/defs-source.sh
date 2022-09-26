@@ -38,5 +38,9 @@ NPM_PACKAGE="${NPM_PACKAGE:-"@xpack-dev-tools/${APP_LC_NAME}@next"}"
 # -----------------------------------------------------------------------------
 
 WITH_HTML="n"
+SKIP_XBBLA64="y"
+SKIP_XBBLA32="y"
+SKIP_XBBMI="y"
+SKIP_XBBMA="y"
 
 # -----------------------------------------------------------------------------
