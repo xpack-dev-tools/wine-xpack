@@ -75,7 +75,6 @@
       ],
       "trigger-workflow-build-all": "bash scripts/helper/trigger-workflow-build.sh",
       "trigger-workflow-build-xbbli": "bash scripts/helper/trigger-workflow-build.sh --machine xbbli",
-      "trigger-workflow-build-xbbmi": "bash scripts/helper/trigger-workflow-build.sh --machine xbbmi",
       "trigger-workflow-test-prime": "bash scripts/helper/tests/trigger-workflow-test-prime.sh",
       "trigger-workflow-test-docker-linux-intel": "bash scripts/helper/tests/trigger-workflow-test-docker-linux-intel.sh",
       "trigger-travis-macos": "bash scripts/helper/tests/trigger-travis-macos.sh",
