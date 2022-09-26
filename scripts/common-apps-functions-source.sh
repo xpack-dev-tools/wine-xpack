@@ -295,51 +295,50 @@ function build_wine()
     echo "Component wine already installed."
   fi
 
-  test_functions+=("test_wine")
+  tests_add "test_wine" "${BINS_INSTALL_FOLDER_PATH}/bin"
 }
 
 function test_wine()
 {
-  (
-    # xbb_activate_installed_bin
+  local test_bin_path="$1"
 
-    echo
-    echo "Checking the wine shared libraries..."
+  echo
+  echo "Checking the wine shared libraries..."
 
-    show_libs "$(realpath ${BINS_INSTALL_FOLDER_PATH}/bin/wine64)"
-    show_libs "$(realpath ${BINS_INSTALL_FOLDER_PATH}/bin/winebuild)"
+  show_libs "$(realpath ${BINS_INSTALL_FOLDER_PATH}/bin/wine64)"
+  show_libs "$(realpath ${BINS_INSTALL_FOLDER_PATH}/bin/winebuild)"
 
-    show_libs "$(realpath ${BINS_INSTALL_FOLDER_PATH}/bin/winegcc)"
-    show_libs "$(realpath ${BINS_INSTALL_FOLDER_PATH}/bin/wineg++)"
+  show_libs "$(realpath ${BINS_INSTALL_FOLDER_PATH}/bin/winegcc)"
+  show_libs "$(realpath ${BINS_INSTALL_FOLDER_PATH}/bin/wineg++)"
 
-    libwine=$(find ${BINS_INSTALL_FOLDER_PATH}/lib* -name 'libwine.so')
-    if [ ! -z "${libwine}" ]
-    then
-      show_libs "$(realpath ${libwine})"
-    fi
+  libwine=$(find ${BINS_INSTALL_FOLDER_PATH}/lib* -name 'libwine.so')
+  if [ ! -z "${libwine}" ]
+  then
+    show_libs "$(realpath ${libwine})"
+  fi
 
-    echo
-    echo "Testing if wine binaries start properly..."
+  echo
+  echo "Testing if wine binaries start properly..."
 
-    # First check if the program is able to tell its version.
-    run_app "${BINS_INSTALL_FOLDER_PATH}/bin/wine64" --version
+  # First check if the program is able to tell its version.
+  run_app "${BINS_INSTALL_FOLDER_PATH}/bin/wine64" --version
 
-    # Require gcc-xbs
-    # run_app "${BINS_INSTALL_FOLDER_PATH}/bin/winegcc" --version
-    # run_app "${BINS_INSTALL_FOLDER_PATH}/bin/wineg++" --version
+  # Require gcc-xbs
+  # run_app "${BINS_INSTALL_FOLDER_PATH}/bin/winegcc" --version
+  # run_app "${BINS_INSTALL_FOLDER_PATH}/bin/wineg++" --version
 
-    run_app "${BINS_INSTALL_FOLDER_PATH}/bin/winebuild" --version
-    run_app "${BINS_INSTALL_FOLDER_PATH}/bin/winecfg" --version
-    # run_app "${BINS_INSTALL_FOLDER_PATH}/bin/wineconsole" dir
+  run_app "${BINS_INSTALL_FOLDER_PATH}/bin/winebuild" --version
+  run_app "${BINS_INSTALL_FOLDER_PATH}/bin/winecfg" --version
+  # run_app "${BINS_INSTALL_FOLDER_PATH}/bin/wineconsole" dir
 
-    # This test should check if the program is able to start
-    # a simple executable.
-    # As a side effect, the "${HOME}/.wine" folder is created
-    # and populated with lots of files., so subsequent runs
-    # will no longer have to do it.
-    local netstat=$(find "${BINS_INSTALL_FOLDER_PATH}"/lib* -name netstat.exe)
-    run_app "${BINS_INSTALL_FOLDER_PATH}/bin/wine64" ${netstat}
-  )
+  # This test should check if the program is able to start
+  # a simple executable.
+  # As a side effect, the "${HOME}/.wine" folder is created
+  # and populated with lots of files., so subsequent runs
+  # will no longer have to do it.
+  local netstat=$(find "${BINS_INSTALL_FOLDER_PATH}"/lib* -name netstat.exe)
+  run_app "${BINS_INSTALL_FOLDER_PATH}/bin/wine64" ${netstat}
+
 }
 
 # -----------------------------------------------------------------------------
