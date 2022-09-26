@@ -1,0 +1,94 @@
+{
+  "name": "@xpack-dev-tools/wine",
+  "version": "6.17.0-1.1-pre",
+  "description": "A binary xPack with the WineHQ executables",
+  "main": "",
+  "scripts": {
+    "npm-install": "npm install",
+    "pack": "npm pack",
+    "version-patch": "npm version patch",
+    "version-minor": "npm version minor",
+    "postversion": "git push origin --all && git push origin --tags",
+    "git-log": "git log --pretty='%cd * %h %s' --date=short",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "liquidjs": "liquidjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xpack-dev-tools/wine-xpack.git/"
+  },
+  "bugs": {
+    "url": "https://github.com/xpack-dev-tools/wine-xpack/issues/"
+  },
+  "homepage": "https://github.com/xpack-dev-tools/wine-xpack.git#readme",
+  "keywords": [
+    "xpack",
+    "wine",
+    "build"
+  ],
+  "author": {
+    "name": "Liviu Ionescu",
+    "email": "ilg@livius.net",
+    "url": "https://github.com/ilg-ul/"
+  },
+  "license": "MIT",
+  "xpack": {
+    "minimumXpmRequired": "0.10.2",
+    "binaries": {
+      "destination": "./.content",
+      "baseUrl": "https://github.com/xpack-dev-tools/wine-xpack/releases/download/v6.17.0-1",
+      "skip": 1,
+      "platforms": {
+        "darwin-x64": {
+          "fileName": "xpack-wine-6.17.0-1-darwin-x64.tar.gz",
+          "sha256": "9abe888ebbfcf9f86f1fc63efbf3597a1af9472ee93b7e52c141fcaddc7641bd"
+        },
+        "linux-x64": {
+          "fileName": "xpack-wine-6.17.0-1-linux-x64.tar.gz",
+          "sha256": "9aaaa62243a11d03b9ad712aeeb55d467f2eba137c4a982e54e6bbf8b02eee7a"
+        }
+      }
+    },
+    "bin": {
+      "ccmake": "./.content/bin/ccmake",
+      "wine": "./.content/bin/wine",
+      "cpack": "./.content/bin/cpack",
+      "ctest": "./.content/bin/ctest"
+    },
+    "properties": {
+      "appName": "WineHQ",
+      "appLCName": "wine",
+      "platforms": "all",
+      "LIQUIDJS": "liquidjs '{ \"APP_NAME\": \"{{ properties.appName }}\", \"APP_LC_NAME\": \"{{ properties.appLCName }}\", \"platforms\": \"{{ properties.platforms }}\" }'"
+    },
+    "actions": {
+      "generate-workflows": [
+        "mkdir -p .github/workflows/",
+        "cp scripts/helper/templates/body-github-pre-releases-test.md .github/workflows/",
+        "cat scripts/helper/templates/build-liquid.yml | {{ properties.LIQUIDJS }} > .github/workflows/build-all.yml",
+        "cat scripts/helper/templates/build-xbbli-liquid.yml | {{ properties.LIQUIDJS }} > .github/workflows/build-xbbli.yml",
+        "cat scripts/helper/templates/build-xbbmi-liquid.yml | {{ properties.LIQUIDJS }} > .github/workflows/build-xbbmi.yml",
+        "cat scripts/helper/templates/test-prime-liquid.yml | {{ properties.LIQUIDJS }} > .github/workflows/test-prime.yml",
+        "cat scripts/helper/templates/test-docker-linux-intel-liquid.yml | {{ properties.LIQUIDJS }} > .github/workflows/test-docker-linux-intel.yml",
+        "cat scripts/helper/templates/publish-release-liquid.yml | {{ properties.LIQUIDJS }} > .github/workflows/publish-release.yml",
+        "cat scripts/helper/templates/test-xpm-liquid.yml | {{ properties.LIQUIDJS }} > .github/workflows/test-xpm.yml",
+        "cat scripts/helper/templates/deep-clean-liquid.yml | {{ properties.LIQUIDJS }} > .github/workflows/deep-clean.yml"
+      ],
+      "trigger-workflow-build-all": "bash scripts/helper/trigger-workflow-build.sh",
+      "trigger-workflow-build-xbbli": "bash scripts/helper/trigger-workflow-build.sh --machine xbbli",
+      "trigger-workflow-build-xbbmi": "bash scripts/helper/trigger-workflow-build.sh --machine xbbmi",
+      "trigger-workflow-test-prime": "bash scripts/helper/tests/trigger-workflow-test-prime.sh",
+      "trigger-workflow-test-docker-linux-intel": "bash scripts/helper/tests/trigger-workflow-test-docker-linux-intel.sh",
+      "trigger-travis-macos": "bash scripts/helper/tests/trigger-travis-macos.sh",
+      "trigger-workflow-publish-release": "bash scripts/helper/trigger-workflow-publish-release.sh",
+      "generate-jekyll-post": "bash scripts/helper/generate-jekyll-post.sh",
+      "update-package-binaries": "bash scripts/helper/update-package-binaries.sh",
+      "trigger-workflow-test-xpm": "bash scripts/helper/tests/trigger-workflow-test-xpm.sh",
+      "trigger-workflow-deep-clean": "bash scripts/helper/trigger-workflow-deep-clean.sh"
+    }
+  },
+  "bundleDependencies": [],
+  "devDependencies": {
+    "liquidjs": "^9.25.1"
+  }
+}

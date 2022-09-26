@@ -1,0 +1,47 @@
+{
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "editor.stablePeek": true,
+  "markdownlint.config": {
+    "MD041": false
+  },
+  "spellright.language": [
+    "en_GB"
+  ],
+  "spellright.notificationClass": "warning",
+  "cSpell.ignoreWords": [
+    "Ionescu",
+    "Liviu",
+    "RPATH",
+    "Somsubhra",
+    "UCRT",
+    "aarch",
+    "aclocal",
+    "armhf",
+    "armv",
+    "caffeinate",
+    "ccmake",
+    "cleanall",
+    "cleanlibs",
+    "wine",
+    "cpack",
+    "ctest",
+    "dylib",
+    "endraw",
+    "ilegeul",
+    "libexec",
+    "libncurses",
+    "npmignore",
+    "npmjs",
+    "postversion",
+    "readelf",
+    "runpath",
+    "wksi",
+    "xbbla",
+    "xbbli",
+    "xbbma",
+    "xbbmi",
+    "xpack",
+    "xpacks"
+  ]
+}
