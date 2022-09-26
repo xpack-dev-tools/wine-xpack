@@ -311,7 +311,7 @@ function test_wine()
   show_libs "$(realpath ${test_bin_path}/winegcc)"
   show_libs "$(realpath ${test_bin_path}/wineg++)"
 
-  libwine=$(find ${BINS_INSTALL_FOLDER_PATH}/lib* -name 'libwine.so')
+  libwine=$(find ${test_bin_path}/../lib* -name 'libwine.so')
   if [ ! -z "${libwine}" ]
   then
     show_libs "$(realpath ${libwine})"
