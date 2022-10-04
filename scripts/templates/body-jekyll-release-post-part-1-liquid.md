@@ -23,7 +23,7 @@ tags:
 
 ---
 
-[The xPack WineHQ](https://xpack.github.io/wine/)
+[The xPack WineHQ](https://xpack.github.io/dev-tools/wine/)
 is a standalone binary distribution of
 [WineHQ](http://www.winehq.org).
 
