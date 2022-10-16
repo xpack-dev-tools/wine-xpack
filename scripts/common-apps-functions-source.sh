@@ -44,7 +44,10 @@ function wine_common_options()
   config_options+=("--without-osmesa")
   config_options+=("--without-oss")
   config_options+=("--without-pcap")
-  config_options+=("--without-png")
+  # 0034:err:wincodecs:png_encoder_create Trying to save PNG picture, but PNG support is not compiled in.
+  # config_options+=("--without-png")
+  config_options+=("--with-png")
+
   config_options+=("--without-pulse")
   config_options+=("--without-quicktime")
   config_options+=("--without-sane")
