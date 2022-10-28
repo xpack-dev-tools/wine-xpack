@@ -112,10 +112,11 @@ function build_wine()
 
   mkdir -pv "${XBB_LOGS_FOLDER_PATH}/${wine_folder_name}"
 
-  local wine_stamp_file_path="${STAMPS_FOLDER_PATH}/stamp-${wine_folder_name}-installed"
+  local wine_stamp_file_path="${XBB_STAMPS_FOLDER_PATH}/stamp-${wine_folder_name}-installed"
   if [ ! -f "${wine_stamp_file_path}" ]
   then
 
+    mkdir -pv "${XBB_SOURCES_FOLDER_PATH}"
     cd "${XBB_SOURCES_FOLDER_PATH}"
 
     download_and_extract "${wine_url}" "${wine_archive}" \
@@ -133,8 +134,8 @@ function build_wine()
       CFLAGS="${XBB_CFLAGS_NO_W}"
       CXXFLAGS="${XBB_CXXFLAGS_NO_W}"
 
-      LDFLAGS="${XBB_LDFLAGS_APP_STATIC_GCC}"
-      # LDFLAGS="${XBB_LDFLAGS_APP}"
+      # LDFLAGS="${XBB_LDFLAGS_APP_STATIC_GCC}"
+      LDFLAGS="${XBB_LDFLAGS_APP}"
       if [ "${XBB_TARGET_PLATFORM}" == "linux" ]
       then
         xbb_activate_cxx_rpath
@@ -149,10 +150,7 @@ function build_wine()
       if [ ! -f "config.status" ]
       then
         (
-          if [ "${XBB_IS_DEVELOP}" == "y" ]
-          then
-            env | sort
-          fi
+          xbb_show_env_develop
 
           echo
           echo "Running wine64 configure..."
@@ -164,7 +162,7 @@ function build_wine()
 
           config_options=()
 
-          config_options+=("--prefix=${BINS_INSTALL_FOLDER_PATH}")
+          config_options+=("--prefix=${XBB_BINARIES_INSTALL_FOLDER_PATH}")
           config_options+=("--mandir=${XBB_LIBRARIES_INSTALL_FOLDER_PATH}/share/man")
 
           config_options+=("--build=${XBB_BUILD}")
@@ -206,7 +204,7 @@ function build_wine()
 
     # -------------------------------------------------------------------------
 
-    if [ "${SKIP_WIN32:-}" != "y" ]
+    if [ "${XBB_WINE_SKIP_WIN32:-}" != "y" ]
     then
       (
         mkdir -pv "${XBB_BUILD_FOLDER_PATH}/${wine_folder_name}-32"
@@ -250,8 +248,8 @@ function build_wine()
 
             config_options=()
 
-            config_options+=("--prefix=${BINS_INSTALL_FOLDER_PATH}")
-            config_options+=("--libdir=${BINS_INSTALL_FOLDER_PATH}/lib32")
+            config_options+=("--prefix=${XBB_BINARIES_INSTALL_FOLDER_PATH}")
+            config_options+=("--libdir=${XBB_BINARIES_INSTALL_FOLDER_PATH}/lib32")
             config_options+=("--mandir=${XBB_LIBRARIES_INSTALL_FOLDER_PATH}/share/man")
 
             config_options+=("--build=${XBB_BUILD}")
@@ -294,14 +292,14 @@ function build_wine()
 
     hash -r
 
-    mkdir -pv "${XBB_STAMPS_FOLDER_PATH}"
+    mkdir -pv "${XBB_XBB_STAMPS_FOLDER_PATH}"
     touch "${wine_stamp_file_path}"
 
   else
     echo "Component wine already installed."
   fi
 
-  tests_add "test_wine" "${BINS_INSTALL_FOLDER_PATH}/bin"
+  tests_add "test_wine" "${XBB_BINARIES_INSTALL_FOLDER_PATH}/bin"
 }
 
 function test_wine()
