@@ -1,14 +1,14 @@
 ---
-title:  xPack WineHQ v{{ RELEASE_VERSION }} released
+title:  xPack WineHQ v{{ XBB_RELEASE_VERSION }} released
 
-summary: "Version **{{ RELEASE_VERSION }}** is a new release; it follows the upstream release."
+summary: "Version **{{ XBB_RELEASE_VERSION }}** is a new release; it follows the upstream release."
 
-version: "{{ RELEASE_VERSION }}"
+version: "{{ XBB_RELEASE_VERSION }}"
 upstream_version: "6.17"
 upstream_version_major: "6"
 upstream_release_date: "2021-09-10"
 npm_subversion: "1"
-download_url: https://github.com/xpack-dev-tools/wine-xpack/releases/tag/v{{ RELEASE_VERSION }}/
+download_url: https://github.com/xpack-dev-tools/wine-xpack/releases/tag/v{{ XBB_RELEASE_VERSION }}/
 
 date:   {{ RELEASE_DATE }}
 
@@ -82,7 +82,7 @@ xpm install --global @xpack-dev-tools/wine@latest
 
 ### Uninstall
 
-To remove the links from the current project:
+To remove the links created by xpm in the current project:
 
 ```sh
 cd my-project

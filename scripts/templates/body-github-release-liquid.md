@@ -1,6 +1,6 @@
-![Github Releases (by Release)](https://img.shields.io/github/downloads/xpack-dev-tools/wine-xpack/v{{ RELEASE_VERSION }}/total.svg)
+![Github Releases (by Release)](https://img.shields.io/github/downloads/xpack-dev-tools/wine-xpack/v{{ XBB_RELEASE_VERSION }}/total.svg)
 
-Version **{{ RELEASE_VERSION }}** is a new release of the **xPack WineHQ** package; it follows the upstream [release](https://www.winehq.org/news/).
+Version **{{ XBB_RELEASE_VERSION }}** is a new release of the **xPack WineHQ** package; it follows the upstream [release](https://www.winehq.org/news/).
 
 [Continue reading »](TODO: edit, add URL!)
 

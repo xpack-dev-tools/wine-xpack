@@ -14,3 +14,6 @@ tests/
 README-*
 *.tgz
 LICENSE-*
+
+xpacks/
+build/

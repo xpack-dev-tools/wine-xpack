@@ -13,38 +13,38 @@
 
 # -----------------------------------------------------------------------------
 
-function build_versions()
+function build_application_versioned_components()
 {
-  WINE_VERSION="$(echo "${RELEASE_VERSION}" | sed -e 's|\.[0-9][0-9]*-.*||')"
+  XBB_WINE_VERSION="$(echo "${XBB_RELEASE_VERSION}" | sed -e 's|\.[0-9][0-9]*-.*||')"
 
-  if [ "${TARGET_PLATFORM}" != "linux" ] || [ "${TARGET_ARCH}" != "x64" ]
+  if [ "${XBB_TARGET_PLATFORM}" != "linux" ] || [ "${XBB_TARGET_ARCH}" != "x64" ]
   then
     echo "This package can be built only on Intel Linux"
     exit 1
   fi
 
   # Keep them in sync with combo archive content.
-  if [[ "${RELEASE_VERSION}" =~ 6\.17\.* ]]
+  if [[ "${XBB_RELEASE_VERSION}" =~ 6\.17\.* ]]
   then
     # -------------------------------------------------------------------------
 
-    (
-      xbb_activate
+    xbb_set_binaries_install "${XBB_DEPENDENCIES_INSTALL_FOLDER_PATH}"
+    xbb_set_libraries_install "${XBB_DEPENDENCIES_INSTALL_FOLDER_PATH}"
 
-      # From now on, install all binaries in the public arena.
-      BINS_INSTALL_FOLDER_PATH="${APP_INSTALL_FOLDER_PATH}"
+    # No dependencies.
 
-      # i686-w64-mingw32-gcc not available in the Docker container.
-      SKIP_WIN32="y"
+    xbb_set_binaries_install "${XBB_APPLICATION_INSTALL_FOLDER_PATH}"
 
-      build_wine "6.17"
+    # i686-w64-mingw32-gcc not available in the Docker container.
+    SKIP_WIN32="y"
 
-      run_verbose rm -rfv "${APP_INSTALL_FOLDER_PATH}/share/man"
-    )
+    build_wine "${XBB_WINE_VERSION}"
+
+    run_verbose rm -rfv "${APP_INSTALL_FOLDER_PATH}/share/man"
 
     # -------------------------------------------------------------------------
   else
-    echo "Unsupported version ${RELEASE_VERSION}."
+    echo "Unsupported version ${XBB_RELEASE_VERSION}."
     exit 1
   fi
 }

@@ -60,6 +60,7 @@ To download them, issue the following commands:
 
 ```sh
 rm -rf ${HOME}/Work/wine-xpack.git; \
+mkdir -p ~/Work; \
 git clone \
   https://github.com/xpack-dev-tools/wine-xpack.git \
   ${HOME}/Work/wine-xpack.git; \
@@ -73,6 +74,7 @@ For development purposes, clone the `xpack-develop` branch:
 
 ```sh
 rm -rf ${HOME}/Work/wine-xpack.git; \
+mkdir -p ~/Work; \
 git clone \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/wine-xpack.git \
@@ -191,14 +193,14 @@ network connection or a computer entering sleep.
 ```sh
 screen -S wine
 
-sudo rm -rf ~/Work/wine-*-*
+sudo rm -rf ~/Work/wine-[0-9]*-*
 bash ${HOME}/Work/wine-xpack.git/scripts/helper/build.sh --develop --linux64 --win64
 ```
 
 or, for development builds:
 
 ```sh
-sudo rm -rf ~/Work/wine-*-*
+sudo rm -rf ~/Work/wine-[0-9]*-*
 bash ${HOME}/Work/wine-xpack.git/scripts/helper/build.sh --develop --without-html --disable-tests --linux64 --win64
 ```
 
@@ -246,7 +248,7 @@ will remove the more specific folders.
 For production builds it is recommended to **completely remove the build folder**:
 
 ```sh
-rm -rf ~/Work/wine-*-*
+rm -rf ~/Work/wine-[0-9]*-*
 ```
 
 ### `--develop`

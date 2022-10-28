@@ -7,10 +7,13 @@
 # for any purpose is hereby granted, under the terms of the MIT license.
 # -----------------------------------------------------------------------------
 
-# Helper script used in the second edition of the xPack build
-# scripts. As the name implies, it should contain only functions and
-# should be included with 'source' by the container build scripts.
-
 # -----------------------------------------------------------------------------
+
+function build_application_versioned_components()
+{
+  local test_bin_path="$1"
+
+  test_wine "${TEST_BIN_PATH}"
+}
 
 # -----------------------------------------------------------------------------

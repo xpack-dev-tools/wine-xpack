@@ -110,21 +110,21 @@ function build_wine()
 
   local wine_folder_name="${wine_src_folder_name}"
 
-  mkdir -pv "${LOGS_FOLDER_PATH}/${wine_folder_name}"
+  mkdir -pv "${XBB_LOGS_FOLDER_PATH}/${wine_folder_name}"
 
   local wine_stamp_file_path="${STAMPS_FOLDER_PATH}/stamp-${wine_folder_name}-installed"
   if [ ! -f "${wine_stamp_file_path}" ]
   then
 
-    cd "${SOURCES_FOLDER_PATH}"
+    cd "${XBB_SOURCES_FOLDER_PATH}"
 
     download_and_extract "${wine_url}" "${wine_archive}" \
       "${wine_src_folder_name}"
 
     # The 64-bit variant.
     (
-      mkdir -pv "${BUILD_FOLDER_PATH}/${wine_folder_name}-64"
-      cd "${BUILD_FOLDER_PATH}/${wine_folder_name}-64"
+      mkdir -pv "${XBB_BUILD_FOLDER_PATH}/${wine_folder_name}-64"
+      cd "${XBB_BUILD_FOLDER_PATH}/${wine_folder_name}-64"
 
       # None so far.
       xbb_activate_installed_dev
@@ -135,8 +135,9 @@ function build_wine()
 
       LDFLAGS="${XBB_LDFLAGS_APP_STATIC_GCC}"
       # LDFLAGS="${XBB_LDFLAGS_APP}"
-      if [ "${TARGET_PLATFORM}" == "linux" ]
+      if [ "${XBB_TARGET_PLATFORM}" == "linux" ]
       then
+        xbb_activate_cxx_rpath
         LDFLAGS+=" -Wl,-rpath,${LD_LIBRARY_PATH}"
       fi
 
@@ -148,7 +149,7 @@ function build_wine()
       if [ ! -f "config.status" ]
       then
         (
-          if [ "${IS_DEVELOP}" == "y" ]
+          if [ "${XBB_IS_DEVELOP}" == "y" ]
           then
             env | sort
           fi
@@ -156,19 +157,19 @@ function build_wine()
           echo
           echo "Running wine64 configure..."
 
-          if [ "${IS_DEVELOP}" == "y" ]
+          if [ "${XBB_IS_DEVELOP}" == "y" ]
           then
-            run_verbose bash "${SOURCES_FOLDER_PATH}/${wine_src_folder_name}/configure" --help
+            run_verbose bash "${XBB_SOURCES_FOLDER_PATH}/${wine_src_folder_name}/configure" --help
           fi
 
           config_options=()
 
           config_options+=("--prefix=${BINS_INSTALL_FOLDER_PATH}")
-          config_options+=("--mandir=${LIBS_INSTALL_FOLDER_PATH}/share/man")
+          config_options+=("--mandir=${XBB_LIBRARIES_INSTALL_FOLDER_PATH}/share/man")
 
-          config_options+=("--build=${BUILD}")
-          config_options+=("--host=${HOST}")
-          config_options+=("--target=${TARGET}")
+          config_options+=("--build=${XBB_BUILD}")
+          config_options+=("--host=${XBB_HOST}")
+          config_options+=("--target=${XBB_TARGET}")
 
           config_options+=("--with-mingw")
           config_options+=("--with-pthread")
@@ -181,11 +182,11 @@ function build_wine()
           config_options+=("--disable-tests")
           config_options+=("--disable-win16")
 
-          run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${wine_src_folder_name}/configure" \
+          run_verbose bash ${DEBUG} "${XBB_SOURCES_FOLDER_PATH}/${wine_src_folder_name}/configure" \
             "${config_options[@]}"
 
-          cp "config.log" "${LOGS_FOLDER_PATH}/${wine_folder_name}/config-log-64-$(ndate).txt"
-        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${wine_folder_name}/configure-output-64-$(ndate).txt"
+          cp "config.log" "${XBB_LOGS_FOLDER_PATH}/${wine_folder_name}/config-log-64-$(ndate).txt"
+        ) 2>&1 | tee "${XBB_LOGS_FOLDER_PATH}/${wine_folder_name}/configure-output-64-$(ndate).txt"
       fi
 
       (
@@ -193,14 +194,14 @@ function build_wine()
         echo "Running wine64 make..."
 
         # Build.
-        run_verbose make -j ${JOBS} STRIP=true
+        run_verbose make -j ${XBB_JOBS} STRIP=true
 
         run_verbose make install
 
         # wine: Unhandled page fault on read access to 0000000000000108 at address 000000038B5B4C00 (thread 0114), starting debugger...
         # run_verbose make test
 
-      ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${wine_folder_name}/make-output-64-$(ndate).txt"
+      ) 2>&1 | tee "${XBB_LOGS_FOLDER_PATH}/${wine_folder_name}/make-output-64-$(ndate).txt"
     )
 
     # -------------------------------------------------------------------------
@@ -208,8 +209,8 @@ function build_wine()
     if [ "${SKIP_WIN32:-}" != "y" ]
     then
       (
-        mkdir -pv "${BUILD_FOLDER_PATH}/${wine_folder_name}-32"
-        cd "${BUILD_FOLDER_PATH}/${wine_folder_name}-32"
+        mkdir -pv "${XBB_BUILD_FOLDER_PATH}/${wine_folder_name}-32"
+        cd "${XBB_BUILD_FOLDER_PATH}/${wine_folder_name}-32"
 
         # None so far.
         xbb_activate_installed_dev
@@ -220,8 +221,9 @@ function build_wine()
 
         LDFLAGS="${XBB_LDFLAGS_APP_STATIC_GCC}"
         # LDFLAGS="${XBB_LDFLAGS_APP}"
-        if [ "${TARGET_PLATFORM}" == "linux" ]
+        if [ "${XBB_TARGET_PLATFORM}" == "linux" ]
         then
+          xbb_activate_cxx_rpath
           LDFLAGS+=" -Wl,-rpath,${LD_LIBRARY_PATH}"
         fi
 
@@ -233,7 +235,7 @@ function build_wine()
         if [ ! -f "config.status" ]
         then
           (
-            if [ "${IS_DEVELOP}" == "y" ]
+            if [ "${XBB_IS_DEVELOP}" == "y" ]
             then
               env | sort
             fi
@@ -241,20 +243,20 @@ function build_wine()
             echo
             echo "Running wine32 configure..."
 
-            if [ "${IS_DEVELOP}" == "y" ]
+            if [ "${XBB_IS_DEVELOP}" == "y" ]
             then
-              run_verbose bash "${SOURCES_FOLDER_PATH}/${wine_src_folder_name}/configure" --help
+              run_verbose bash "${XBB_SOURCES_FOLDER_PATH}/${wine_src_folder_name}/configure" --help
             fi
 
             config_options=()
 
             config_options+=("--prefix=${BINS_INSTALL_FOLDER_PATH}")
             config_options+=("--libdir=${BINS_INSTALL_FOLDER_PATH}/lib32")
-            config_options+=("--mandir=${LIBS_INSTALL_FOLDER_PATH}/share/man")
+            config_options+=("--mandir=${XBB_LIBRARIES_INSTALL_FOLDER_PATH}/share/man")
 
-            config_options+=("--build=${BUILD}")
-            config_options+=("--host=${HOST}")
-            config_options+=("--target=${TARGET}")
+            config_options+=("--build=${XBB_BUILD}")
+            config_options+=("--host=${XBB_HOST}")
+            config_options+=("--target=${XBB_TARGET}")
 
             config_options+=("--with-mingw")
             config_options+=("--with-pthread")
@@ -262,16 +264,16 @@ function build_wine()
 
             wine_common_options
 
-            config_options+=("--with-wine64=${BUILD_FOLDER_PATH}/${wine_folder_name}-64")
+            config_options+=("--with-wine64=${XBB_BUILD_FOLDER_PATH}/${wine_folder_name}-64")
 
             config_options+=("--disable-tests")
             config_options+=("--disable-win16")
 
-            run_verbose bash ${DEBUG} "${SOURCES_FOLDER_PATH}/${wine_src_folder_name}/configure" \
+            run_verbose bash ${DEBUG} "${XBB_SOURCES_FOLDER_PATH}/${wine_src_folder_name}/configure" \
               "${config_options[@]}"
 
-            cp "config.log" "${LOGS_FOLDER_PATH}/${wine_folder_name}/config-log-32-$(ndate).txt"
-          ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${wine_folder_name}/configure-output-32-$(ndate).txt"
+            cp "config.log" "${XBB_LOGS_FOLDER_PATH}/${wine_folder_name}/config-log-32-$(ndate).txt"
+          ) 2>&1 | tee "${XBB_LOGS_FOLDER_PATH}/${wine_folder_name}/configure-output-32-$(ndate).txt"
         fi
 
         (
@@ -279,19 +281,20 @@ function build_wine()
           echo "Running wine32 make..."
 
           # Build.
-          run_verbose make -j ${JOBS} STRIP=true
+          run_verbose make -j ${XBB_JOBS} STRIP=true
 
           run_verbose make install
 
           # wine: Unhandled page fault on read access to 0000000000000108 at address 000000038B5B4C00 (thread 0114), starting debugger...
           # run_verbose make test
 
-        ) 2>&1 | tee "${LOGS_FOLDER_PATH}/${wine_folder_name}/make-output-32-$(ndate).txt"
+        ) 2>&1 | tee "${XBB_LOGS_FOLDER_PATH}/${wine_folder_name}/make-output-32-$(ndate).txt"
       )
     fi
 
     hash -r
 
+    mkdir -pv "${XBB_STAMPS_FOLDER_PATH}"
     touch "${wine_stamp_file_path}"
 
   else
