@@ -36,7 +36,7 @@ function build_application_versioned_components()
     xbb_set_binaries_install "${XBB_APPLICATION_INSTALL_FOLDER_PATH}"
 
     # i686-w64-mingw32-gcc not available in the Docker container.
-    SKIP_WIN32="y"
+    XBB_WINE_SKIP_WIN32="y"
 
     build_wine "${XBB_WINE_VERSION}"
 
