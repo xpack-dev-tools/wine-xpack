@@ -17,7 +17,7 @@ function build_application_versioned_components()
 {
   XBB_WINE_VERSION="$(echo "${XBB_RELEASE_VERSION}" | sed -e 's|\.[0-9][0-9]*-.*||')"
 
-  if [ "${XBB_TARGET_PLATFORM}" != "linux" ] || [ "${XBB_TARGET_ARCH}" != "x64" ]
+  if [ "${XBB_REQUESTED_HOST_PLATFORM}" != "linux" ] || [ "${XBB_REQUESTED_HOST_ARCH}" != "x64" ]
   then
     echo "This package can be built only on Intel Linux"
     exit 1
