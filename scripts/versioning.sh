@@ -13,7 +13,7 @@
 
 # -----------------------------------------------------------------------------
 
-function build_application_versioned_components()
+function application_build_versioned_components()
 {
   XBB_WINE_VERSION="$(echo "${XBB_RELEASE_VERSION}" | sed -e 's|\.[0-9][0-9]*-.*||')"
 
@@ -32,7 +32,7 @@ function build_application_versioned_components()
     xbb_set_libraries_install "${XBB_DEPENDENCIES_INSTALL_FOLDER_PATH}"
 
     # https://sourceforge.net/projects/libpng/files/libpng16/
-    build_libpng "1.6.38" # "1.6.37"
+    libpng_build "1.6.38" # "1.6.37"
 
     xbb_set_binaries_install "${XBB_APPLICATION_INSTALL_FOLDER_PATH}"
 
@@ -40,7 +40,7 @@ function build_application_versioned_components()
     XBB_WINE_SKIP_WIN32="y"
 
     # https://dl.winehq.org/wine/source/
-    build_wine "${XBB_WINE_VERSION}"
+    wine_build "${XBB_WINE_VERSION}"
 
     run_verbose rm -rfv "${XBB_APPLICATION_INSTALL_FOLDER_PATH}/share/man"
 
@@ -53,7 +53,7 @@ function build_application_versioned_components()
     xbb_set_libraries_install "${XBB_DEPENDENCIES_INSTALL_FOLDER_PATH}"
 
     # https://sourceforge.net/projects/libpng/files/libpng16/
-    build_libpng "1.6.37"
+    libpng_build "1.6.37"
 
     xbb_set_binaries_install "${XBB_APPLICATION_INSTALL_FOLDER_PATH}"
 
@@ -61,7 +61,7 @@ function build_application_versioned_components()
     XBB_WINE_SKIP_WIN32="y"
 
     # https://dl.winehq.org/wine/source/
-    build_wine "${XBB_WINE_VERSION}"
+    wine_build "${XBB_WINE_VERSION}"
 
     run_verbose rm -rfv "${XBB_APPLICATION_INSTALL_FOLDER_PATH}/share/man"
 

@@ -13,7 +13,7 @@
 
 # -----------------------------------------------------------------------------
 
-function wine_common_options()
+function wine_prepare_common_options()
 {
   config_options+=("--without-alsa")
   config_options+=("--without-capi")
@@ -74,7 +74,7 @@ function wine_common_options()
   config_options+=("--without-x")
 }
 
-function build_wine()
+function wine_build()
 {
   # https://www.winehq.org
   # https://wiki.winehq.org/Building_Wine
@@ -177,7 +177,7 @@ function build_wine()
           config_options+=("--with-pthread")
           config_options+=("--with-unwind")
 
-          wine_common_options
+          wine_prepare_common_options
 
           config_options+=("--enable-win64")
 
@@ -240,7 +240,7 @@ function build_wine()
               config_options+=("--with-pthread")
               config_options+=("--with-unwind")
 
-              wine_common_options
+              wine_prepare_common_options
 
               config_options+=("--with-wine64=${XBB_BUILD_FOLDER_PATH}/${wine_folder_name}-64")
 
@@ -293,10 +293,10 @@ function build_wine()
     echo "Component wine already installed."
   fi
 
-  tests_add "test_wine" "${XBB_BINARIES_INSTALL_FOLDER_PATH}/bin"
+  tests_add "wine_test" "${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin"
 }
 
-function test_wine()
+function wine_test()
 {
   local test_bin_path="$1"
 
