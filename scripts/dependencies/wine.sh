@@ -9,6 +9,29 @@
 
 # -----------------------------------------------------------------------------
 
+# https://www.winehq.org
+# https://wiki.winehq.org/Building_Wine
+
+# https://dl.winehq.org/wine/source/
+# https://dl.winehq.org/wine/source/6.x/wine-6.17.tar.xz
+
+# https://github.com/archlinux/svntogit-community/blob/packages/wine/trunk/PKGBUILD
+
+# 2017-09-16, "4.3"
+# 2019-11-29, "4.21"
+# Fails with a missing yywrap
+# 2020-01-21, "5.0"
+# 2020-02-02, "5.1"
+# 2021-06-04, "6.10"
+# 2020-11-20, "5.22"
+# 2021-09-10, "6.17"
+# 2021-11-05, "6.21"
+# 2021-12-03, "6.23"
+# 2022-08-28, "7.16"
+# 2022-10-14, "7.19"
+
+# -----------------------------------------------------------------------------
+
 function wine_prepare_common_options()
 {
   config_options+=("--without-alsa")
@@ -72,27 +95,6 @@ function wine_prepare_common_options()
 
 function wine_build()
 {
-  # https://www.winehq.org
-  # https://wiki.winehq.org/Building_Wine
-
-  # https://dl.winehq.org/wine/source/
-  # https://dl.winehq.org/wine/source/6.x/wine-6.17.tar.xz
-
-  # https://github.com/archlinux/svntogit-community/blob/packages/wine/trunk/PKGBUILD
-
-  # 2017-09-16, "4.3"
-  # 2019-11-29, "4.21"
-  # Fails with a missing yywrap
-  # 2020-01-21, "5.0"
-  # 2020-02-02, "5.1"
-  # 2021-06-04, "6.10"
-  # 2020-11-20, "5.22"
-  # 2021-09-10, "6.17"
-  # 2021-11-05, "6.21"
-  # 2021-12-03, "6.23"
-  # 2022-08-28, "7.16"
-  # 2022-10-14, "7.19"
-
   local wine_version="$1"
 
   local wine_version_major="$(echo ${wine_version} | sed -e 's|\([0-9][0-9]*\)\.\([0-9][0-9]*\)|\1|')"
