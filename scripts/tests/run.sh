@@ -9,11 +9,11 @@
 
 # -----------------------------------------------------------------------------
 
-function build_application_versioned_components()
+function tests_run_all()
 {
   local test_bin_path="$1"
 
-  test_wine "${TEST_BIN_PATH}"
+  test_wine "${test_bin_path}"
 }
 
 # -----------------------------------------------------------------------------
