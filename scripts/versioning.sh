@@ -56,7 +56,18 @@ function application_build_versioned_components()
     # -------------------------------------------------------------------------
     # Build the native dependencies.
 
-    # None
+    export XBB_BINUTILS_BRANDING="${XBB_APPLICATION_DISTRO_NAME} MinGW-w64 binutils ${XBB_REQUESTED_TARGET_MACHINE}"
+
+    # https://ftp.gnu.org/gnu/binutils/
+    XBB_BINUTILS_VERSION="2.39"
+
+    xbb_reset_env
+    xbb_set_target "mingw-w64-native"
+
+    triplet="x86_64-w64-mingw32"
+    xbb_set_extra_target_env "${triplet}"
+
+    binutils_build "${XBB_BINUTILS_VERSION}" --triplet="${triplet}" --program-prefix="${triplet}-"
 
     # -------------------------------------------------------------------------
     # Build the target dependencies.
