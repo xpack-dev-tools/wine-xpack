@@ -42,7 +42,7 @@ jobs:
 
   linux-x64:
     name: 'Linux x64 WineHQ ${{ github.event.inputs.version }} test'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
       - name: 'Environment'
@@ -68,6 +68,6 @@ jobs:
           fetch-depth: 1
 
       - name: 'Run ${{ github.event.inputs.version }} native test'
-        run: bash scripts/test.sh --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+        run: bash scripts/test.sh --image github-actions-ubuntu-latest --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
   
 # -----------------------------------------------------------------------------
