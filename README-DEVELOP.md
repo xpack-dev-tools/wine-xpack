@@ -16,3 +16,16 @@ make: *** [Makefile:195227: dlls/winmm/libwinmm.delay.a] Error 1
 ```
 
 The soution is to upgrade to binutils 2.39.
+
+## 32-bit wine
+
+To build the 32-bit version of wine, it is necessary to:
+
+- have gcc support `-m32`
+- `i686-w64-mingw32-gcc` be present
+- 32-bit libraries be present
+
+```console
+checking whether /home/ilg/Work/wine-xpack.git/build/linux-x64/xpacks/.bin/gcc -m32 works... no
+configure: error: Cannot build a 32-bit program, you need to install 32-bit development libraries.
+```
