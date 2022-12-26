@@ -1,12 +1,74 @@
-# How to make a new release (maintainer info)
+[![license](https://img.shields.io/github/license/xpack-dev-tools/wine-xpack)](https://github.com/xpack-dev-tools/wine-xpack/blob/xpack/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/xpack-dev-tools/wine-xpack.svg)](https://github.com/xpack-dev-tools/wine-xpack/issues/)
+[![GitHub pulls](https://img.shields.io/github/issues-pr/xpack-dev-tools/wine-xpack.svg)](https://github.com/xpack-dev-tools/wine-xpack/pulls)
+
+# Maintainer info
+
+## Get project sources
+
+The project is hosted on GitHub:
+
+- <https://github.com/xpack-dev-tools/wine-xpack.git>
+
+To clone the stable branch (`xpack`), run the following commands in a
+terminal (on Windows use the _Git Bash_ console):
+
+```sh
+rm -rf ~/Work/wine-xpack.git && \
+git clone https://github.com/xpack-dev-tools/wine-xpack.git \
+  ~/Work/wine-xpack.git
+```
+
+For development purposes, clone the `xpack-develop` branch:
+
+```sh
+rm -rf ~/Work/wine-xpack.git && \
+mkdir -p ~/Work && \
+git clone \
+  --branch xpack-develop \
+  https://github.com/xpack-dev-tools/wine-xpack.git \
+  ~/Work/wine-xpack.git
+```
+
+Or, if the repo was already cloned:
+
+```sh
+git -C ~/Work/wine-xpack.git pull
+```
+
+## Get helper sources
+
+The project has a dependency to a common **helper**; clone the
+`xpack-develop` branch and link it to the central xPacks store:
+
+```sh
+rm -rf ~/Work/xbb-helper-xpack.git && \
+mkdir -p ~/Work && \
+git clone \
+  --branch xpack-develop \
+  https://github.com/xpack-dev-tools/xbb-helper-xpack.git \
+  ~/Work/xbb-helper-xpack.git && \
+xpm link -C ~/Work/xbb-helper-xpack.git
+```
+
+Or, if the repo was already cloned:
+
+```sh
+git -C ~/Work/xbb-helper-xpack.git pull
+xpm link -C ~/Work/xbb-helper-xpack.git
+```
+
+## Prerequisites
+
+A recent [xpm](https://xpack.github.io/xpm/), which is a portable
+[Node.js](https://nodejs.org/) command line application.
 
 ## Release schedule
 
-This distribution is generally one major release behind the upstream releases.
-In practical terms, when the minor release number changes, it picks the
-release of the previous major.
+This distribution generally follows the major upstream
+[releases](https://dl.winehq.org/wine/source/).
 
-## Prepare the build
+## How to make new releases
 
 Before starting the build, perform some checks and tweaks.
 
@@ -16,20 +78,8 @@ The build scripts are available in the `scripts` folder of the
 [`xpack-dev-tools/wine-xpack`](https://github.com/xpack-dev-tools/wine-xpack)
 Git repo.
 
-To download them on a new machine, clone the `xpack-develop` branch:
-
-```sh
-rm -rf ${HOME}/Work/wine-xpack.git; \
-mkdir -p ~/Work; \
-git clone \
-  --branch xpack-develop \
-  https://github.com/xpack-dev-tools/wine-xpack.git \
-  ${HOME}/Work/wine-xpack.git; \
-git -C ${HOME}/Work/wine-xpack.git submodule update --init --recursive
-```
-
-> Note: the repository uses submodules; for a successful build it is
-> mandatory to recurse the submodules.
+To download them on a new machine, clone the `xpack-develop` branch,
+as seen above.
 
 ### Check Git
 
@@ -41,22 +91,18 @@ In the `xpack-dev-tools/wine-xpack` Git repo:
 
 No need to add a tag here, it'll be added when the release is created.
 
-### Update helper
-
-With a git client, go to the helper repo and update to the latest master commit.
-
 ### Check the latest upstream release
 
-Check the WineHQ [News](https://www.winehq.org/news/)
-and compare the the xPack [Releases](https://github.com/xpack-dev-tools/wine-xpack/releases/).
-Find the latest release and go 1 major releases back;
-a possible rule of thumb would be to wait for
-x.0, before releasing x-1.y.0).
+Check the WineHQ [News](https://www.winehq.org/news/) and
+[downloads](https://dl.winehq.org/wine/source/); compare with the
+xPack [Releases](https://github.com/xpack-dev-tools/wine-xpack/releases/).
+At the beginning of the year wait for the first x.0 and release the
+final previous major, like x-1.y
 
 ### Increase the version
 
-Determine the version (like `6.17.0`) and update the `scripts/VERSION`
-file; the format is `6.17.0-1`. The fourth number is the xPack release number
+Determine the version (like `6.23.0`) and update the `scripts/VERSION`
+file; the format is `6.23.0-1`. The fourth number is the xPack release number
 of this version. A fifth number will be added when publishing
 the package on the `npm` server.
 
@@ -66,7 +112,7 @@ Check GitHub issues and pull requests:
 
 - <https://github.com/xpack-dev-tools/wine-xpack/issues/>
 
-and fix them; assign them to a milestone (like `6.17.0-1`).
+and fix them; assign them to a milestone (like `6.23.0-1`).
 
 ### Check `README.md`
 
@@ -93,28 +139,63 @@ but in the version specific release page.
 
 ## Build
 
-The builds currently run on 5 dedicated machines (Intel GNU/Linux,
-Arm 32 GNU/Linux, Arm 64 GNU/Linux, Intel macOS and Arm macOS).
+The builds currently run on a dedicated machine (Intel GNU/Linux).
 
 ### Development run the build scripts
 
-Before the real build, run a test build on all platforms.
+Before the real build, run a test build.
+
+#### Visual Studio Code
+
+All actions are defined as **xPack actions** and can be conveniently
+triggered via the VS Code graphical interface, using the
+[xPack extension](https://marketplace.visualstudio.com/items?itemName=ilg-vscode.xpack).
+
+#### Intel GNU/Linux
+
+Run the docker build on the production machine (`xbbli`);
+start a VS Code remote session, or connect with a terminal:
 
 ```sh
-rm -rf ~/Work/wine-[0-9]*-*
-
-caffeinate bash ${HOME}/Work/wine-xpack.git/scripts/helper/build.sh --develop --macos
+caffeinate ssh xbbli
 ```
 
-Similarly on the Intel Linux (`xbbli`):
+##### Build the GNU/Linux binaries
+
+Update the build scripts (or clone them at the first use):
 
 ```sh
-sudo rm -rf ~/Work/wine-[0-9]*-*
-
-bash ${HOME}/Work/wine-xpack.git/scripts/helper/build.sh --develop --linux64
+git -C ~/Work/wine-xpack.git pull && \
+xpm run deep-clean -C ~/Work/wine-xpack.git && \
+xpm run deep-clean --config linux-x64 -C ~/Work/wine-xpack.git && \
+xpm run docker-prepare --config linux-x64 -C ~/Work/wine-xpack.git && \
+git -C ~/Work/xbb-helper-xpack.git pull && \
+xpm run docker-link-deps --config linux-x64 -C ~/Work/wine-xpack.git
+xpm run docker-build-develop --config linux-x64 -C ~/Work/wine-xpack.git
 ```
 
-Work on the scripts until all platforms pass the build.
+About 20 minutes later, the output of the build script is a compressed
+archive and its SHA signature, created in the `deploy` folder:
+
+```console
+$ ls -l ~/Work/wine-xpack.git/build/linux-x64/deploy
+total 196820
+-rw-r--r-- 1 ilg ilg 201538244 Nov  7 14:20 xpack-wine-6.23.0-1-linux-x64.tar.gz
+-rw-r--r-- 1 ilg ilg       102 Nov  7 14:20 xpack-wine-6.23.0-1-linux-x64.tar.gz.sha
+```
+
+### Files cache
+
+The XBB build scripts use a local cache such that files are downloaded only
+during the first run, later runs being able to use the cached files.
+
+However, occasionally some servers may not be available, and the builds
+may fail.
+
+The workaround is to manually download the files from an alternate
+location (like
+<https://github.com/xpack-dev-tools/files-cache/tree/master/libs>),
+place them in the XBB cache (`Work/cache`) and restart the build.
 
 ## Push the build scripts
 
@@ -132,20 +213,20 @@ The automation is provided by GitHub Actions and three self-hosted runners.
 Run the `generate-workflows` to re-generate the
 GitHub workflow files; commit and push if necessary.
 
-- on the macOS machine (`wksi`) open ssh sessions to the build
-machines (`xbbmi`, `xbbli`):
+- on a permanently running machine (`berry`) open a ssh session to the build
+machine (`xbbli`):
 
 ```sh
-caffeinate ssh xbbmi
 caffeinate ssh xbbli
 ```
 
-Start the runner on all machines:
+Start the runners:
 
 ```sh
 screen -S ga
 
-~/actions-runners/xpack-dev-tools/run.sh &
+~/actions-runners/xpack-dev-tools/1/run.sh &
+~/actions-runners/xpack-dev-tools/2/run.sh &
 
 # Ctrl-a Ctrl-d
 ```
@@ -155,13 +236,11 @@ Check that both the project Git and the submodule are pushed to GitHub.
 To trigger the GitHub Actions build, use the xPack action:
 
 - `trigger-workflow-build-xbbli`
-- `trigger-workflow-build-xbbmi`
 
 This is equivalent to:
 
 ```sh
 bash ${HOME}/Work/wine-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbli
-bash ${HOME}/Work/wine-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbmi
 ```
 
 These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
@@ -215,19 +294,22 @@ The tests results are available from the
 
 ### Manual tests
 
-Install the binaries on all platforms.
-
-On GNU/Linux and macOS systems, use:
+To download the pre-released archive for the specific platform
+and run the tests, use:
 
 ```sh
-.../xpack-wine-6.17.0-1/bin/wine --version
-wine-6.17
+xpm run test-pre-release
 ```
 
-On Windows use:
+For even more tests, on each platform (GNU/Linux),
+download the archive from
+[pre-releases/test](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/)
+and check the binaries.
 
-```dos
-...\xpack-wine-6.17.0-1\bin\wine --version
+On GNU/Linux, use:
+
+```sh
+.../xpack-wine-6.23.0-1/bin/wine --version
 wine-6.17
 ```
 
@@ -310,7 +392,7 @@ watching this project.
 - compare the SHA sums with those shown by `cat *.sha`
 - check the executable names
 - commit all changes, use a message like
-  _package.json: update urls for 6.17.0-1.1 release_ (without _v_)
+  _package.json: update urls for 6.23.0-1.1 release_ (without _v_)
 
 ## Publish on the npmjs.com server
 
@@ -321,7 +403,7 @@ watching this project.
 - `npm pack` and check the content of the archive, which should list
   only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`;
   possibly adjust `.npmignore`
-- `npm version 6.17.0-1.1`; the first 4 numbers are the same as the
+- `npm version 6.23.0-1.1`; the first 4 numbers are the same as the
   GitHub release; the fifth number is the npm specific version
 - the commits and the tag should have been pushed by the `postversion` script;
   if not, push them with `git push origin --tags`
@@ -350,12 +432,12 @@ The tests results are available from the
 When the release is considered stable, promote it as `latest`:
 
 - `npm dist-tag ls @xpack-dev-tools/wine`
-- `npm dist-tag add @xpack-dev-tools/wine@6.17.0-1.1 latest`
+- `npm dist-tag add @xpack-dev-tools/wine@6.23.0-1.1 latest`
 - `npm dist-tag ls @xpack-dev-tools/wine`
 
 In case the previous version is not functional and needs to be unpublished:
 
-- `npm unpublish @xpack-dev-tools/wine@6.17.0-1.1`
+- `npm unpublish @xpack-dev-tools/wine@6.23.0-1.1`
 
 ## Update the Web
 
@@ -382,7 +464,7 @@ In case the previous version is not functional and needs to be unpublished:
   [release](https://xpack.github.io/wine/releases/)
 - click the **Tweet** button
 
-## Remove pre-release binaries
+## Remove the pre-release binaries
 
 - go to <https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/>
 - remove the test binaries
@@ -392,5 +474,5 @@ In case the previous version is not functional and needs to be unpublished:
 Run the xPack action `trigger-workflow-deep-clean`, this
 will remove the build folders on all supported platforms.
 
-The tests results are available from the
+The results are available from the
 [Actions](https://github.com/xpack-dev-tools/wine-xpack/actions/) page.
