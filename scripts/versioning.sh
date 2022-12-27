@@ -7,10 +7,6 @@
 # for any purpose is hereby granted, under the terms of the MIT license.
 # -----------------------------------------------------------------------------
 
-# Helper script used in the xPack build scripts. As the name implies,
-# it should contain only functions and should be included with 'source'
-# by the build scripts (both native and container).
-
 # -----------------------------------------------------------------------------
 
 function application_build_versioned_components()
@@ -27,14 +23,24 @@ function application_build_versioned_components()
   if [[ "${XBB_RELEASE_VERSION}" =~ 7\.*\.* ]]
   then
     # -------------------------------------------------------------------------
+    # Build the native dependencies.
 
-    xbb_set_binaries_install "${XBB_DEPENDENCIES_INSTALL_FOLDER_PATH}"
-    xbb_set_libraries_install "${XBB_DEPENDENCIES_INSTALL_FOLDER_PATH}"
+    # None
+
+    # -------------------------------------------------------------------------
+    # Build the target dependencies.
+
+    xbb_reset_env
+    xbb_set_target "requested"
 
     # https://sourceforge.net/projects/libpng/files/libpng16/
     libpng_build "1.6.38" # "1.6.37"
 
-    xbb_set_binaries_install "${XBB_APPLICATION_INSTALL_FOLDER_PATH}"
+    # -------------------------------------------------------------------------
+    # Build the application binaries.
+
+    xbb_set_executables_install_path "${XBB_APPLICATION_INSTALL_FOLDER_PATH}"
+    xbb_set_libraries_install_path "${XBB_DEPENDENCIES_INSTALL_FOLDER_PATH}"
 
     # the xPack gcc does not support -m32 yet.
     XBB_WINE_SKIP_WIN32="y"
@@ -45,17 +51,38 @@ function application_build_versioned_components()
     run_verbose rm -rfv "${XBB_APPLICATION_INSTALL_FOLDER_PATH}/share/man"
 
     # -------------------------------------------------------------------------
-  elif [[ "${XBB_RELEASE_VERSION}" =~ 6\.17\.* ]]
+  elif [[ "${XBB_RELEASE_VERSION}" =~ 6\.*\.* ]]
   then
     # -------------------------------------------------------------------------
+    # Build the native dependencies.
 
-    xbb_set_binaries_install "${XBB_DEPENDENCIES_INSTALL_FOLDER_PATH}"
-    xbb_set_libraries_install "${XBB_DEPENDENCIES_INSTALL_FOLDER_PATH}"
+    export XBB_BINUTILS_BRANDING="${XBB_APPLICATION_DISTRO_NAME} MinGW-w64 binutils ${XBB_REQUESTED_TARGET_MACHINE}"
+
+    # https://ftp.gnu.org/gnu/binutils/
+    XBB_BINUTILS_VERSION="2.39"
+
+    xbb_reset_env
+    xbb_set_target "mingw-w64-native"
+
+    triplet="x86_64-w64-mingw32"
+    xbb_set_extra_target_env "${triplet}"
+
+    binutils_build "${XBB_BINUTILS_VERSION}" --triplet="${triplet}" --program-prefix="${triplet}-"
+
+    # -------------------------------------------------------------------------
+    # Build the target dependencies.
+
+    xbb_reset_env
+    xbb_set_target "requested"
 
     # https://sourceforge.net/projects/libpng/files/libpng16/
     libpng_build "1.6.37"
 
-    xbb_set_binaries_install "${XBB_APPLICATION_INSTALL_FOLDER_PATH}"
+    # -------------------------------------------------------------------------
+    # Build the application binaries.
+
+    xbb_set_executables_install_path "${XBB_APPLICATION_INSTALL_FOLDER_PATH}"
+    xbb_set_libraries_install_path "${XBB_DEPENDENCIES_INSTALL_FOLDER_PATH}"
 
     # i686-w64-mingw32-gcc not available in the Docker container.
     XBB_WINE_SKIP_WIN32="y"
@@ -67,7 +94,7 @@ function application_build_versioned_components()
 
     # -------------------------------------------------------------------------
   else
-    echo "Unsupported version ${XBB_RELEASE_VERSION}."
+    echo "Unsupported ${XBB_APPLICATION_LOWER_CASE_NAME} version ${XBB_RELEASE_VERSION}"
     exit 1
   fi
 }

@@ -1,6 +1,8 @@
 
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/xpack-dev-tools/wine-xpack)](https://github.com/xpack-dev-tools/wine-xpack/releases)
-[![npm (scoped)](https://img.shields.io/npm/v/@xpack-dev-tools/wine.svg)](https://www.npmjs.com/package/@xpack-dev-tools/wine/)
+[![GitHub package.json version](https://img.shields.io/github/package-json/v/xpack-dev-tools/wine-xpack)](https://github.com/xpack-dev-tools/wine-xpack/blob/xpack/package.json)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/xpack-dev-tools/wine-xpack)](https://github.com/xpack-dev-tools/wine-xpack/releases/)
+[![npm (scoped)](https://img.shields.io/npm/v/@xpack-dev-tools/wine.svg?color=blue)](https://www.npmjs.com/package/@xpack-dev-tools/wine/)
+[![license](https://img.shields.io/github/license/xpack-dev-tools/wine-xpack)](https://github.com/xpack-dev-tools/wine-xpack/blob/xpack/LICENSE)
 
 # The xPack WineHQ
 
@@ -25,9 +27,7 @@ The binaries can be installed automatically as **binary xPacks** or manually as
 
 ## Release schedule
 
-This distribution is generally one minor release behind the upstream releases.
-In practical terms, when the minor release number changes, it awaits a few
-more weeks to get the latest patch release.
+This distribution generally follows the major upstream [releases](https://dl.winehq.org/wine/source/).
 
 ## User info
 
@@ -91,6 +91,59 @@ It is also possible to install WineHQ globally, in the user home folder:
 xpm install --global @xpack-dev-tools/wine@latest
 ```
 
+After install, the package should create a structure like this (macOS files;
+only the first two depth levels are shown):
+
+```console
+$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/wine/6.23.0-1.1/.content/
+/Users/ilg/Library/xPacks/\@xpack-dev-tools/wine/6.23.0-1.1/.content/
+├── README.md
+├── bin
+│   ├── function_grep.pl
+│   ├── msidb
+│   ├── msiexec
+│   ├── notepad
+│   ├── regedit
+│   ├── regsvr32
+│   ├── widl
+│   ├── wine64
+│   ├── wine64-preloader
+│   ├── wineboot
+│   ├── winebuild
+│   ├── winecfg
+│   ├── wineconsole
+│   ├── winecpp -> winegcc
+│   ├── winedbg
+│   ├── winedump
+│   ├── winefile
+│   ├── wineg++ -> winegcc
+│   ├── winegcc
+│   ├── winemaker
+│   ├── winemine
+│   ├── winepath
+│   ├── wineserver
+│   ├── wmc
+│   └── wrc
+├── distro-info
+│   ├── CHANGELOG.md
+│   ├── patches
+│   └── scripts
+├── include
+│   └── wine
+├── lib
+│   └── wine
+├── libexec
+│   ├── libresolv-2.27.so
+│   └── libresolv.so.2 -> libresolv-2.27.so
+└── share
+    ├── applications
+    └── wine
+
+12 directories, 29 files
+```
+
+No other files are installed in any system folders or other locations.
+
 #### Uninstall
 
 To remove the links created by xpm in the current project:
@@ -127,22 +180,21 @@ like `6.17`; to make it semver compatible, `.0` is added as the third digit;
 the xPack distribution adds a four number,
 but since semver allows only three numbers, all additional ones can
 be added only as pre-release strings, separated by a dash,
-like `6.17.0-1`. When published as a npm package, the version gets
-a fifth number, like `6.17.0-1.1`.
+like `6.23.0-1`. When published as a npm package, the version gets
+a fifth number, like `6.23.0-1.1`.
 
 Since adherence of third party packages to semver is not guaranteed,
-it is recommended to use semver expressions like `^6.17.0` and `~6.17.0`
-with caution, and prefer exact matches, like `6.17.0-1.1`.
+it is recommended to use semver expressions like `^6.23.0` and `~6.23.0`
+with caution, and prefer exact matches, like `6.23.0-1.1`.
 
 ## Maintainer info
 
-- [How to build](https://github.com/xpack-dev-tools/wine-xpack/blob/xpack/README-BUILD.md)
-- [How to make new releases](https://github.com/xpack-dev-tools/wine-xpack/blob/xpack/README-RELEASE.md)
-- [Developer info](https://github.com/xpack-dev-tools/wine-xpack/blob/xpack/README-DEVELOP.md)
+For maintainer info, please see the
+[README-MAINTAINER](https://github.com/xpack-dev-tools/wine-xpack/blob/xpack/README-MAINTAINER.md)
 
 ## Support
 
-The quick answer is to use the GitHub
+The quick advice for getting support is to use the GitHub
 [Discussions](https://github.com/xpack-dev-tools/wine-xpack/discussions/).
 
 For more details please read the

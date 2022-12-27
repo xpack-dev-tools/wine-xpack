@@ -7,9 +7,28 @@
 # for any purpose is hereby granted, under the terms of the MIT license.
 # -----------------------------------------------------------------------------
 
-# Helper script used in the second edition of the xPack build
-# scripts. As the name implies, it should contain only functions and
-# should be included with 'source' by the container build scripts.
+# -----------------------------------------------------------------------------
+
+# https://www.winehq.org
+# https://wiki.winehq.org/Building_Wine
+
+# https://dl.winehq.org/wine/source/
+# https://dl.winehq.org/wine/source/6.x/wine-6.17.tar.xz
+
+# https://github.com/archlinux/svntogit-community/blob/packages/wine/trunk/PKGBUILD
+
+# 2017-09-16, "4.3"
+# 2019-11-29, "4.21"
+# Fails with a missing yywrap
+# 2020-01-21, "5.0"
+# 2020-02-02, "5.1"
+# 2021-06-04, "6.10"
+# 2020-11-20, "5.22"
+# 2021-09-10, "6.17"
+# 2021-11-05, "6.21"
+# 2021-12-03, "6.23"
+# 2022-08-28, "7.16"
+# 2022-10-14, "7.19"
 
 # -----------------------------------------------------------------------------
 
@@ -76,26 +95,8 @@ function wine_prepare_common_options()
 
 function wine_build()
 {
-  # https://www.winehq.org
-  # https://wiki.winehq.org/Building_Wine
-
-  # https://dl.winehq.org/wine/source/
-  # https://dl.winehq.org/wine/source/6.x/wine-6.17.tar.xz
-
-  # https://github.com/archlinux/svntogit-community/blob/packages/wine/trunk/PKGBUILD
-
-  # 2017-09-16, "4.3"
-  # 2019-11-29, "4.21"
-  # Fails with a missing yywrap
-  # 2020-01-21, "5.0"
-  # 2020-02-02, "5.1"
-  # 2021-06-04, "6.10"
-  # 2020-11-20, "5.22"
-  # 2021-09-10, "6.17"
-  # 2021-11-05, "6.21"
-  # 2021-12-03, "6.23"
-  # 2022-08-28, "7.16"
-  # 2022-10-14, "7.19"
+  echo_develop
+  echo_develop "[${FUNCNAME[0]} $@]"
 
   local wine_version="$1"
 
@@ -132,7 +133,7 @@ function wine_build()
       cd "${XBB_BUILD_FOLDER_PATH}/${wine_folder_name}-64"
 
       # None so far.
-      xbb_activate_installed_dev
+      xbb_activate_dependencies_dev
 
       CPPFLAGS="${XBB_CPPFLAGS}"
       CFLAGS="${XBB_CFLAGS_NO_W}"
@@ -140,11 +141,7 @@ function wine_build()
 
       # LDFLAGS="${XBB_LDFLAGS_APP_STATIC_GCC}"
       LDFLAGS="${XBB_LDFLAGS_APP}"
-      if [ "${XBB_TARGET_PLATFORM}" == "linux" ]
-      then
-        xbb_activate_cxx_rpath
-        LDFLAGS+=" -Wl,-rpath,${LD_LIBRARY_PATH}"
-      fi
+      xbb_adjust_ldflags_rpath
 
       export CPPFLAGS
       export CFLAGS
@@ -166,12 +163,12 @@ function wine_build()
 
           config_options=()
 
-          config_options+=("--prefix=${XBB_BINARIES_INSTALL_FOLDER_PATH}")
+          config_options+=("--prefix=${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}")
           config_options+=("--mandir=${XBB_LIBRARIES_INSTALL_FOLDER_PATH}/share/man")
 
-          config_options+=("--build=${XBB_BUILD}")
-          config_options+=("--host=${XBB_HOST}")
-          config_options+=("--target=${XBB_TARGET}")
+          config_options+=("--build=${XBB_BUILD_TRIPLET}")
+          config_options+=("--host=${XBB_HOST_TRIPLET}")
+          config_options+=("--target=${XBB_TARGET_TRIPLET}")
 
           config_options+=("--with-mingw")
           config_options+=("--with-pthread")
@@ -196,7 +193,8 @@ function wine_build()
         echo "Running wine64 make..."
 
         # Build.
-        run_verbose make -j ${XBB_JOBS} STRIP=true
+        # run_verbose make -j ${XBB_JOBS} STRIP=true
+        run_verbose make -j 1 STRIP=true
 
         # The install step must be done after wine 32.
 
@@ -228,13 +226,13 @@ function wine_build()
 
               config_options=()
 
-              config_options+=("--prefix=${XBB_BINARIES_INSTALL_FOLDER_PATH}")
-              config_options+=("--libdir=${XBB_BINARIES_INSTALL_FOLDER_PATH}/lib32")
+              config_options+=("--prefix=${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}")
+              config_options+=("--libdir=${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/lib32")
               config_options+=("--mandir=${XBB_LIBRARIES_INSTALL_FOLDER_PATH}/share/man")
 
-              config_options+=("--build=${XBB_BUILD}")
-              config_options+=("--host=${XBB_HOST}")
-              config_options+=("--target=${XBB_TARGET}")
+              config_options+=("--build=${XBB_BUILD_TRIPLET}")
+              config_options+=("--host=${XBB_HOST_TRIPLET}")
+              config_options+=("--target=${XBB_TARGET_TRIPLET}")
 
               config_options+=("--with-mingw")
               config_options+=("--with-pthread")
@@ -263,7 +261,7 @@ function wine_build()
 
             run_verbose make install
 
-            i686-w64-mingw32-strip --strip-unneeded "${XBB_BINARIES_INSTALL_FOLDER_PATH}"/lib32/wine/i386-windows/*.dll
+            i686-w64-mingw32-strip --strip-unneeded "${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}"/lib32/wine/i386-windows/*.dll
 
             # wine: Unhandled page fault on read access to 0000000000000108 at address 000000038B5B4C00 (thread 0114), starting debugger...
             # run_verbose make test
@@ -279,7 +277,7 @@ function wine_build()
 
         run_verbose make install
 
-        x86_64-w64-mingw32-strip --strip-unneeded "${XBB_BINARIES_INSTALL_FOLDER_PATH}"/lib/wine/x86_64-windows/*.dll
+        x86_64-w64-mingw32-strip --strip-unneeded "${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}"/lib/wine/x86_64-windows/*.dll
 
       ) 2>&1 | tee "${XBB_LOGS_FOLDER_PATH}/${wine_folder_name}/make-install-output-64-$(ndate).txt"
     )
@@ -290,7 +288,7 @@ function wine_build()
     touch "${wine_stamp_file_path}"
 
   else
-    echo "Component wine already installed."
+    echo "Component wine already installed"
   fi
 
   tests_add "wine_test" "${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin"
@@ -305,36 +303,36 @@ function wine_test()
 
   local wine64_realpath="$(realpath ${test_bin_path}/wine64)"
 
-  show_libs "${wine64_realpath}"
-  show_libs "$(realpath ${test_bin_path}/winebuild)"
+  show_host_libs "${wine64_realpath}"
+  show_host_libs "$(realpath ${test_bin_path}/winebuild)"
 
-  show_libs "$(realpath ${test_bin_path}/winegcc)"
-  show_libs "$(realpath ${test_bin_path}/wineg++)"
+  show_host_libs "$(realpath ${test_bin_path}/winegcc)"
+  show_host_libs "$(realpath ${test_bin_path}/wineg++)"
 
   libwine=$(find "$(dirname ${wine64_realpath})"/../lib* -name 'libwine.so')
   if [ ! -z "${libwine}" ]
   then
-    show_libs "$(realpath ${libwine})"
+    show_host_libs "$(realpath ${libwine})"
   fi
 
   echo
   echo "Testing if wine64 binaries start properly..."
 
   # First check if the program is able to tell its version.
-  run_app "${test_bin_path}/wine64" --version
+  run_host_app_verbose "${test_bin_path}/wine64" --version
 
   # Require gcc-xbs
-  # run_app "${test_bin_path}/winegcc" --version
-  # run_app "${test_bin_path}/wineg++" --version
+  # run_host_app_verbose "${test_bin_path}/winegcc" --version
+  # run_host_app_verbose "${test_bin_path}/wineg++" --version
 
-  run_app "${test_bin_path}/winebuild" --version
+  run_host_app_verbose "${test_bin_path}/winebuild" --version
 
   # When running in Docker with the home mounted, wine throws:
   # wine: '/github/home' is not owned by you, refusing to create a configuration directory there
   # To avoid it, create the .wine folder beforehand.
   run_verbose mkdir -p "${HOME}/.wine"
 
-  run_app "${test_bin_path}/winecfg" --version
+  run_host_app_verbose "${test_bin_path}/winecfg" --version
 
   # This test should check if the program is able to start
   # a simple executable.
@@ -342,7 +340,7 @@ function wine_test()
   # and populated with lots of files., so subsequent runs
   # will no longer have to do it.
   local netstat=$(find  "$(dirname ${wine64_realpath})"/../lib* -name netstat.exe)
-  run_app "${test_bin_path}/wine64" ${netstat}
+  run_host_app_verbose "${test_bin_path}/wine64" ${netstat}
 
 }
 

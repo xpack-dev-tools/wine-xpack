@@ -38,7 +38,7 @@ jobs:
 
   linux-x64:
     name: 'Linux Intel 64-bit WineHQ@${{ github.event.inputs.version }} test'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
       - name: 'Environment'

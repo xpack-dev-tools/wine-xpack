@@ -9,7 +9,7 @@
 
 # -----------------------------------------------------------------------------
 
-function application_build_versioned_components()
+function tests_run_all()
 {
   local test_bin_path="$1"
 
