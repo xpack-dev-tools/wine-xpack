@@ -166,7 +166,8 @@ Update the build scripts (or clone them at the first use):
 
 ```sh
 git -C ~/Work/wine-xpack.git pull && \
-xpm run deep-clean -C ~/Work/wine-xpack.git && \
+xpm install -C ~/Work/wine-xpack.git && \
+xpm run link-deps -C ~/Work/wine-xpack.git && \
 xpm run deep-clean --config linux-x64 -C ~/Work/wine-xpack.git && \
 xpm run docker-prepare --config linux-x64 -C ~/Work/wine-xpack.git && \
 git -C ~/Work/xbb-helper-xpack.git pull && \
