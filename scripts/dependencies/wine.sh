@@ -95,6 +95,9 @@ function wine_prepare_common_options()
 
 function wine_build()
 {
+  echo_develop
+  echo_develop "[${FUNCNAME[0]} $@]"
+
   local wine_version="$1"
 
   local wine_version_major="$(echo ${wine_version} | sed -e 's|\([0-9][0-9]*\)\.\([0-9][0-9]*\)|\1|')"
