@@ -11,7 +11,7 @@
 
 function application_build_versioned_components()
 {
-  XBB_WINE_VERSION="$(echo "${XBB_RELEASE_VERSION}" | sed -e 's|\.[0-9][0-9]*-.*||')"
+  XBB_WINE_VERSION="$(echo "${XBB_RELEASE_VERSION}" | sed -e 's|[.][0-9][0-9]*-.*||')"
 
   if [ "${XBB_REQUESTED_HOST_PLATFORM}" != "linux" ] || [ "${XBB_REQUESTED_HOST_ARCH}" != "x64" ]
   then
@@ -20,7 +20,7 @@ function application_build_versioned_components()
   fi
 
   # Keep them in sync with combo archive content.
-  if [[ "${XBB_RELEASE_VERSION}" =~ 7\.*\.* ]]
+  if [[ "${XBB_RELEASE_VERSION}" =~ 7[.]*[.]* ]]
   then
     # -------------------------------------------------------------------------
     # Build the native dependencies.
@@ -51,7 +51,7 @@ function application_build_versioned_components()
     run_verbose rm -rfv "${XBB_APPLICATION_INSTALL_FOLDER_PATH}/share/man"
 
     # -------------------------------------------------------------------------
-  elif [[ "${XBB_RELEASE_VERSION}" =~ 6\.*\.* ]]
+  elif [[ "${XBB_RELEASE_VERSION}" =~ 6[.]*[.]* ]]
   then
     # -------------------------------------------------------------------------
     # Build the native dependencies.
