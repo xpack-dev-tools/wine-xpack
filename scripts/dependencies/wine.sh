@@ -100,8 +100,8 @@ function wine_build()
 
   local wine_version="$1"
 
-  local wine_version_major="$(echo ${wine_version} | sed -e 's|\([0-9][0-9]*\)\.\([0-9][0-9]*\)|\1|')"
-  local wine_version_minor="$(echo ${wine_version} | sed -e 's|\([0-9][0-9]*\)\.\([0-9][0-9]*\)|\2|')"
+  local wine_version_major="$(echo ${wine_version} | sed -e 's|\([0-9][0-9]*\)[.]\([0-9][0-9]*\)|\1|')"
+  local wine_version_minor="$(echo ${wine_version} | sed -e 's|\([0-9][0-9]*\)[.]\([0-9][0-9]*\)|\2|')"
 
   local wine_src_folder_name="wine-${wine_version}"
 
