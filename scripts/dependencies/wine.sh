@@ -193,9 +193,8 @@ function wine_build()
         echo "Running wine64 make..."
 
         # Build.
-        # run_verbose make -j ${XBB_JOBS} STRIP=true
-        run_verbose make -j 1 STRIP=true
-
+        run_verbose make -j ${XBB_JOBS} STRIP=true
+        
         # The install step must be done after wine 32.
 
         # wine: Unhandled page fault on read access to 0000000000000108 at address 000000038B5B4C00 (thread 0114), starting debugger...
