@@ -148,6 +148,9 @@ function wine_build()
       export CXXFLAGS
       export LDFLAGS
 
+      # binutils 2.38 has a problem with parallel builds.
+      run-verbose ${$(which x86_64-w64-mingw32-dlltool)} --version
+
       if [ ! -f "config.status" ]
       then
         (
@@ -194,6 +197,8 @@ function wine_build()
 
         # Build.
         # run_verbose make -j ${XBB_JOBS} STRIP=true
+        # dlltool seems to have a problem with parallel builds.
+        # /home/ilg/Work/wine-xpack.git/build/linux-x64/xpacks/.bin/x86_64-w64-mingw32-dlltool: dlls/winmm/libwinmm.cross.a: error reading winmm_dll_h.o: file truncated
         run_verbose make -j 1 STRIP=true
 
         # The install step must be done after wine 32.
@@ -257,7 +262,9 @@ function wine_build()
             echo "Running wine32 make..."
 
             # Build.
-            run_verbose make -j ${XBB_JOBS} STRIP=true
+            # run_verbose make -j ${XBB_JOBS} STRIP=true
+            # dlltool seems to have a problem with parallel builds.
+            run_verbose make -j 1 STRIP=true
 
             run_verbose make install
 

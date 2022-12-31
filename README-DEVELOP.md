@@ -15,7 +15,9 @@ winebuild: /usr/bin/x86_64-w64-mingw32-dlltool failed with status 1
 make: *** [Makefile:195227: dlls/winmm/libwinmm.delay.a] Error 1
 ```
 
-The soution is to upgrade to binutils 2.39.
+The workaround is to disable the parallel build.
+
+The solution is to upgrade to binutils 2.39.
 
 ## 32-bit wine
 
