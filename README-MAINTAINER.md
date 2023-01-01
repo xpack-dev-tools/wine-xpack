@@ -175,7 +175,7 @@ xpm run docker-link-deps --config linux-x64 -C ~/Work/wine-xpack.git
 xpm run docker-build-develop --config linux-x64 -C ~/Work/wine-xpack.git
 ```
 
-About 20 minutes later, the output of the build script is a compressed
+About 40 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
