@@ -167,6 +167,7 @@ function wine_build()
           config_options=()
 
           config_options+=("--prefix=${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}")
+
           config_options+=("--mandir=${XBB_LIBRARIES_INSTALL_FOLDER_PATH}/share/man")
 
           config_options+=("--build=${XBB_BUILD_TRIPLET}")
@@ -232,6 +233,7 @@ function wine_build()
               config_options=()
 
               config_options+=("--prefix=${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}")
+              
               config_options+=("--libdir=${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/lib32")
               config_options+=("--mandir=${XBB_LIBRARIES_INSTALL_FOLDER_PATH}/share/man")
 
