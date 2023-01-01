@@ -149,7 +149,7 @@ function wine_build()
       export LDFLAGS
 
       # binutils 2.38 has a problem with parallel builds.
-      run-verbose ${$(which x86_64-w64-mingw32-dlltool)} --version
+      run_verbose $(which x86_64-w64-mingw32-dlltool) --version
 
       if [ ! -f "config.status" ]
       then
