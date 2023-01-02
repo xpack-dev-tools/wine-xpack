@@ -350,9 +350,25 @@ function wine_test()
   # As a side effect, the "${HOME}/.wine" folder is created
   # and populated with lots of files., so subsequent runs
   # will no longer have to do it.
-  local netstat=$(find  "$(dirname ${wine64_realpath})"/../lib* -name netstat.exe)
-  run_host_app_verbose "${test_bin_path}/wine64" ${netstat}
+  local netstat_64="$(dirname ${wine64_realpath})/../lib/wine/x86_64-windows/netstat.exe"
+  run_host_app_verbose "${test_bin_path}/wine64" ${netstat_64}
 
+  local netstat_32="$(dirname ${wine64_realpath})/../lib32/wine/i386-windows/netstat.exe"
+  run_host_app_verbose "${test_bin_path}/wine64" ${netstat_32}
+
+  echo
+  echo "Checking the wine shared libraries..."
+
+  local wine_realpath="$(realpath ${test_bin_path}/wine)"
+
+  show_host_libs "${wine_realpath}"
+
+  echo
+  echo "Testing if wine binary starts properly..."
+
+  # The `wine` executable is a 32-bit program; running it requires the 32-bit
+  # libraries, not available on some systems, thus it is not enforced.
+  run_host_app_verbose "${test_bin_path}/wine" --version || true
 }
 
 # -----------------------------------------------------------------------------
