@@ -84,8 +84,6 @@ function application_build_versioned_components()
     xbb_set_executables_install_path "${XBB_APPLICATION_INSTALL_FOLDER_PATH}"
     xbb_set_libraries_install_path "${XBB_DEPENDENCIES_INSTALL_FOLDER_PATH}"
 
-    # i686-w64-mingw32-gcc not available in the Docker container.
-    XBB_WINE_SKIP_WIN32="y"
     XBB_APPLICATION_JOBS=1
 
     # https://dl.winehq.org/wine/source/
