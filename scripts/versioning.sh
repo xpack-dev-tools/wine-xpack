@@ -42,9 +42,6 @@ function application_build_versioned_components()
     xbb_set_executables_install_path "${XBB_APPLICATION_INSTALL_FOLDER_PATH}"
     xbb_set_libraries_install_path "${XBB_DEPENDENCIES_INSTALL_FOLDER_PATH}"
 
-    # the xPack gcc does not support -m32 yet.
-    XBB_WINE_SKIP_WIN32="y"
-
     # https://dl.winehq.org/wine/source/
     wine_build "${XBB_WINE_VERSION}"
 
@@ -56,23 +53,50 @@ function application_build_versioned_components()
     # -------------------------------------------------------------------------
     # Build the native dependencies.
 
-    export XBB_BINUTILS_BRANDING="${XBB_APPLICATION_DISTRO_NAME} MinGW-w64 binutils ${XBB_REQUESTED_TARGET_MACHINE}"
+    # 6.23 is an intermediate release, which uses a preliminary compiler
+    # that includes binutils 2.38 which ahs a bug in dlltool,
+    # thus the need to disable parallel builds.
 
-    # https://ftp.gnu.org/gnu/binutils/
-    XBB_BINUTILS_VERSION="2.39"
+    XBB_APPLICATION_JOBS=1
 
-    xbb_reset_env
-    xbb_set_target "mingw-w64-native"
+    # Used during development only.
+    # Don't forget to enable xbb_activate_installed_bin later.
+    if false
+    then
 
-    triplet="x86_64-w64-mingw32"
-    xbb_set_extra_target_env "${triplet}"
+      # Rebuild binutils 2.39 to avoid the 2.38 bug in the current
+      # mingw-w64-gcc package.
+      export XBB_BINUTILS_BRANDING="${XBB_APPLICATION_DISTRO_NAME} MinGW-w64 binutils ${XBB_REQUESTED_TARGET_MACHINE}"
 
-    binutils_build "${XBB_BINUTILS_VERSION}" --triplet="${triplet}" --program-prefix="${triplet}-"
+      # https://ftp.gnu.org/gnu/binutils/
+      XBB_BINUTILS_VERSION="2.39"
+
+      xbb_reset_env
+      xbb_set_target "mingw-w64-native"
+
+      # 32-bit first, since it is more probable to fail.
+      XBB_MINGW_TRIPLETS=( "i686-w64-mingw32" "x86_64-w64-mingw32" )
+
+      for triplet in "${XBB_MINGW_TRIPLETS[@]}"
+      do
+
+        xbb_set_extra_target_env "${triplet}"
+
+        binutils_build "${XBB_BINUTILS_VERSION}" --triplet="${triplet}" --program-prefix="${triplet}-"
+
+      done
+
+      # With 2.39 parallel builds are fine.
+      unset XBB_APPLICATION_JOBS
+
+    fi
 
     # -------------------------------------------------------------------------
     # Build the target dependencies.
 
     xbb_reset_env
+    # xbb_activate_installed_bin
+
     xbb_set_target "requested"
 
     # https://sourceforge.net/projects/libpng/files/libpng16/
