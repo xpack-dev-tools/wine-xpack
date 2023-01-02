@@ -86,6 +86,7 @@ function application_build_versioned_components()
 
     # i686-w64-mingw32-gcc not available in the Docker container.
     XBB_WINE_SKIP_WIN32="y"
+    XBB_APPLICATION_JOBS=1
 
     # https://dl.winehq.org/wine/source/
     wine_build "${XBB_WINE_VERSION}"

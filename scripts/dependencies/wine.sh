@@ -200,7 +200,8 @@ function wine_build()
         # run_verbose make -j ${XBB_JOBS} STRIP=true
         # dlltool seems to have a problem with parallel builds.
         # /home/ilg/Work/wine-xpack.git/build/linux-x64/xpacks/.bin/x86_64-w64-mingw32-dlltool: dlls/winmm/libwinmm.cross.a: error reading winmm_dll_h.o: file truncated
-        run_verbose make -j 1 STRIP=true
+        local jobs=${XBB_APPLICATION_JOBS:-${XBB_JOBS}}
+        run_verbose make -j ${jobs} STRIP=true
 
         # The install step must be done after wine 32.
 
@@ -233,7 +234,7 @@ function wine_build()
               config_options=()
 
               config_options+=("--prefix=${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}")
-              
+
               config_options+=("--libdir=${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/lib32")
               config_options+=("--mandir=${XBB_LIBRARIES_INSTALL_FOLDER_PATH}/share/man")
 
@@ -266,7 +267,8 @@ function wine_build()
             # Build.
             # run_verbose make -j ${XBB_JOBS} STRIP=true
             # dlltool seems to have a problem with parallel builds.
-            run_verbose make -j 1 STRIP=true
+            local jobs=${XBB_APPLICATION_JOBS:-${XBB_JOBS}}
+            run_verbose make -j ${jobs} STRIP=true
 
             run_verbose make install
 
