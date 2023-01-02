@@ -65,8 +65,15 @@ A recent [xpm](https://xpack.github.io/xpm/), which is a portable
 
 ## Release schedule
 
-This distribution generally follows the major upstream
-[releases](https://dl.winehq.org/wine/source/).
+The [upstream](https://dl.winehq.org/wine/source/) release cycle is about
+two weeks, with one major release every year.
+
+This distribution generally plans to have at least one,
+possibly two releases per year.
+Initial releases like *.0 are avoided; instead, the last
+release before increasing the major number, like
+x.22 or x.23, is preferred. Time permitting, a second release
+might be done in mid year, with x.12 or 13.
 
 ## How to make new releases
 

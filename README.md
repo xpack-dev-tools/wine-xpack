@@ -27,7 +27,11 @@ The binaries can be installed automatically as **binary xPacks** or manually as
 
 ## Release schedule
 
-This distribution generally follows the major upstream [releases](https://dl.winehq.org/wine/source/).
+The [upstream](https://dl.winehq.org/wine/source/) release cycle is about
+two weeks, with one major release every year.
+
+This distribution generally plans to have at least one,
+possibly two releases per year.
 
 ## User info
 
