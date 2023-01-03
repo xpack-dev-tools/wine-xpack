@@ -328,6 +328,13 @@ function wine_test()
   fi
 
   echo
+  echo "Checking the wine shared libraries..."
+
+  local wine_realpath="$(realpath ${test_bin_path}/wine)"
+
+  show_host_libs "${wine_realpath}"
+
+  echo
   echo "Testing if wine64 binaries start properly..."
 
   # First check if the program is able to tell its version.
@@ -344,7 +351,9 @@ function wine_test()
   # To avoid it, create the .wine folder beforehand.
   run_verbose mkdir -p "${HOME}/.wine"
 
-  run_host_app_verbose "${test_bin_path}/winecfg" --version
+  # This is a script that tries to access the wine and win64
+  # binaries, but wine fails on machines which do not support 32-bit.
+  run_host_app_verbose "${test_bin_path}/winecfg" --version || true
 
   # This test should check if the program is able to start
   # a simple executable.
@@ -355,14 +364,7 @@ function wine_test()
   run_host_app_verbose "${test_bin_path}/wine64" ${netstat_64}
 
   local netstat_32="$(dirname ${wine64_realpath})/../lib32/wine/i386-windows/netstat.exe"
-  run_host_app_verbose "${test_bin_path}/wine64" ${netstat_32}
-
-  echo
-  echo "Checking the wine shared libraries..."
-
-  local wine_realpath="$(realpath ${test_bin_path}/wine)"
-
-  show_host_libs "${wine_realpath}"
+  run_host_app_verbose "${test_bin_path}/wine64" ${netstat_32} || true
 
   echo
   echo "Testing if wine binary starts properly..."
