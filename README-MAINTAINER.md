@@ -342,6 +342,7 @@ with all binaries attached.
 ## Prepare a new blog post
 
 - check and possibly update the `templates/body-jekyll-release-*-liquid.md`
+  (use <https://dl.winehq.org/wine/source/> for the release date)
 - run the xPack action `generate-jekyll-post`; this will leave a file
 on the Desktop.
 
