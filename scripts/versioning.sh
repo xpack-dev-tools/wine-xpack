@@ -41,6 +41,8 @@ function application_build_versioned_components()
     xbb_set_executables_install_path "${XBB_APPLICATION_INSTALL_FOLDER_PATH}"
     xbb_set_libraries_install_path "${XBB_DEPENDENCIES_INSTALL_FOLDER_PATH}"
 
+    XBB_APPLICATION_JOBS=1
+
     # https://dl.winehq.org/wine/source/
     wine_build "${XBB_WINE_VERSION}"
 
@@ -52,48 +54,13 @@ function application_build_versioned_components()
     # -------------------------------------------------------------------------
     # Build the native dependencies.
 
-    # 6.23 is an intermediate release, which uses a preliminary compiler
-    # that includes binutils 2.38 which ahs a bug in dlltool,
-    # thus the need to disable parallel builds.
-
-    XBB_APPLICATION_JOBS=1
-
-    # Used during development only.
-    # Don't forget to enable xbb_activate_installed_bin later.
-    if false
-    then
-
-      # Rebuild binutils 2.39 to avoid the 2.38 bug in the current
-      # mingw-w64-gcc package.
-      export XBB_BINUTILS_BRANDING="${XBB_APPLICATION_DISTRO_NAME} MinGW-w64 binutils ${XBB_REQUESTED_TARGET_MACHINE}"
-
-      # https://ftp.gnu.org/gnu/binutils/
-      XBB_BINUTILS_VERSION="2.39"
-
-      xbb_reset_env
-      xbb_set_target "mingw-w64-native"
-
-      # 32-bit first, since it is more probable to fail.
-      XBB_MINGW_TRIPLETS=( "i686-w64-mingw32" "x86_64-w64-mingw32" )
-
-      for triplet in "${XBB_MINGW_TRIPLETS[@]}"
-      do
-
-        xbb_set_extra_target_env "${triplet}"
-
-        binutils_build "${XBB_BINUTILS_VERSION}" --triplet="${triplet}" --program-prefix="${triplet}-"
-
-      done
-
-      # With 2.39 parallel builds are fine.
-      unset XBB_APPLICATION_JOBS
-
-    fi
+    # None
 
     # -------------------------------------------------------------------------
     # Build the target dependencies.
 
     xbb_reset_env
+    # Before set target (to possibly update CC & co variables).
     # xbb_activate_installed_bin
 
     xbb_set_target "requested"
