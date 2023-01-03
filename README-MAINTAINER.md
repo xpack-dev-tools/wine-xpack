@@ -108,8 +108,8 @@ final previous major, like x-1.y
 
 ### Increase the version
 
-Determine the version (like `6.23.0`) and update the `scripts/VERSION`
-file; the format is `6.23.0-1`. The fourth number is the xPack release number
+Determine the version (like `7.22.0`) and update the `scripts/VERSION`
+file; the format is `7.22.0-1`. The fourth number is the xPack release number
 of this version. A fifth number will be added when publishing
 the package on the `npm` server.
 
@@ -119,7 +119,7 @@ Check GitHub issues and pull requests:
 
 - <https://github.com/xpack-dev-tools/wine-xpack/issues/>
 
-and fix them; assign them to a milestone (like `6.23.0-1`).
+and fix them; assign them to a milestone (like `7.22.0-1`).
 
 ### Check `README.md`
 
@@ -136,8 +136,8 @@ but in the version specific release page.
 
 - open the `CHANGELOG.md` file
 - check if all previous fixed issues are in
-- add a new entry like _* v6.17.0-1 prepared_
-- commit with a message like _prepare v6.17.0-1_
+- add a new entry like _* v7.22.0-1 prepared_
+- commit with a message like _prepare v7.22.0-1_
 
 ### Update the version specific code
 
@@ -187,9 +187,9 @@ archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/wine-xpack.git/build/linux-x64/deploy
-total 196820
--rw-r--r-- 1 ilg ilg 201538244 Nov  7 14:20 xpack-wine-6.23.0-1-linux-x64.tar.gz
--rw-r--r-- 1 ilg ilg       102 Nov  7 14:20 xpack-wine-6.23.0-1-linux-x64.tar.gz.sha
+total 130860
+-rw-r--r-- 1 ilg ilg 133992714 Jan  3 18:05 xpack-wine-7.22.0-1-linux-x64.tar.gz
+-rw-r--r-- 1 ilg ilg       103 Jan  3 18:05 xpack-wine-7.22.0-1-linux-x64.tar.gz.sha
 ```
 
 ### Files cache
@@ -317,13 +317,13 @@ and check the binaries.
 On GNU/Linux, use:
 
 ```sh
-.../xpack-wine-6.23.0-1/bin/wine --version
+.../xpack-wine-7.22.0-1/bin/wine --version
 wine-6.17
 ```
 
 ## Create a new GitHub pre-release draft
 
-- in `CHANGELOG.md`, add the release date and a message like _* v6.17.0-1 released_
+- in `CHANGELOG.md`, add the release date and a message like _* v7.22.0-1 released_
 - commit with _CHANGELOG update_
 - check and possibly update the `templates/body-github-release-liquid.md`
 - push the `xpack-develop` branch
@@ -334,8 +334,8 @@ The workflow result and logs are available from the
 
 The result is a
 [draft pre-release](https://github.com/xpack-dev-tools/wine-xpack/releases/)
-tagged like **v6.17.0-1** (mind the dash in the middle!) and
-named like **xPack WineHQ v6.17.0-1** (mind the dash),
+tagged like **v7.22.0-1** (mind the dash in the middle!) and
+named like **xPack WineHQ v7.22.0-1** (mind the dash),
 with all binaries attached.
 
 - edit the draft and attach it to the `xpack-develop` branch (important!)
@@ -358,7 +358,7 @@ If any, refer to closed
 ## Update the preview Web
 
 - commit the `develop` branch of `xpack/web-jekyll` GitHub repo;
-  use a message like _xPack WineHQ v6.17.0-1 released_
+  use a message like _xPack WineHQ v7.22.0-1 released_
 - push to GitHub
 - wait for the GitHub Pages build to complete
 - the preview web is <https://xpack.github.io/web-preview/news/>
@@ -400,18 +400,18 @@ watching this project.
 - compare the SHA sums with those shown by `cat *.sha`
 - check the executable names
 - commit all changes, use a message like
-  _package.json: update urls for 6.23.0-1.1 release_ (without _v_)
+  _package.json: update urls for 7.22.0-1.1 release_ (without _v_)
 
 ## Publish on the npmjs.com server
 
 - select the `xpack-develop` branch
 - check the latest commits `npm run git-log`
-- update `CHANGELOG.md`, add a line like _* v6.17.0-1.1 published on npmjs.com_
-- commit with a message like _CHANGELOG: publish npm v6.17.0-1.1_
+- update `CHANGELOG.md`, add a line like _* v7.22.0-1.1 published on npmjs.com_
+- commit with a message like _CHANGELOG: publish npm v7.22.0-1.1_
 - `npm pack` and check the content of the archive, which should list
   only the `package.json`, the `README.md`, `LICENSE` and `CHANGELOG.md`;
   possibly adjust `.npmignore`
-- `npm version 6.23.0-1.1`; the first 4 numbers are the same as the
+- `npm version 7.22.0-1.1`; the first 4 numbers are the same as the
   GitHub release; the fifth number is the npm specific version
 - the commits and the tag should have been pushed by the `postversion` script;
   if not, push them with `git push origin --tags`
@@ -440,12 +440,12 @@ The tests results are available from the
 When the release is considered stable, promote it as `latest`:
 
 - `npm dist-tag ls @xpack-dev-tools/wine`
-- `npm dist-tag add @xpack-dev-tools/wine@6.23.0-1.1 latest`
+- `npm dist-tag add @xpack-dev-tools/wine@7.22.0-1.1 latest`
 - `npm dist-tag ls @xpack-dev-tools/wine`
 
 In case the previous version is not functional and needs to be unpublished:
 
-- `npm unpublish @xpack-dev-tools/wine@6.23.0-1.1`
+- `npm unpublish @xpack-dev-tools/wine@7.22.0-1.1`
 
 ## Update the Web
 
@@ -467,7 +467,7 @@ In case the previous version is not functional and needs to be unpublished:
 
 - in a separate browser windows, open [TweetDeck](https://tweetdeck.twitter.com/)
 - using the `@xpack_project` account
-- paste the release name like **xPack WineHQ v6.17.0-1 released**
+- paste the release name like **xPack WineHQ v7.22.0-1 released**
 - paste the link to the Web page
   [release](https://xpack.github.io/wine/releases/)
 - click the **Tweet** button

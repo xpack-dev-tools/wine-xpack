@@ -99,9 +99,9 @@ After install, the package should create a structure like this (macOS files;
 only the first two depth levels are shown):
 
 ```console
-$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/wine/6.23.0-1.1/.content/
-/Users/ilg/Library/xPacks/\@xpack-dev-tools/wine/6.23.0-1.1/.content/
-├── README.md
+$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/wine/7.22.0-1.1/.content/
+/Users/ilg/Library/xPacks/\@xpack-dev-tools/wine/7.22.0-1.1/.content/
+/home/ilg/Work/wine-xpack.git/build/linux-x64/application/
 ├── bin
 │   ├── function_grep.pl
 │   ├── msidb
@@ -110,6 +110,7 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/wine/6.23.0-1.1/.content
 │   ├── regedit
 │   ├── regsvr32
 │   ├── widl
+│   ├── wine
 │   ├── wine64
 │   ├── wine64-preloader
 │   ├── wineboot
@@ -125,25 +126,31 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/wine/6.23.0-1.1/.content
 │   ├── winemaker
 │   ├── winemine
 │   ├── winepath
+│   ├── wine-preloader
 │   ├── wineserver
 │   ├── wmc
 │   └── wrc
 ├── distro-info
 │   ├── CHANGELOG.md
+│   ├── licenses
 │   ├── patches
 │   └── scripts
 ├── include
 │   └── wine
 ├── lib
 │   └── wine
+├── lib32
+│   └── wine
 ├── libexec
+│   ├── libgcc_s.so.1
 │   ├── libresolv-2.27.so
 │   └── libresolv.so.2 -> libresolv-2.27.so
+├── README.md
 └── share
     ├── applications
     └── wine
 
-12 directories, 29 files
+15 directories, 32 files
 ```
 
 No other files are installed in any system folders or other locations.
@@ -184,12 +191,12 @@ like `6.17`; to make it semver compatible, `.0` is added as the third digit;
 the xPack distribution adds a four number,
 but since semver allows only three numbers, all additional ones can
 be added only as pre-release strings, separated by a dash,
-like `6.23.0-1`. When published as a npm package, the version gets
-a fifth number, like `6.23.0-1.1`.
+like `7.22.0-1`. When published as a npm package, the version gets
+a fifth number, like `7.22.0-1.1`.
 
 Since adherence of third party packages to semver is not guaranteed,
-it is recommended to use semver expressions like `^6.23.0` and `~6.23.0`
-with caution, and prefer exact matches, like `6.23.0-1.1`.
+it is recommended to use semver expressions like `^7.22.0` and `~7.22.0`
+with caution, and prefer exact matches, like `7.22.0-1.1`.
 
 ## Maintainer info
 
