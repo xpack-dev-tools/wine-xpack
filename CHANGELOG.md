@@ -4,6 +4,12 @@ Entries in this file are in reverse chronological order.
 
 ## 2023-01-03
 
+* v7.22.0-1 released
+* e004ed5 add tests/update.sh, with multilib
+* 2e763a6 wine.sh: do not fail on 32-bit tests
+* a2ffed5 README update
+* ab83f6e package.json: bump deps
+* 85ddbed package.json: update xpack.bin
 * v7.22.0-1 prepared
 * 6c234c5 versioning.sh: document XBB_APPLICATION_JOBS
 * 8f0307d wine.sh: update versions
