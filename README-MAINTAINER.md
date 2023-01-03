@@ -182,7 +182,7 @@ xpm run docker-link-deps --config linux-x64 -C ~/Work/wine-xpack.git
 xpm run docker-build-develop --config linux-x64 -C ~/Work/wine-xpack.git
 ```
 
-About 40 minutes later, the output of the build script is a compressed
+About 1h25 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
@@ -259,9 +259,7 @@ page.
 
 This command uses the `xpack-develop` branch of this repo.
 
-The builds take about 7 minutes to complete:
-
-- `xbbli`: 7 min
+The build takes about 1h25 to complete.
 
 The workflow result and logs are available from the
 [Actions](https://github.com/xpack-dev-tools/wine-xpack/actions/) page.
