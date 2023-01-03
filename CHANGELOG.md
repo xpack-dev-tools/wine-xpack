@@ -4,6 +4,7 @@ Entries in this file are in reverse chronological order.
 
 ## 2023-01-03
 
+* v7.22.0-1.1 published on npmjs.com
 * v7.22.0-1 released
 * e004ed5 add tests/update.sh, with multilib
 * 2e763a6 wine.sh: do not fail on 32-bit tests
