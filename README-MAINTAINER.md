@@ -386,7 +386,7 @@ watching this project.
 
 - open the `package.json` file
 - check if the links in the `bin` property cover the actual binaries
-- rename `winewidl`
+- rename `wine` -> `winewidl`
 
 ## Update package.json binaries
 
