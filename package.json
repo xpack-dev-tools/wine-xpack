@@ -36,12 +36,12 @@
     "minimumXpmRequired": "0.14.0",
     "binaries": {
       "destination": "./.content",
-      "baseUrl": "https://github.com/xpack-dev-tools/wine-xpack/releases/download/v6.17.0-1",
+      "baseUrl": "https://github.com/xpack-dev-tools/wine-xpack/releases/download/v7.22.0-1",
       "skip": 1,
       "platforms": {
         "linux-x64": {
-          "fileName": "xpack-wine-6.17.0-1-linux-x64.tar.gz",
-          "sha256": "c324fb7194311aafe8464c5947a84a0496867a97fa81962704f219bf481290ba"
+          "fileName": "xpack-wine-7.22.0-1-linux-x64.tar.gz",
+          "sha256": "a5db2d237b4fb69ed04dfd8870255ee0b51b4cd49cdc882e86b73fde2e505947"
         }
       }
     },
@@ -51,7 +51,7 @@
       "notepad": "./.content/bin/notepad",
       "regedit": "./.content/bin/regedit",
       "regsvr32": "./.content/bin/regsvr32",
-      "widl": "./.content/bin/widl",
+      "winewidl": "./.content/bin/widl",
       "wine": "./.content/bin/wine",
       "wine-preloader": "./.content/bin/wine-preloader",
       "wine64": "./.content/bin/wine64",
