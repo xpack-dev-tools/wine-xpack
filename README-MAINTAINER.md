@@ -315,7 +315,7 @@ and check the binaries.
 On GNU/Linux, use:
 
 ```sh
-.../xpack-wine-7.22.0-1/bin/wine --version
+.../xpack-wine-7.22.0-1/bin/wine64 --version
 wine-6.17
 ```
 
