@@ -42,7 +42,7 @@ function application_build_versioned_components()
     xbb_set_libraries_install_path "${XBB_DEPENDENCIES_INSTALL_FOLDER_PATH}"
 
     # Disable parallel build due to buggy dllutils in binutils 2.38.
-    XBB_APPLICATION_JOBS=1
+    # XBB_APPLICATION_JOBS=1
 
     # https://dl.winehq.org/wine/source/
     wine_build "${XBB_WINE_VERSION}"
