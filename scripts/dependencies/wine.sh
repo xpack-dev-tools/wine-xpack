@@ -108,16 +108,20 @@ function wine_build()
 
   local wine_archive="${wine_src_folder_name}.tar.xz"
 
-  if [ "${wine_version_minor}" != "0" ]
+  local wine_version_minor_x
+  if [ "${wine_version_minor}" == "0" ]
   then
-    wine_version_minor="x"
+    wine_version_minor_x="0"
+  else
+    wine_version_minor_x="x"
   fi
-  local wine_url="https://dl.winehq.org/wine/source/${wine_version_major}.${wine_version_minor}/${wine_archive}"
+  local wine_url="https://dl.winehq.org/wine/source/${wine_version_major}.${wine_version_minor_x}/${wine_archive}"
 
   local wine_folder_name="${wine_src_folder_name}"
 
   mkdir -pv "${XBB_LOGS_FOLDER_PATH}/${wine_folder_name}"
 
+  local wine_patch_file_name="wine-${wine_version}.git.patch"
   local wine_stamp_file_path="${XBB_STAMPS_FOLDER_PATH}/stamp-${wine_folder_name}-installed"
   if [ ! -f "${wine_stamp_file_path}" ]
   then
@@ -126,7 +130,7 @@ function wine_build()
     cd "${XBB_SOURCES_FOLDER_PATH}"
 
     download_and_extract "${wine_url}" "${wine_archive}" \
-      "${wine_src_folder_name}"
+      "${wine_src_folder_name}" "${wine_patch_file_name}"
 
     # The 64-bit variant.
     (
