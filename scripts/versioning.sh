@@ -34,7 +34,8 @@ function application_build_versioned_components()
     xbb_set_target "requested"
 
     # https://sourceforge.net/projects/libpng/files/libpng16/
-    libpng_build "1.6.39"
+    # libpng_build "1.6.39"
+
     # -------------------------------------------------------------------------
     # Build the application binaries.
 
