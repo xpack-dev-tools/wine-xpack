@@ -2,6 +2,19 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2023-01-06
+
+* v7.22.0-2 prepared
+* e44aa10 versioning.sh: no need to build png
+* 87d956b wine.sh: update options or 7.22
+
+## 2023-01-05
+
+* c33585f versioning.sh: no need to disable parallel build
+* 82bb6ac package.json: bump mingw-w64-gcc to 12 again
+* e6694b7 wine.sh: add support for patches
+* 767e9b7 add wine-7.22.git.patch
+
 ## 2023-01-03
 
 * v7.22.0-1.1 published on npmjs.com
