@@ -37,46 +37,51 @@ function wine_prepare_common_options()
 {
   config_options+=("--without-alsa")
   config_options+=("--without-capi")
-  config_options+=("--without-cms")
+  # config_options+=("--without-cms") # - from 7.22
   config_options+=("--without-coreaudio")
   config_options+=("--without-cups")
   config_options+=("--without-dbus")
-  config_options+=("--without-faudio")
+  # config_options+=("--without-faudio") # - from 7.22
   config_options+=("--without-fontconfig")
   config_options+=("--without-freetype")
   config_options+=("--without-gettext")
   config_options+=("--without-gettextpo")
   config_options+=("--without-gphoto")
   config_options+=("--without-gnutls")
-  config_options+=("--without-gsm")
+  # config_options+=("--without-gsm") # - from 7.22
   config_options+=("--without-gssapi")
   config_options+=("--without-gstreamer")
-  config_options+=("--without-hal")
+  # config_options+=("--without-hal") # - from 7.22
   config_options+=("--without-inotify")
-  config_options+=("--without-jpeg")
-  config_options+=("--without-jxrlib")
+  # config_options+=("--without-jpeg") # - from 7.22
+  # config_options+=("--without-jxrlib") # - from 7.22
   config_options+=("--without-krb5")
-  config_options+=("--without-ldap")
-  config_options+=("--without-mpg123")
+  # config_options+=("--without-ldap") # - from 7.22
+  # config_options+=("--without-mpg123") # - from 7.22
   config_options+=("--without-netapi")
-  config_options+=("--without-openal")
+  # config_options+=("--without-openal") # - from 7.22
+  config_options+=("--without-opencl") # + from 7.22
   config_options+=("--without-opengl")
   config_options+=("--without-osmesa")
   config_options+=("--without-oss")
   config_options+=("--without-pcap")
+
   # 0034:err:wincodecs:png_encoder_create Trying to save PNG picture, but PNG support is not compiled in.
   # config_options+=("--without-png")
-  config_options+=("--with-png")
+  # config_options+=("--with-png") # - from 7.22
 
+  # --without-pthread since 7.22
   config_options+=("--without-pulse")
-  config_options+=("--without-quicktime")
+  # config_options+=("--without-quicktime") # - from 7.22
   config_options+=("--without-sane")
   config_options+=("--without-sdl")
-  config_options+=("--without-tiff")
+  # config_options+=("--without-tiff") # - from 7.22
   config_options+=("--without-udev")
+
+  # --without-unwind since 7.22
   config_options+=("--without-usb")
   config_options+=("--without-v4l2")
-  config_options+=("--without-vkd3d")
+  # config_options+=("--without-vkd3d") # - from 7.22
   config_options+=("--without-vulkan")
   config_options+=("--without-xcomposite")
   config_options+=("--without-xcursor")
@@ -84,12 +89,12 @@ function wine_prepare_common_options()
   config_options+=("--without-xinerama")
   config_options+=("--without-xinput")
   config_options+=("--without-xinput2")
-  config_options+=("--without-xml")
+  # config_options+=("--without-xml") # - from 7.22
   config_options+=("--without-xrandr")
   config_options+=("--without-xrender")
   config_options+=("--without-xshape")
   config_options+=("--without-xshm")
-  config_options+=("--without-xslt")
+  # config_options+=("--without-xslt") # - from 7.22
   config_options+=("--without-xxf86vm")
   config_options+=("--without-x")
 }
