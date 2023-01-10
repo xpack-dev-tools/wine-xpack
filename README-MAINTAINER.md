@@ -304,7 +304,9 @@ To download the pre-released archive for the specific platform
 and run the tests, use:
 
 ```sh
-xpm run test-pre-release
+git -C ~/Work/wine-xpack.git pull
+xpm run install -C ~/Work/wine-xpack.git
+xpm run test-pre-release -C ~/Work/wine-xpack.git
 ```
 
 For even more tests, on each platform (GNU/Linux),
