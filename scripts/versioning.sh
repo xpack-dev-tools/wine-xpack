@@ -19,7 +19,7 @@ function application_build_versioned_components()
     exit 1
   fi
 
-  # Keep them in sync with combo archive content.
+  # Keep them in sync with the combo archive content.
   if [[ "${XBB_RELEASE_VERSION}" =~ 7[.].*[.].* ]]
   then
     # -------------------------------------------------------------------------
