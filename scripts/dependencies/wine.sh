@@ -106,8 +106,8 @@ function wine_build()
 
   local wine_version="$1"
 
-  local wine_version_major="$(echo ${wine_version} | sed -e 's|\([0-9][0-9]*\)[.]\([0-9][0-9]*\)|\1|')"
-  local wine_version_minor="$(echo ${wine_version} | sed -e 's|\([0-9][0-9]*\)[.]\([0-9][0-9]*\)|\2|')"
+  local wine_version_major=$(xbb_get_version_major "${wine_version}")
+  local wine_version_minor=$(xbb_get_version_minor "${wine_version}")
 
   local wine_src_folder_name="wine-${wine_version}"
 
@@ -151,7 +151,7 @@ function wine_build()
 
       # LDFLAGS="${XBB_LDFLAGS_APP_STATIC_GCC}"
       LDFLAGS="${XBB_LDFLAGS_APP}"
-      
+
       xbb_adjust_ldflags_rpath
 
       export CPPFLAGS
