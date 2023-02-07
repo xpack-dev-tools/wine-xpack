@@ -206,23 +206,16 @@ location (like
 <https://github.com/xpack-dev-tools/files-cache/tree/master/libs>),
 place them in the XBB cache (`Work/cache`) and restart the build.
 
-## Push the build scripts
-
-In this Git repo:
-
-- push the `xpack-develop` branch to GitHub
-- possibly push the helper project too
-
-From here it'll be cloned on the production machines.
-
 ## Run the CI build
 
 The automation is provided by GitHub Actions and three self-hosted runners.
 
+### Generate the GitHub workflows
+
 Run the `generate-workflows` to re-generate the
 GitHub workflow files; commit and push if necessary.
 
-- on a permanently running machine (`berry`) open a ssh session to the build
+- on the development machine (`wksi`) open a ssh session to the build
 machine (`xbbli`):
 
 ```sh
@@ -240,7 +233,19 @@ screen -S ga
 # Ctrl-a Ctrl-d
 ```
 
-Check that both the project Git and the submodule are pushed to GitHub.
+### Push the build scripts
+
+- push the `xpack-develop` branch to GitHub
+- possibly push the helper project too
+
+From here it'll be cloned on the production machines.
+
+### Check for disk space
+
+Check if the build machines have enough free space and eventually
+do some cleanups.
+
+### Manually trigger the build GitHub Actions
 
 To trigger the GitHub Actions build, use the xPack action:
 
@@ -258,9 +263,11 @@ Settings → Action →
 [Secrets](https://github.com/xpack-dev-tools/wine-xpack/settings/secrets/actions)
 page.
 
-This command uses the `xpack-develop` branch of this repo.
+This commands uses the `xpack-develop` branch of this repo.
 
-The build takes about 1h25 to complete.
+## Durations & results
+
+The  build takes about 1h25 to complete.
 
 The workflow result and logs are available from the
 [Actions](https://github.com/xpack-dev-tools/wine-xpack/actions/) page.
