@@ -14,26 +14,26 @@ To clone the stable branch (`xpack`), run the following commands in a
 terminal (on Windows use the _Git Bash_ console):
 
 ```sh
-rm -rf ~/Work/wine-xpack.git && \
+rm -rf ~/Work/xpacks/wine-xpack.git && \
 git clone https://github.com/xpack-dev-tools/wine-xpack.git \
-  ~/Work/wine-xpack.git
+  ~/Work/xpacks/wine-xpack.git
 ```
 
 For development purposes, clone the `xpack-develop` branch:
 
 ```sh
-rm -rf ~/Work/wine-xpack.git && \
-mkdir -p ~/Work && \
+rm -rf ~/Work/xpacks/wine-xpack.git && \
+mkdir -p ~/Work/xpacks && \
 git clone \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/wine-xpack.git \
-  ~/Work/wine-xpack.git
+  ~/Work/xpacks/wine-xpack.git
 ```
 
 Or, if the repo was already cloned:
 
 ```sh
-git -C ~/Work/wine-xpack.git pull
+git -C ~/Work/xpacks/wine-xpack.git pull
 ```
 
 ## Get helper sources
@@ -42,20 +42,20 @@ The project has a dependency to a common **helper**; clone the
 `xpack-develop` branch and link it to the central xPacks store:
 
 ```sh
-rm -rf ~/Work/xbb-helper-xpack.git && \
-mkdir -p ~/Work && \
+rm -rf ~/Work/xpacks/xbb-helper-xpack.git && \
+mkdir -p ~/Work/xpacks && \
 git clone \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/xbb-helper-xpack.git \
-  ~/Work/xbb-helper-xpack.git && \
-xpm link -C ~/Work/xbb-helper-xpack.git
+  ~/Work/xpacks/xbb-helper-xpack.git && \
+xpm link -C ~/Work/xpacks/xbb-helper-xpack.git
 ```
 
 Or, if the repo was already cloned:
 
 ```sh
-git -C ~/Work/xbb-helper-xpack.git pull
-xpm link -C ~/Work/xbb-helper-xpack.git
+git -C ~/Work/xpacks/xbb-helper-xpack.git pull
+xpm link -C ~/Work/xpacks/xbb-helper-xpack.git
 ```
 
 ## Prerequisites
@@ -172,22 +172,22 @@ caffeinate ssh xbbli
 Update the build scripts (or clone them at the first use):
 
 ```sh
-git -C ~/Work/wine-xpack.git pull && \
-xpm run install -C ~/Work/wine-xpack.git && \
-git -C ~/Work/xbb-helper-xpack.git pull && \
-xpm link -C ~/Work/xbb-helper-xpack.git && \
-xpm run link-deps -C ~/Work/wine-xpack.git && \
-xpm run deep-clean --config linux-x64 -C ~/Work/wine-xpack.git && \
-xpm run docker-prepare --config linux-x64 -C ~/Work/wine-xpack.git && \
-xpm run docker-link-deps --config linux-x64 -C ~/Work/wine-xpack.git
-xpm run docker-build-develop --config linux-x64 -C ~/Work/wine-xpack.git
+git -C ~/Work/xpacks/wine-xpack.git pull && \
+xpm run install -C ~/Work/xpacks/wine-xpack.git && \
+git -C ~/Work/xpacks/xbb-helper-xpack.git pull && \
+xpm link -C ~/Work/xpacks/xbb-helper-xpack.git && \
+xpm run link-deps -C ~/Work/xpacks/wine-xpack.git && \
+xpm run deep-clean --config linux-x64 -C ~/Work/xpacks/wine-xpack.git && \
+xpm run docker-prepare --config linux-x64 -C ~/Work/xpacks/wine-xpack.git && \
+xpm run docker-link-deps --config linux-x64 -C ~/Work/xpacks/wine-xpack.git
+xpm run docker-build-develop --config linux-x64 -C ~/Work/xpacks/wine-xpack.git
 ```
 
 About 1h25 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
-$ ls -l ~/Work/wine-xpack.git/build/linux-x64/deploy
+$ ls -l ~/Work/xpacks/wine-xpack.git/build/linux-x64/deploy
 total 130860
 -rw-r--r-- 1 ilg ilg 133992714 Jan  3 18:05 xpack-wine-7.22.0-2-linux-x64.tar.gz
 -rw-r--r-- 1 ilg ilg       103 Jan  3 18:05 xpack-wine-7.22.0-2-linux-x64.tar.gz.sha
@@ -206,23 +206,16 @@ location (like
 <https://github.com/xpack-dev-tools/files-cache/tree/master/libs>),
 place them in the XBB cache (`Work/cache`) and restart the build.
 
-## Push the build scripts
-
-In this Git repo:
-
-- push the `xpack-develop` branch to GitHub
-- possibly push the helper project too
-
-From here it'll be cloned on the production machines.
-
 ## Run the CI build
 
 The automation is provided by GitHub Actions and three self-hosted runners.
 
+### Generate the GitHub workflows
+
 Run the `generate-workflows` to re-generate the
 GitHub workflow files; commit and push if necessary.
 
-- on a permanently running machine (`berry`) open a ssh session to the build
+- on the development machine (`wksi`) open a ssh session to the build
 machine (`xbbli`):
 
 ```sh
@@ -240,7 +233,19 @@ screen -S ga
 # Ctrl-a Ctrl-d
 ```
 
-Check that both the project Git and the submodule are pushed to GitHub.
+### Push the build scripts
+
+- push the `xpack-develop` branch to GitHub
+- possibly push the helper project too
+
+From here it'll be cloned on the production machines.
+
+### Check for disk space
+
+Check if the build machines have enough free space and eventually
+do some cleanups.
+
+### Manually trigger the build GitHub Actions
 
 To trigger the GitHub Actions build, use the xPack action:
 
@@ -249,7 +254,7 @@ To trigger the GitHub Actions build, use the xPack action:
 This is equivalent to:
 
 ```sh
-bash ${HOME}/Work/wine-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbli
+bash ${HOME}/Work/xpacks/wine-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbli
 ```
 
 These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
@@ -258,9 +263,11 @@ Settings → Action →
 [Secrets](https://github.com/xpack-dev-tools/wine-xpack/settings/secrets/actions)
 page.
 
-This command uses the `xpack-develop` branch of this repo.
+This commands uses the `xpack-develop` branch of this repo.
 
-The build takes about 1h25 to complete.
+## Durations & results
+
+The  build takes about 1h25 to complete.
 
 The workflow result and logs are available from the
 [Actions](https://github.com/xpack-dev-tools/wine-xpack/actions/) page.
@@ -282,8 +289,8 @@ To trigger the GitHub Actions tests, use the xPack actions:
 These are equivalent to:
 
 ```sh
-bash ${HOME}/Work/wine-xpack.git/scripts/helper/tests/trigger-workflow-test-prime.sh
-bash ${HOME}/Work/wine-xpack.git/scripts/helper/tests/trigger-workflow-test-docker-linux-intel.sh
+bash ${HOME}/Work/xpacks/wine-xpack.git/scripts/helper/tests/trigger-workflow-test-prime.sh
+bash ${HOME}/Work/xpacks/wine-xpack.git/scripts/helper/tests/trigger-workflow-test-docker-linux-intel.sh
 ```
 
 These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
@@ -305,9 +312,9 @@ To download the pre-released archive for the specific platform
 and run the tests, use:
 
 ```sh
-git -C ~/Work/wine-xpack.git pull
-xpm run install -C ~/Work/wine-xpack.git
-xpm run test-pre-release -C ~/Work/wine-xpack.git
+git -C ~/Work/xpacks/wine-xpack.git pull
+xpm run install -C ~/Work/xpacks/wine-xpack.git
+xpm run test-pre-release -C ~/Work/xpacks/wine-xpack.git
 ```
 
 For even more tests, on each platform (GNU/Linux),

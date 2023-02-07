@@ -19,7 +19,7 @@ This open source project is hosted on GitHub as
 and provides the platform specific binaries for the
 [xPack WineHQ](https://xpack.github.io/wine/).
 
-This distribution follows the official [WineHQ](http://www.winehq.org)
+This distribution follows the official [WineHQ](https://www.winehq.org)
 build system project.
 
 The binaries can be installed automatically as **binary xPacks** or manually as
@@ -69,7 +69,7 @@ a dependency for a project is quite easy:
 cd my-project
 xpm init # Only at first use.
 
-xpm install @xpack-dev-tools/wine@latest
+xpm install @xpack-dev-tools/wine@latest --verbose
 
 ls -l xpacks/.bin
 ```
@@ -92,7 +92,7 @@ This location is configurable via the environment variable
 It is also possible to install WineHQ globally, in the user home folder:
 
 ```sh
-xpm install --global @xpack-dev-tools/wine@latest
+xpm install --global @xpack-dev-tools/wine@latest --verbose
 ```
 
 After install, the package should create a structure like this (macOS files;
@@ -101,7 +101,7 @@ only the first two depth levels are shown):
 ```console
 $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/wine/7.22.0-2.1/.content/
 /Users/ilg/Library/xPacks/\@xpack-dev-tools/wine/7.22.0-2.1/.content/
-/home/ilg/Work/wine-xpack.git/build/linux-x64/application/
+/home/ilg/Work/xpacks/wine-xpack.git/build/linux-x64/application/
 ├── bin
 │   ├── function_grep.pl
 │   ├── msidb
