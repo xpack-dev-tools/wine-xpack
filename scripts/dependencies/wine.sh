@@ -210,7 +210,7 @@ function wine_build()
         # Build.
         # run_verbose make -j ${XBB_JOBS} STRIP=true
         # dlltool seems to have a problem with parallel builds.
-        # /home/ilg/Work/wine-xpack.git/build/linux-x64/xpacks/.bin/x86_64-w64-mingw32-dlltool: dlls/winmm/libwinmm.cross.a: error reading winmm_dll_h.o: file truncated
+        # /home/ilg/Work/xpacks/wine-xpack.git/build/linux-x64/xpacks/.bin/x86_64-w64-mingw32-dlltool: dlls/winmm/libwinmm.cross.a: error reading winmm_dll_h.o: file truncated
         local jobs=${XBB_APPLICATION_JOBS:-${XBB_JOBS}}
         run_verbose make -j ${jobs} STRIP=true
 
