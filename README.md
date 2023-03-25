@@ -201,7 +201,7 @@ with caution, and prefer exact matches, like `7.22.0-2.1`.
 ## Maintainer info
 
 For maintainer info, please see the
-[README-MAINTAINER](https://github.com/xpack-dev-tools/wine-xpack/blob/xpack/README-MAINTAINER.md)
+[README-MAINTAINER](https://github.com/xpack-dev-tools/wine-xpack/blob/xpack/README-MAINTAINER.md).
 
 ## Support
 
