@@ -105,7 +105,7 @@ only the first two depth levels are shown):
 ```console
 $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/wine/7.22.0-2.1/.content/
 /Users/ilg/Library/xPacks/\@xpack-dev-tools/wine/7.22.0-2.1/.content/
-/home/ilg/Work/xpacks/wine-xpack.git/build/linux-x64/application/
+/home/ilg/Work/xpack-dev-tools/wine-xpack.git/build/linux-x64/application/
 ├── bin
 │   ├── function_grep.pl
 │   ├── msidb

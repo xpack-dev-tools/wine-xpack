@@ -35,26 +35,26 @@ To clone the stable branch (`xpack`), run the following commands in a
 terminal (on Windows use the _Git Bash_ console):
 
 ```sh
-rm -rf ~/Work/xpacks/wine-xpack.git && \
+rm -rf ~/Work/xpack-dev-tools/wine-xpack.git && \
 git clone https://github.com/xpack-dev-tools/wine-xpack.git \
-  ~/Work/xpacks/wine-xpack.git
+  ~/Work/xpack-dev-tools/wine-xpack.git
 ```
 
 For development purposes, clone the `xpack-develop` branch:
 
 ```sh
-rm -rf ~/Work/xpacks/wine-xpack.git && \
-mkdir -p ~/Work/xpacks && \
+rm -rf ~/Work/xpack-dev-tools/wine-xpack.git && \
+mkdir -p ~/Work/xpack-dev-tools && \
 git clone \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/wine-xpack.git \
-  ~/Work/xpacks/wine-xpack.git
+  ~/Work/xpack-dev-tools/wine-xpack.git
 ```
 
 Or, if the repo was already cloned:
 
 ```sh
-git -C ~/Work/xpacks/wine-xpack.git pull
+git -C ~/Work/xpack-dev-tools/wine-xpack.git pull
 ```
 
 ## Get helper sources
@@ -63,20 +63,20 @@ The project has a dependency to a common **helper**; clone the
 `xpack-develop` branch and link it to the central xPacks store:
 
 ```sh
-rm -rf ~/Work/xpacks/xbb-helper-xpack.git && \
-mkdir -p ~/Work/xpacks && \
+rm -rf ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
+mkdir -p ~/Work/xpack-dev-tools && \
 git clone \
   --branch xpack-develop \
   https://github.com/xpack-dev-tools/xbb-helper-xpack.git \
-  ~/Work/xpacks/xbb-helper-xpack.git && \
-xpm link -C ~/Work/xpacks/xbb-helper-xpack.git
+  ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
+xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git
 ```
 
 Or, if the repo was already cloned:
 
 ```sh
-git -C ~/Work/xpacks/xbb-helper-xpack.git pull
-xpm link -C ~/Work/xpacks/xbb-helper-xpack.git
+git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull
+xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git
 ```
 
 ## Release schedule
@@ -188,22 +188,22 @@ caffeinate ssh xbbli
 Update the build scripts (or clone them at the first use):
 
 ```sh
-git -C ~/Work/xpacks/wine-xpack.git pull && \
-xpm run install -C ~/Work/xpacks/wine-xpack.git && \
-git -C ~/Work/xpacks/xbb-helper-xpack.git pull && \
-xpm link -C ~/Work/xpacks/xbb-helper-xpack.git && \
-xpm run link-deps -C ~/Work/xpacks/wine-xpack.git && \
-xpm run deep-clean --config linux-x64 -C ~/Work/xpacks/wine-xpack.git && \
-xpm run docker-prepare --config linux-x64 -C ~/Work/xpacks/wine-xpack.git && \
-xpm run docker-link-deps --config linux-x64 -C ~/Work/xpacks/wine-xpack.git
-xpm run docker-build-develop --config linux-x64 -C ~/Work/xpacks/wine-xpack.git
+git -C ~/Work/xpack-dev-tools/wine-xpack.git pull && \
+xpm run install -C ~/Work/xpack-dev-tools/wine-xpack.git && \
+git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
+xpm link -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git && \
+xpm run link-deps -C ~/Work/xpack-dev-tools/wine-xpack.git && \
+xpm run deep-clean --config linux-x64 -C ~/Work/xpack-dev-tools/wine-xpack.git && \
+xpm run docker-prepare --config linux-x64 -C ~/Work/xpack-dev-tools/wine-xpack.git && \
+xpm run docker-link-deps --config linux-x64 -C ~/Work/xpack-dev-tools/wine-xpack.git
+xpm run docker-build-develop --config linux-x64 -C ~/Work/xpack-dev-tools/wine-xpack.git
 ```
 
 About 1h25 later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
-$ ls -l ~/Work/xpacks/wine-xpack.git/build/linux-x64/deploy
+$ ls -l ~/Work/xpack-dev-tools/wine-xpack.git/build/linux-x64/deploy
 total 130860
 -rw-r--r-- 1 ilg ilg 133992714 Jan  3 18:05 xpack-wine-7.22.0-2-linux-x64.tar.gz
 -rw-r--r-- 1 ilg ilg       103 Jan  3 18:05 xpack-wine-7.22.0-2-linux-x64.tar.gz.sha
@@ -270,7 +270,7 @@ To trigger the GitHub Actions build, use the xPack action:
 This is equivalent to:
 
 ```sh
-bash ${HOME}/Work/xpacks/wine-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbli
+bash ${HOME}/Work/xpack-dev-tools/wine-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbli
 ```
 
 These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
@@ -305,8 +305,8 @@ To trigger the GitHub Actions tests, use the xPack actions:
 These are equivalent to:
 
 ```sh
-bash ${HOME}/Work/xpacks/wine-xpack.git/scripts/helper/tests/trigger-workflow-test-prime.sh
-bash ${HOME}/Work/xpacks/wine-xpack.git/scripts/helper/tests/trigger-workflow-test-docker-linux-intel.sh
+bash ${HOME}/Work/xpack-dev-tools/wine-xpack.git/scripts/helper/tests/trigger-workflow-test-prime.sh
+bash ${HOME}/Work/xpack-dev-tools/wine-xpack.git/scripts/helper/tests/trigger-workflow-test-docker-linux-intel.sh
 ```
 
 These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
@@ -328,9 +328,9 @@ To download the pre-released archive for the specific platform
 and run the tests, use:
 
 ```sh
-git -C ~/Work/xpacks/wine-xpack.git pull
-xpm run install -C ~/Work/xpacks/wine-xpack.git
-xpm run test-pre-release -C ~/Work/xpacks/wine-xpack.git
+git -C ~/Work/xpack-dev-tools/wine-xpack.git pull
+xpm run install -C ~/Work/xpack-dev-tools/wine-xpack.git
+xpm run test-pre-release -C ~/Work/xpack-dev-tools/wine-xpack.git
 ```
 
 For even more tests, on each platform (GNU/Linux),

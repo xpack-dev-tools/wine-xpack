@@ -28,6 +28,6 @@ To build the 32-bit version of wine, it is necessary to:
 - 32-bit libraries be present
 
 ```console
-checking whether /home/ilg/Work/xpacks/wine-xpack.git/build/linux-x64/xpacks/.bin/gcc -m32 works... no
+checking whether /home/ilg/Work/xpack-dev-tools/wine-xpack.git/build/linux-x64/xpacks/.bin/gcc -m32 works... no
 configure: error: Cannot build a 32-bit program, you need to install 32-bit development libraries.
 ```
