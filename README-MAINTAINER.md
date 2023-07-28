@@ -123,6 +123,11 @@ In the `xpack-dev-tools/wine-xpack` Git repo:
 
 No need to add a tag here, it'll be added when the release is created.
 
+### Update helper & other dependencies
+
+Check the latest versions at <https://github.com/xpack-dev-tools/> and
+update the dependencies in `package.json`.
+
 ### Check the latest upstream release
 
 Check the WineHQ [News](https://www.winehq.org/news/) and
