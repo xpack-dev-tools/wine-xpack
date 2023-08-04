@@ -162,6 +162,7 @@
         "actions": {
           "build": "{{ properties.commandBashBuild }}",
           "build-develop": "{{ properties.commandBashBuild }} --develop",
+          "build-develop-debug": "{{ properties.commandBashBuild }} --develop --debug",
           "build-develop-tests-only": "{{ properties.commandBashBuild }} --develop --tests-only"
         }
       },
@@ -195,6 +196,9 @@
           ],
           "docker-build-develop": [
             "docker exec --user $(id -un) {{ properties.containerName }} xpm run build-develop --config {{ configuration.name }}"
+          ],
+          "docker-build-develop-debug": [
+            "docker exec --user $(id -un) {{ properties.containerName }} xpm run build-develop-debug --config {{ configuration.name }}"
           ],
           "docker-build-develop-tests-only": [
             "docker exec --user $(id -un) {{ properties.containerName }} xpm run build-develop-tests-only --config {{ configuration.name }}"
