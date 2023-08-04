@@ -223,6 +223,16 @@ total 130860
 -rw-r--r-- 1 ilg ilg       103 Jan  3 18:05 xpack-wine-7.22.0-2-linux-x64.tar.gz.sha
 ```
 
+### Build a debug version
+
+In some cases it is necessary to run a debug session in the binaries,
+or even in the libraries functions.
+
+For these cases, the build script accepts the `--debug` options.
+
+There are also xPack actions that use this option (`build-develop-debug`
+and `docker-build-develop-debug`).
+
 ### Files cache
 
 The XBB build scripts use a local cache such that files are downloaded only
