@@ -69,7 +69,7 @@
       "wrc": "./.content/bin/wrc"
     },
     "devDependencies": {
-      "@xpack-dev-tools/xbb-helper": "^1.10.0"
+      "@xpack-dev-tools/xbb-helper": "^1.10.8"
     },
     "properties": {
       "appName": "WineHQ",
@@ -143,7 +143,7 @@
           "@xpack-dev-tools/pkg-config": "0.29.2-2.1"
         },
         "devDependencies": {
-          "@xpack-dev-tools/mingw-w64-gcc": "12.2.0-1.1",
+          "@xpack-dev-tools/mingw-w64-gcc": "13.2.0-1.1",
           "@xpack-dev-tools/pkg-config": "0.29.2-2.1"
         }
       },
@@ -217,7 +217,7 @@
           "common-docker"
         ],
         "devDependencies": {
-          "@xpack-dev-tools/gcc": "12.2.0-2.1",
+          "@xpack-dev-tools/gcc": "13.2.0-1.1",
           "@xpack-dev-tools/patchelf": "0.17.2-1.1"
         },
         "properties": {
