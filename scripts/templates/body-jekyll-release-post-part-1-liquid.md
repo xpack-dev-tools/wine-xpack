@@ -3,9 +3,9 @@ title:  xPack WineHQ v{{ XBB_RELEASE_VERSION }} released
 
 summary: "Version **{{ XBB_RELEASE_VERSION }}** is a new release; it follows the upstream release."
 
-upstream_version: "7.22"
-upstream_version_major: "7"
-upstream_release_date: "2022-11-25"
+upstream_version: "8.0"
+upstream_version_major: "2"
+upstream_release_date: "2023-07-19"
 
 version: "{{ XBB_RELEASE_VERSION }}"
 npm_subversion: "1"

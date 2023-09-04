@@ -20,7 +20,32 @@ function application_build_versioned_components()
   fi
 
   # Keep them in sync with the combo archive content.
-  if [[ "${XBB_RELEASE_VERSION}" =~ 7[.].*[.].* ]]
+  if [[ "${XBB_RELEASE_VERSION}" =~ 8[.].*[.].* ]]
+  then
+    # -------------------------------------------------------------------------
+    # Build the native dependencies.
+
+    # None
+
+    # -------------------------------------------------------------------------
+    # Build the target dependencies.
+
+    xbb_reset_env
+    xbb_set_target "requested"
+
+    # -------------------------------------------------------------------------
+    # Build the application binaries.
+
+    xbb_set_executables_install_path "${XBB_APPLICATION_INSTALL_FOLDER_PATH}"
+    xbb_set_libraries_install_path "${XBB_DEPENDENCIES_INSTALL_FOLDER_PATH}"
+
+    # https://dl.winehq.org/wine/source/
+    wine_build "${XBB_WINE_VERSION}"
+
+    run_verbose rm -rfv "${XBB_APPLICATION_INSTALL_FOLDER_PATH}/share/man"
+
+    # -------------------------------------------------------------------------
+  elif [[ "${XBB_RELEASE_VERSION}" =~ 7[.].*[.].* ]]
   then
     # -------------------------------------------------------------------------
     # Build the native dependencies.

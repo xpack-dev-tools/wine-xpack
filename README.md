@@ -103,8 +103,8 @@ After install, the package should create a structure like this (macOS files;
 only the first two depth levels are shown):
 
 ```console
-$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/wine/7.22.0-2.1/.content/
-/Users/ilg/Library/xPacks/\@xpack-dev-tools/wine/7.22.0-2.1/.content/
+$ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/wine/8.0.2-1.1/.content/
+/Users/ilg/Library/xPacks/\@xpack-dev-tools/wine/8.0.2-1.1/.content/
 /home/ilg/Work/xpack-dev-tools/wine-xpack.git/build/linux-x64/application/
 ├── bin
 │   ├── function_grep.pl
@@ -190,17 +190,17 @@ For more details please read the
 
 ### Versioning
 
-The version strings used by the WineHQ project are two number strings
-like `6.17`; to make it semver compatible, `.0` is added as the third digit;
+The version strings used by the WineHQ project are three number strings
+like `8.0.2`;
 the xPack distribution adds a four number,
 but since semver allows only three numbers, all additional ones can
 be added only as pre-release strings, separated by a dash,
-like `7.22.0-2`. When published as a npm package, the version gets
-a fifth number, like `7.22.0-2.1`.
+like `8.0.2-1`. When published as a npm package, the version gets
+a fifth number, like `8.0.2-1.1`.
 
 Since adherence of third party packages to semver is not guaranteed,
-it is recommended to use semver expressions like `^7.22.0` and `~7.22.0`
-with caution, and prefer exact matches, like `7.22.0-2.1`.
+it is recommended to use semver expressions like `^8.0.2` and `~8.0.2`
+with caution, and prefer exact matches, like `8.0.2-1.1`.
 
 ## Maintainer info
 

@@ -2,9 +2,126 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2023-09-04
+
+* v8.0.2-1 prepare
+
+## 2023-09-03
+
+* 1ff4d51 package.json: bump deps
+
+## 2023-08-28
+
+* b4c8f0d READMEs update
+
+## 2023-08-25
+
+* c3ec750 package.json: rm xpack-dev-tools-build/*
+* 3fd1264 remove tests/update.sh
+* ce7cfcf package.json: bump deps
+
+## 2023-08-21
+
+* 7b8eff7 READMEs update
+* 850ad42 package.json: bump deps
+
+## 2023-08-19
+
+* c4c789a READMEs update
+* f4721d0 package.json: bump deps
+
+## 2023-08-15
+
+* bfbcf3e package.json: bump deps
+
+## 2023-08-05
+
+* d80fd36 READMEs update
+
+## 2023-08-04
+
+* 126efe5 READMEs update
+* 18a55b5 package.json: add build-develop-debug
+
+## 2023-08-03
+
+* d58acf0 READMEs update
+* d036fc7 package.json: bump deps
+
+## 2023-07-28
+
+* 88dc716 READMEs update
+* 147c3c9 READMEs update
+* c93af16 package.json: bump deps
+* ba74448 package.json: liquidjs --context --template
+* d4c3625 scripts cosmetics
+* a2a5a43 re-generate workflows
+* 01333d1 package.json: minXpm 0.16.3 & @xpack-dev-tools/xbb-helper
+* 2fb4a8e READMEs update
+* 354f3e2 package.json: bump deps
+
+## 2023-07-26
+
+* ee965cc wine.sh: cosmetics
+* a6540dd package.json: move scripts to actions
+* 993da23 package.json: update xpack-dev-tools path
+* 292a2ab READMEs update xpack-dev-tools path
+* 155deb9 body-jekyll update
+* 0e4398a READMEs update
+
+## 2023-07-17
+
+* 1a4b61d package.json: bump deps
+
+## 2023-03-25
+
+* 8b72215 READMEs update
+* 5fa6939 READMEs update prerequisites
+* a79fd9e package.json: mkdir -pv cache
+
+## 2023-02-22
+
+* 198f731 READMEs update
+
+## 2023-02-14
+
+* 064d2cc body-jekyll update
+
+## 2023-02-10
+
+* bef2549 wine.sh: update comments
+* 0133b0f package.json: update Work/xpacks
+* 6a4acf7 READMEs update
+
+## 2023-02-07
+
+* 8386f63 READMEs update
+* 83c7051 body-jekyll update
+
+## 2023-01-28
+
+* 21e7d0d wine.sh: use versioning functions
+* 795cc1b versioning.sh: comments
+
+## 2023-01-27
+
+* 3eb39a8 package.json: reorder scripts
+
+## 2023-01-24
+
+* 35994e2 README updates
+
+## 2023-01-22
+
+* 8d4249e README update
+
+## 2023-01-11
+
+* 73ca35a cosmetize xbb_adjust_ldflags_rpath
+
 ## 2023-01-06
 
-* v7.22.0-2 prepared
+* 1bb30d3 prepare v7.22.0-2
 * e44aa10 versioning.sh: no need to build png
 * 87d956b wine.sh: update options or 7.22
 
