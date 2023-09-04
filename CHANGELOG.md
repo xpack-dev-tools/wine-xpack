@@ -4,7 +4,16 @@ Entries in this file are in reverse chronological order.
 
 ## 2023-09-04
 
-* v8.0.2-1 released
+* v8.0.2-1.1 published on npmjs.com
+* 30abf3f package.json: update urls for 8.0.2-1.1 release
+* 33278cb READMEs updates
+* 629c0be re-generate workflows
+* f97c456 dot.*ignore updated
+* 26b029b CHANGELOG update
+* 6290855 README update
+* 5f7d8a8 package.json cleanup
+* 2b44f09 CHANGELOG update
+* 812ce31 README update
 * 67b3810 .vscode/settings.json: ignoreWords
 * 7b70eec package.json: bump deps
 * 47b6a9f wine.sh: add new links
