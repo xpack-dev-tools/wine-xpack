@@ -36,7 +36,7 @@
       "platforms": {
         "linux-x64": {
           "fileName": "xpack-wine-8.0.2-1-linux-x64.tar.gz",
-          "sha256": "a5db2d237b4fb69ed04dfd8870255ee0b51b4cd49cdc882e86b73fde2e505947"
+          "sha256": "bfaf3b78c4be98ecd42c6b8f13d601ce1e39c3fbef1824fb43c6c6cb1557f305"
         }
       }
     },
