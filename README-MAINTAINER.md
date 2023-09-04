@@ -451,6 +451,11 @@ watching this project.
 ## Update the READMEs listings and examples
 
 - check and possibly update the output of `tree -L 2` in README
+
+```sh
+tree -L 2 ${HOME}/Work/xpack-dev-tools/wine-xpack.git/build/linux-x64/application/
+```
+
 - check and possibly update the output of the `--version` runs in README-MAINTAINER
 - commit changes
 

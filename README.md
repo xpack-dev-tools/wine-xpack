@@ -136,7 +136,6 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/wine/8.0.2-1.1/.content/
 │   └── wrc
 ├── distro-info
 │   ├── CHANGELOG.md
-│   ├── licenses
 │   ├── patches
 │   └── scripts
 ├── include
@@ -154,7 +153,7 @@ $ tree -L 2 /Users/ilg/Library/xPacks/\@xpack-dev-tools/wine/8.0.2-1.1/.content/
     ├── applications
     └── wine
 
-15 directories, 32 files
+14 directories, 32 files
 ```
 
 No other files are installed in any system folders or other locations.
