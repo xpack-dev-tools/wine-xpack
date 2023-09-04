@@ -330,7 +330,7 @@ This commands uses the `xpack-develop` branch of this repo.
 
 ## Durations & results
 
-The  build takes about 1h25 to complete.
+The  build takes about 14 minutes to complete.
 
 The workflow result and logs are available from the
 [Actions](https://github.com/xpack-dev-tools/wine-xpack/actions/) page.
@@ -458,7 +458,7 @@ watching this project.
 
 - open the `package.json` file
 - check if the links in the `bin` property cover the actual binaries
-- rename `wine` -> `winewidl`
+- rename `widl` -> `winewidl`
 
 ## Update package.json binaries
 
