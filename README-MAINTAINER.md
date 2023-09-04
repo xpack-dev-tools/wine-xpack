@@ -214,14 +214,14 @@ xpm run docker-link-deps --config linux-x64 -C ~/Work/xpack-dev-tools/wine-xpack
 xpm run docker-build-develop --config linux-x64 -C ~/Work/xpack-dev-tools/wine-xpack.git
 ```
 
-About 1h25 later, the output of the build script is a compressed
+About 12 minutes later, the output of the build script is a compressed
 archive and its SHA signature, created in the `deploy` folder:
 
 ```console
 $ ls -l ~/Work/xpack-dev-tools/wine-xpack.git/build/linux-x64/deploy
-total 130860
--rw-r--r-- 1 ilg ilg 133992714 Jan  3 18:05 xpack-wine-8.0.2-1-linux-x64.tar.gz
--rw-r--r-- 1 ilg ilg       103 Jan  3 18:05 xpack-wine-8.0.2-1-linux-x64.tar.gz.sha
+total 130180
+-rw-r--r-- 1 ilg ilg 133299558 Sep  4 11:08 xpack-wine-8.0.2-1-linux-x64.tar.gz
+-rw-r--r-- 1 ilg ilg       102 Sep  4 11:08 xpack-wine-8.0.2-1-linux-x64.tar.gz.sha
 ```
 
 ### Update README-MAINTAINER listing output
