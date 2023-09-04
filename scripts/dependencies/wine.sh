@@ -13,6 +13,7 @@
 # https://wiki.winehq.org/Building_Wine
 
 # https://dl.winehq.org/wine/source/
+# https://dl.winehq.org/wine/source/8.0/wine-8.0.2.tar.xz
 # https://dl.winehq.org/wine/source/6.x/wine-6.17.tar.xz
 
 # https://github.com/archlinux/svntogit-community/blob/packages/wine/trunk/PKGBUILD
@@ -30,6 +31,7 @@
 # 2022-08-28, "7.16"
 # 2022-10-14, "7.19"
 # 2022-11-25, "7.22"
+# 2023-07-19, "8.0.2"
 
 # -----------------------------------------------------------------------------
 
