@@ -4,6 +4,7 @@ Entries in this file are in reverse chronological order.
 
 ## 2023-09-04
 
+* v8.0.2-1 released
 * 67b3810 .vscode/settings.json: ignoreWords
 * 7b70eec package.json: bump deps
 * 47b6a9f wine.sh: add new links
