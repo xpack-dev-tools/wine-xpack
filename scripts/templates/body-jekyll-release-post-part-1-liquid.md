@@ -5,7 +5,7 @@ summary: "Version **{{ XBB_RELEASE_VERSION }}** is a new release; it follows the
 
 upstream_version: "8.0"
 upstream_version_major: "2"
-upstream_release_date: "2023-07-19"
+upstream_release_date: "19 Jul 2023"
 
 version: "{{ XBB_RELEASE_VERSION }}"
 npm_subversion: "1"
@@ -16,10 +16,12 @@ comments: true
 
 date:   {{ RELEASE_DATE }}
 
+# For Jekyll releases selection.
 categories:
   - releases
   - wine
 
+# For navigation; use scripts/createtag.sh in Jekyll.
 tags:
   - releases
   - wine
