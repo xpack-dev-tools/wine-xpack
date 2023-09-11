@@ -216,7 +216,7 @@
           "@xpack-dev-tools/patchelf": "0.18.0-1.1"
         },
         "properties": {
-          "dockerImage": "ilegeul/ubuntu:amd64-18.04-xbb-v5.1.0"
+          "dockerImage": "ilegeul/ubuntu:amd64-18.04-xbb-v5.1.1"
         }
       }
     }
