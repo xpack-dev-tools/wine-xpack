@@ -31,3 +31,9 @@ To build the 32-bit version of wine, it is necessary to:
 checking whether /home/ilg/Work/xpack-dev-tools/wine-xpack.git/build/linux-x64/xpacks/.bin/gcc -m32 works... no
 configure: error: Cannot build a 32-bit program, you need to install 32-bit development libraries.
 ```
+
+## bugzilla
+
+The following bug was submitted:
+
+- [Add a --nographics option to winecfg?](https://bugs.winehq.org/show_bug.cgi?id=55586)
