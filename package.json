@@ -69,7 +69,7 @@
       "wrc": "./.content/bin/wrc"
     },
     "devDependencies": {
-      "@xpack-dev-tools/xbb-helper": "^2.0.0"
+      "@xpack-dev-tools/xbb-helper": "^2.0.1"
     },
     "properties": {
       "appName": "WineHQ",
