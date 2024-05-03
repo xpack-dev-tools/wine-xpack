@@ -138,6 +138,7 @@
         "hidden": true,
         "$comment": "Build of 7.x with gcc 12 + mingw 10 fails with duplicate defs; stick to gcc 11.3",
         "devDependencies": {
+          "@xpack-dev-tools/bison": "3.8.2-1.1",
           "@xpack-dev-tools/m4": "1.4.19-3.1",
           "@xpack-dev-tools/mingw-w64-gcc": "13.2.0-1.1",
           "@xpack-dev-tools/pkg-config": "0.29.2-3.1"
