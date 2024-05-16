@@ -179,6 +179,8 @@ caffeinate ssh xbbli
 Update the build scripts (or clone them at the first use):
 
 ```sh
+export XBB_ENVIRONMENT_WITH_TESTS="n"
+
 git -C ~/Work/xpack-dev-tools/wine-xpack.git pull && \
 xpm run install -C ~/Work/xpack-dev-tools/wine-xpack.git && \
 git -C ~/Work/xpack-dev-tools/xbb-helper-xpack.git pull && \
