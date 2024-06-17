@@ -289,14 +289,14 @@ rm -rf ~/Work/xpack-dev-tools/*/build
 
 ### Manually trigger the build GitHub Actions
 
-To trigger the GitHub Actions build, use the xPack action:
+To trigger the GitHub Actions builds, use the xPack actions:
 
-- `trigger-workflow-build-xbbli`
+- `trigger-workflow-build-linux-x64`
 
 This is equivalent to:
 
 ```sh
-bash ${HOME}/Work/xpack-dev-tools/wine-xpack.git/scripts/helper/trigger-workflow-build.sh --machine xbbli
+bash ${HOME}/Work/xpack-dev-tools/wine-xpack.git/scripts/helper/trigger-workflow-build.sh --workflow build-linux-x64.yml
 ```
 
 These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
