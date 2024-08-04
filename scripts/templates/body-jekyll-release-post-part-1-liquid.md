@@ -42,7 +42,7 @@ The binary files are available from GitHub [Releases]({% raw %}{{ page.download_
 ## Prerequisites
 
 - GNU/Linux Intel 64-bit: any system with **GLIBC 2.27** or higher
-  (like Ubuntu 18 or later, Debian 10 or later, RedHat 8 later,
+  (like Ubuntu 18 or later, Debian 10 or later, RedHat 8 or later,
   Fedora 29 or later, etc)
 
 ## Install
