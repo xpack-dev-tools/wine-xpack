@@ -172,7 +172,7 @@ function wine_build()
           echo
           echo "Running wine64 configure..."
 
-          if is_develop
+          if is_development
           then
             run_verbose bash "${XBB_SOURCES_FOLDER_PATH}/${wine_src_folder_name}/configure" --help
           fi
@@ -239,7 +239,7 @@ function wine_build()
               echo
               echo "Running wine32 configure..."
 
-              if is_develop
+              if is_development
               then
                 run_verbose bash "${XBB_SOURCES_FOLDER_PATH}/${wine_src_folder_name}/configure" --help
               fi
