@@ -190,7 +190,7 @@ xpm run link-deps -C ~/Work/xpack-dev-tools/wine-xpack.git && \
 xpm run deep-clean --config linux-x64 -C ~/Work/xpack-dev-tools/wine-xpack.git && \
 xpm run docker-prepare --config linux-x64 -C ~/Work/xpack-dev-tools/wine-xpack.git && \
 xpm run docker-link-deps --config linux-x64 -C ~/Work/xpack-dev-tools/wine-xpack.git && \
-xpm run docker-build-develop --config linux-x64 -C ~/Work/xpack-dev-tools/wine-xpack.git
+xpm run docker-build-development --config linux-x64 -C ~/Work/xpack-dev-tools/wine-xpack.git
 ```
 
 About 12 minutes later, the output of the build script is a compressed
@@ -222,8 +222,8 @@ or even in the libraries functions.
 
 For these cases, the build script accepts the `--debug` options.
 
-There are also xPack actions that use this option (`build-develop-debug`
-and `docker-build-develop-debug`).
+There are also xPack actions that use this option (`build-development-debug`
+and `docker-build-development-debug`).
 
 ### Files cache
 
