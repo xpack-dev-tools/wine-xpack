@@ -1,0 +1,124 @@
+
+# -----------------------------------------------------------------------------
+# DO NOT EDIT!
+# Generated from xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/*.
+#
+# This file is part of the xPack distribution.
+#   (https://xpack.github.io)
+# Copyright (c) 2021 Liviu Ionescu.
+#
+# Permission to use, copy, modify, and/or distribute this software
+# for any purpose is hereby granted, under the terms of the MIT license.
+# -----------------------------------------------------------------------------
+
+# https://help.github.com/en/actions
+# https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners
+
+# https://docs.github.com/en/actions/reference/events-that-trigger-workflows#workflow_dispatch
+# https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#workflow_dispatch
+# https://docs.github.com/en/rest/reference/actions#create-a-workflow-dispatch-event
+
+# https://github.com/actions/checkout
+# https://github.com/actions/upload-artifact
+# https://github.com/actions/download-artifact
+
+# -----------------------------------------------------------------------------
+
+
+name: 'Test xPack WineHQ via xpm'
+
+on:
+  workflow_dispatch:
+    inputs:
+      package-version:
+        description: 'The semver of the npm release'
+        required: false
+        default: 'next'
+      version:
+        description: 'The GitHub release version'
+        required: false
+        default: 'current'
+      helper-git-ref:
+        description: 'The helper branch, tag or SHA to checkout'
+        required: false
+        default: ''
+
+jobs:
+
+  linux-x64-test:
+    name: 'linux-x64 WineHQ@${{ github.event.inputs.version }} test'
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: 'Show environment'
+        run: |
+          uname -a
+          lsb_release -sd
+          echo "whoami: $(whoami)"
+          echo "pwd: $(pwd)"
+          ls -lLA
+          env | sort | grep -E '^[^ \t]+='
+
+      - name: 'Checkout project'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 3
+
+      - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
+        uses: actions/checkout@v4
+        with:
+          repository: xpack-dev-tools/xbb-helper-xpack
+          path: /xpacks/@xpack-dev-tools/xbb-helper
+          ref: ${{ github.event.inputs.helper-git-ref }}
+          fetch-depth: 3
+
+      - name: 'Run ${{ github.event.inputs.version }} xpm docker test'
+        uses: docker://node:lts-slim
+        with:
+          entrypoint: /bin/bash
+          args: /github/workspace//scripts/test.sh --image debian --package-version ${{ github.event.inputs.package-version }} --version ${{ github.event.inputs.version }} --xpm
+
+      - name: Upload platform tests report
+        uses: actions/upload-artifact@v4
+        with:
+          name: tests-report-linux-x64
+          path: ${{ github.workspace }}//build/linux-x64/artefacts/tests-report-*.md
+          overwrite: true
+
+  generate-tests-report:
+    name: 'Generate tests report for WineHQ@${{ github.event.inputs.version }}'
+    runs-on: ubuntu-22.04
+    needs: [linux-x64-test]
+
+    steps:
+      - name: Download platform test reports
+        uses: actions/download-artifact@v4
+        with:
+          path: ${{ github.workspace }}//artefacts
+          merge-multiple: true
+
+      - name: Concatenate platform test reports
+        run: |
+          ls -lR ${{ github.workspace }}//artefacts
+          touch ${{ github.workspace }}//artefacts/tests-report.md
+          echo "---" >>${{ github.workspace }}//artefacts/tests-report.md
+          echo "title: WineHQ ${{ github.event.inputs.version }} test results" >>${{ github.workspace }}//artefacts/tests-report.md
+          echo "permalink: /dev-tools/wine/tests/${{ github.event.inputs.version }}/" >>${{ github.workspace }}//artefacts/tests-report.md
+          echo >>${{ github.workspace }}//artefacts/tests-report.md
+          echo "comments: true" >>${{ github.workspace }}//artefacts/tests-report.md
+          echo >>${{ github.workspace }}//artefacts/tests-report.md
+          echo "date: $(date "+%Y-%m-%d %H:%M:%S %z")" >>${{ github.workspace }}//artefacts/tests-report.md
+          echo >>${{ github.workspace }}//artefacts/tests-report.md
+          echo "---" >>${{ github.workspace }}//artefacts/tests-report.md
+          echo >>${{ github.workspace }}//artefacts/tests-report.md
+          (cd ${{ github.workspace }}; cat -s artefacts/tests-report-linux-x64.md  | tee -a /artefacts/tests-report.md)
+          mv -v ${{ github.workspace }}//artefacts/tests-report.md ${{ github.workspace }}//artefacts/${{ github.event.inputs.version }}.md
+
+      - name: Upload tests report
+        uses: actions/upload-artifact@v4
+        with:
+          name: tests-report
+          path: ${{ github.workspace }}//artefacts/${{ github.event.inputs.version }}.md
+          overwrite: true
+
+# -----------------------------------------------------------------------------
