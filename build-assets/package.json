@@ -62,9 +62,9 @@
     },
     "actions": {
       "npm-install": "npm install",
-      "npm-pack": "npm pack",
-      "npm-version-patch": "npm version patch",
-      "npm-version-minor": "npm version minor",
+      "npm-pack": "cd .. && npm pack",
+      "npm-version-patch": "cd .. && npm version patch",
+      "npm-version-minor": "cd .. && npm version minor",
       "deep-clean": [
         "rm -rf build xpacks node_modules package-lock.json",
         "rm -rf ${HOME}/Work/xpack-dev-tools-build/{{ properties.appLcName }}-[0-9]*-*"
@@ -79,7 +79,7 @@
       "git-pull-helper": [
         "git -C ${HOME}/Work/xpack-dev-tools/xbb-helper-xpack.git pull"
       ],
-      "git-log": "git log --pretty='%cd * %h %s' --date=short",
+      "git-log": "git -C .. log --pretty='%cd * %h %s' --date=short",
       "generate-workflows": [
         "mkdir -p .github/workflows/",
         "cp xpacks/@xpack-dev-tools/xbb-helper/templates/body-github-pre-releases-test.md .github/workflows/",
