@@ -6,53 +6,13 @@
   },
   "xpack": {
     "minimumXpmRequired": "0.16.3",
-    "binaries": {
-      "destination": "./.content",
-      "baseUrl": "https://github.com/xpack-dev-tools/wine-xpack/releases/download/v8.0.2-1",
-      "skip": 1,
-      "platforms": {
-        "linux-x64": {
-          "fileName": "xpack-wine-8.0.2-1-linux-x64.tar.gz",
-          "sha256": "bfaf3b78c4be98ecd42c6b8f13d601ce1e39c3fbef1824fb43c6c6cb1557f305"
-        }
-      }
-    },
-    "bin": {
-      "msidb": "./.content/bin/msidb",
-      "msiexec": "./.content/bin/msiexec",
-      "notepad": "./.content/bin/notepad",
-      "regedit": "./.content/bin/regedit",
-      "regsvr32": "./.content/bin/regsvr32",
-      "winewidl": "./.content/bin/widl",
-      "wine": "./.content/bin/wine",
-      "wine-preloader": "./.content/bin/wine-preloader",
-      "wine64": "./.content/bin/wine64",
-      "wine64-preloader": "./.content/bin/wine64-preloader",
-      "wineboot": "./.content/bin/wineboot",
-      "winebuild": "./.content/bin/winebuild",
-      "winecfg": "./.content/bin/winecfg",
-      "wineconsole": "./.content/bin/wineconsole",
-      "winecpp": "./.content/bin/winecpp",
-      "winedbg": "./.content/bin/winedbg",
-      "winedump": "./.content/bin/winedump",
-      "winefile": "./.content/bin/winefile",
-      "wineg++": "./.content/bin/wineg++",
-      "winegcc": "./.content/bin/winegcc",
-      "winemaker": "./.content/bin/winemaker",
-      "winemine": "./.content/bin/winemine",
-      "winepath": "./.content/bin/winepath",
-      "wineserver": "./.content/bin/wineserver",
-      "wmc": "./.content/bin/wmc",
-      "wrc": "./.content/bin/wrc"
-    },
     "devDependencies": {
-      "@xpack-dev-tools/xbb-helper": "^3.0.2"
+      "@xpack-dev-tools/xbb-helper": "^3.0.7"
     },
     "properties": {
       "appName": "WineHQ",
       "appLcName": "wine",
       "platforms": "linux-x64",
-      "LIQUIDJS": "liquidjs --context '{ \"XBB_APPLICATION_NAME\": \"{{ properties.appName }}\", \"XBB_APPLICATION_LOWER_CASE_NAME\": \"{{ properties.appLcName }}\", \"platforms\": \"{{ properties.platforms }}\" }'",
       "buildFolderRelativePath": "{{ 'build' | path_join: configuration.name | to_filename | downcase }}",
       "buildFolderRelativePathPosix": "{{ 'build' | path_posix_join: configuration.name | downcase }}",
       "commandBashBuild": "bash {{ properties.dbg }} scripts/build.sh --target {{ configuration.name }} --build-folder {{ properties.buildFolderRelativePathPosix }}",
@@ -80,21 +40,7 @@
         "git -C ${HOME}/Work/xpack-dev-tools/xbb-helper-xpack.git pull"
       ],
       "git-log": "git -C .. log --pretty='%cd * %h %s' --date=short",
-      "generate-workflows": [
-        "mkdir -p .github/workflows/",
-        "cp xpacks/@xpack-dev-tools/xbb-helper/templates/body-github-pre-releases-test.md .github/workflows/",
-        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/build-linux-x64-liquid.yml --output .github/workflows/build-linux-x64.yml",
-        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/test-prime-liquid.yml --output .github/workflows/test-prime.yml",
-        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/test-docker-linux-intel-liquid.yml --output .github/workflows/test-docker-linux-intel.yml",
-        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/publish-release-liquid.yml --output .github/workflows/publish-release.yml",
-        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/test-xpm-liquid.yml --output .github/workflows/test-xpm.yml",
-        "{{ properties.LIQUIDJS }} --template @xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/deep-clean-liquid.yml --output .github/workflows/deep-clean.yml",
-        "cp xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/publish-github-pages.yml .github/workflows/publish-github-pages.yml",
-        "cp xpacks/@xpack-dev-tools/xbb-helper/templates/dot.gitignore .gitignore",
-        "cp xpacks/@xpack-dev-tools/xbb-helper/templates/dot.npmignore .npmignore",
-        "cp xpacks/@xpack-dev-tools/xbb-helper/templates/build.sh scripts/",
-        "cp xpacks/@xpack-dev-tools/xbb-helper/templates/test.sh scripts/"
-      ],
+      "generate-workflows": "bash xpacks/@xpack-dev-tools/xbb-helper/maintainer-scripts/generate-workflows.sh",
       "website-generate-commons": "bash xpacks/@xpack-dev-tools/xbb-helper/maintainer-scripts/website-generate-commons.sh",
       "website-import-releases": "bash xpacks/@xpack-dev-tools/xbb-helper/maintainer-scripts/website-import-releases.sh",
       "trigger-workflow-build-linux-x64": "bash xpacks/@xpack-dev-tools/xbb-helper/github-actions/trigger-workflow-build.sh --workflow build-linux-x64.yml --xpm-version {{ properties.xpm-version }} --loglevel {{ properties.xpm-install-loglevel }}",
