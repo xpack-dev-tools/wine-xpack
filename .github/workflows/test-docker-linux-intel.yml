@@ -1,6 +1,7 @@
 
 # -----------------------------------------------------------------------------
-# DO NOT EDIT! Generated from xpacks/@xpack-dev-tools/xbb-helper/templates/*.
+# DO NOT EDIT!
+# Generated from xpacks/@xpack-dev-tools/xbb-helper/templates/workflows/*.
 #
 # This file is part of the xPack distribution.
 #   (https://xpack.github.io)
@@ -16,6 +17,10 @@
 # https://docs.github.com/en/actions/reference/events-that-trigger-workflows#workflow_dispatch
 # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#workflow_dispatch
 # https://docs.github.com/en/rest/reference/actions#create-a-workflow-dispatch-event
+
+# https://github.com/actions/checkout
+# https://github.com/actions/upload-artifact
+# https://github.com/actions/download-artifact
 
 # -----------------------------------------------------------------------------
 
@@ -38,7 +43,7 @@
 
 # -----------------------------------------------------------------------------
 
-name: 'Test xPack WineHQ on Intel Docker platforms'
+name: 'Test xPack WineHQ on x64 Docker platforms'
 
 on:
   workflow_dispatch:
@@ -54,7 +59,7 @@ on:
       helper-git-ref:
         description: 'The helper branch, tag or SHA to checkout'
         required: false
-        default: 'xpack-develop'
+        default: 'xpack-development'
 
 # The scripts are executed in the Docker context by GitHub Actions,
 # so `native-test.sh` should be fine, it already takes care of updates.
@@ -68,26 +73,26 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: 'Environment'
+      - name: 'Show environment'
         run: |
           uname -a
           lsb_release -sd
           echo "whoami: $(whoami)"
           echo "pwd: $(pwd)"
           ls -lLA
-          env | sort | egrep '^[^ \t]+='
+          env | sort | grep -E '^[^ \t]+='
 
       # https://github.com/actions/checkout
       - name: 'Checkout project'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: xpack-dev-tools/xbb-helper-xpack
-          path: xpacks/@xpack-dev-tools/xbb-helper
+          path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
           fetch-depth: 3
 
@@ -95,19 +100,19 @@ jobs:
         uses: docker://ubuntu:22.04
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/scripts/test.sh --image ubuntu:22.04 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+          args: /github/workspace/build-assets/scripts/test.sh --image ubuntu:22.04 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
 
       - name: 'Ubuntu 20.04 x64'
         uses: docker://ubuntu:20.04
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/scripts/test.sh --image ubuntu:20.04 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+          args: /github/workspace/build-assets/scripts/test.sh --image ubuntu:20.04 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
 
       - name: 'Ubuntu 18.04 x64'
         uses: docker://ubuntu:18.04
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/scripts/test.sh --image ubuntu:18.04 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+          args: /github/workspace/build-assets/scripts/test.sh --image ubuntu:18.04 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
 
   # https://en.wikipedia.org/wiki/Debian_version_history
   # https://hub.docker.com/_/debian
@@ -116,26 +121,26 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: 'Environment'
+      - name: 'Show environment'
         run: |
           uname -a
           lsb_release -sd
           echo "whoami: $(whoami)"
           echo "pwd: $(pwd)"
           ls -lLA
-          env | sort | egrep '^[^ \t]+='
+          env | sort | grep -E '^[^ \t]+='
 
       # https://github.com/actions/checkout
       - name: 'Checkout project'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: xpack-dev-tools/xbb-helper-xpack
-          path: xpacks/@xpack-dev-tools/xbb-helper
+          path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
           fetch-depth: 3
 
@@ -143,41 +148,41 @@ jobs:
         uses: docker://debian:bullseye
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/scripts/test.sh --image debian:bullseye --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+          args: /github/workspace/build-assets/scripts/test.sh --image debian:bullseye --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
 
       - name: 'Debian 10 x64'
         uses: docker://debian:buster
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/scripts/test.sh --image debian:buster --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+          args: /github/workspace/build-assets/scripts/test.sh --image debian:buster --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
 
   # https://hub.docker.com/r/redhat/ubi8
-  # `-static` disabled, there is no static libc.a.
+  # For `-static` to work, explicit static packages must be present.
   redhat-x64:
     name: 'x64 wine ${{ github.event.inputs.version }} test on RedHat stable'
     runs-on: ubuntu-22.04
 
     steps:
-      - name: 'Environment'
+      - name: 'Show environment'
         run: |
           uname -a
           lsb_release -sd
           echo "whoami: $(whoami)"
           echo "pwd: $(pwd)"
           ls -lLA
-          env | sort | egrep '^[^ \t]+='
+          env | sort | grep -E '^[^ \t]+='
 
       # https://github.com/actions/checkout
       - name: 'Checkout project'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: xpack-dev-tools/xbb-helper-xpack
-          path: xpacks/@xpack-dev-tools/xbb-helper
+          path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
           fetch-depth: 3
 
@@ -185,7 +190,7 @@ jobs:
         uses: docker://redhat/ubi8
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/scripts/test.sh --image redhat/ubi8 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+          args: /github/workspace/build-assets/scripts/test.sh --image redhat/ubi8 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
 
   # https://en.wikipedia.org/wiki/Fedora_version_history
   # https://hub.docker.com/_/fedora
@@ -195,26 +200,26 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: 'Environment'
+      - name: 'Show environment'
         run: |
           uname -a
           lsb_release -sd
           echo "whoami: $(whoami)"
           echo "pwd: $(pwd)"
           ls -lLA
-          env | sort | egrep '^[^ \t]+='
+          env | sort | grep -E '^[^ \t]+='
 
       # https://github.com/actions/checkout
       - name: 'Checkout project'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: xpack-dev-tools/xbb-helper-xpack
-          path: xpacks/@xpack-dev-tools/xbb-helper
+          path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
           fetch-depth: 3
 
@@ -222,19 +227,19 @@ jobs:
         uses: docker://fedora:37
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/scripts/test.sh --image fedora:37 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+          args: /github/workspace/build-assets/scripts/test.sh --image fedora:37 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
 
       - name: 'Fedora 33 x64'
         uses: docker://fedora:33
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/scripts/test.sh --image fedora:33 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+          args: /github/workspace/build-assets/scripts/test.sh --image fedora:33 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
 
       - name: 'Fedora 29 x64'
         uses: docker://fedora:29
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/scripts/test.sh --image fedora:29 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+          args: /github/workspace/build-assets/scripts/test.sh --image fedora:29 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
 
   # https://en.wikipedia.org/wiki/OpenSUSE#Releases
   # https://hub.docker.com/u/opensuse
@@ -244,26 +249,26 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: 'Environment'
+      - name: 'Show environment'
         run: |
           uname -a
           lsb_release -sd
           echo "whoami: $(whoami)"
           echo "pwd: $(pwd)"
           ls -lLA
-          env | sort | egrep '^[^ \t]+='
+          env | sort | grep -E '^[^ \t]+='
 
       # https://github.com/actions/checkout
       - name: 'Checkout project'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: xpack-dev-tools/xbb-helper-xpack
-          path: xpacks/@xpack-dev-tools/xbb-helper
+          path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
           fetch-depth: 3
 
@@ -271,39 +276,39 @@ jobs:
         uses: docker://opensuse/leap:15.4
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/scripts/test.sh --image opensuse/leap:15.4 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+          args: /github/workspace/build-assets/scripts/test.sh --image opensuse/leap:15.4 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
 
       - name: 'OpenSUSE 15.3 x64'
         uses: docker://opensuse/leap:15.3
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/scripts/test.sh --image opensuse/leap:15.3 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+          args: /github/workspace/build-assets/scripts/test.sh --image opensuse/leap:15.3 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
 
   ubuntu-x64-latest:
     name: 'x64 wine ${{ github.event.inputs.version }} test on Ubuntu latest'
     runs-on: ubuntu-22.04
 
     steps:
-      - name: 'Environment'
+      - name: 'Show environment'
         run: |
           uname -a
           lsb_release -sd
           echo "whoami: $(whoami)"
           echo "pwd: $(pwd)"
           ls -lLA
-          env | sort | egrep '^[^ \t]+='
+          env | sort | grep -E '^[^ \t]+='
 
       # https://github.com/actions/checkout
       - name: 'Checkout project'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: xpack-dev-tools/xbb-helper-xpack
-          path: xpacks/@xpack-dev-tools/xbb-helper
+          path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
           fetch-depth: 3
 
@@ -311,7 +316,7 @@ jobs:
         uses: docker://ubuntu:22.04
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/scripts/test.sh --image ubuntu:22.04 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+          args: /github/workspace/build-assets/scripts/test.sh --image ubuntu:22.04 --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
       # ubuntu:rolling fails during update
 
   debian-x64-latest:
@@ -319,26 +324,26 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: 'Environment'
+      - name: 'Show environment'
         run: |
           uname -a
           lsb_release -sd
           echo "whoami: $(whoami)"
           echo "pwd: $(pwd)"
           ls -lLA
-          env | sort | egrep '^[^ \t]+='
+          env | sort | grep -E '^[^ \t]+='
 
       # https://github.com/actions/checkout
       - name: 'Checkout project'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: xpack-dev-tools/xbb-helper-xpack
-          path: xpacks/@xpack-dev-tools/xbb-helper
+          path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
           fetch-depth: 3
 
@@ -346,13 +351,13 @@ jobs:
         uses: docker://debian:testing
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/scripts/test.sh --image debian:testing --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+          args: /github/workspace/build-assets/scripts/test.sh --image debian:testing --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
 
       - name: 'Debian latest x64'
         uses: docker://debian:latest
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/scripts/test.sh --image debian:latest --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+          args: /github/workspace/build-assets/scripts/test.sh --image debian:latest --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
 
   # Fails during zypper in
   # docker://opensuse/tumbleweed
@@ -368,26 +373,26 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: 'Environment'
+      - name: 'Show environment'
         run: |
           uname -a
           lsb_release -sd
           echo "whoami: $(whoami)"
           echo "pwd: $(pwd)"
           ls -lLA
-          env | sort | egrep '^[^ \t]+='
+          env | sort | grep -E '^[^ \t]+='
 
       # https://github.com/actions/checkout
       - name: 'Checkout project'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: xpack-dev-tools/xbb-helper-xpack
-          path: xpacks/@xpack-dev-tools/xbb-helper
+          path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
           fetch-depth: 3
 
@@ -395,7 +400,7 @@ jobs:
         uses: docker://fedora:latest
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/scripts/test.sh --image fedora:latest --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+          args: /github/workspace/build-assets/scripts/test.sh --image fedora:latest --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
 
   # - https://hub.docker.com/_/archlinux
   arch-x64-latest:
@@ -403,26 +408,26 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: 'Environment'
+      - name: 'Show environment'
         run: |
           uname -a
           lsb_release -sd
           echo "whoami: $(whoami)"
           echo "pwd: $(pwd)"
           ls -lLA
-          env | sort | egrep '^[^ \t]+='
+          env | sort | grep -E '^[^ \t]+='
 
       # https://github.com/actions/checkout
       - name: 'Checkout project'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 3
 
       - name: 'Checkout helper ${{ github.event.inputs.helper-git-ref }}'
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: xpack-dev-tools/xbb-helper-xpack
-          path: xpacks/@xpack-dev-tools/xbb-helper
+          path: build-assets/xpacks/@xpack-dev-tools/xbb-helper
           ref: ${{ github.event.inputs.helper-git-ref }}
           fetch-depth: 3
 
@@ -430,12 +435,12 @@ jobs:
         uses: docker://archlinux:latest
         with:
           entrypoint: /bin/bash
-          args: /github/workspace/scripts/test.sh --image archlinux:latest --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
+          args: /github/workspace/build-assets/scripts/test.sh --image archlinux:latest --version ${{ github.event.inputs.version }} --base-url ${{ github.event.inputs.base_url }}
 
   # - https://hub.docker.com/u/manjarolinux
   # docker://manjarolinux/base - too slow
 
   # - https://hub.docker.com/r/gentoo/portage
   # docker://gentoo/portage - exec: "/bin/bash": stat /bin/bash: no such file or directory: unknown.
-  
+
 # -----------------------------------------------------------------------------
