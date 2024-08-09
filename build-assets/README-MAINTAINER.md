@@ -336,7 +336,7 @@ These are equivalent to:
 
 ```sh
 bash ${HOME}/Work/xpack-dev-tools/wine-xpack.git/scripts/helper/tests/trigger-workflow-test-prime.sh
-bash ${HOME}/Work/xpack-dev-tools/wine-xpack.git/scripts/helper/tests/trigger-workflow-test-docker-linux-intel.sh
+bash ${HOME}/Work/xpack-dev-tools/wine-xpack.git/scripts/helper/tests/trigger-workflow-test-docker-linux-x64.sh
 ```
 
 These scripts require the `GITHUB_API_DISPATCH_TOKEN` variable to be present
