@@ -2,6 +2,6 @@
 
 Version **{{ XBB_RELEASE_VERSION }}** is a new release of the **xPack WineHQ** package; it follows the upstream [release](https://www.winehq.org/news/).
 
-[Continue reading »](TODO: edit, add URL!)
+[Continue reading »](will-be-updated-shortly)
 
 _At this moment the binaries are provided for tests only!_
