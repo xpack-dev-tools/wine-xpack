@@ -37,7 +37,7 @@ on:
 jobs:
 
   linux-x64:
-    name: 'linux-x64 wine ${{ github.event.inputs.version }} clean'
+    name: 'linux-x64 wine ${{github.event.inputs.version}} clean'
     timeout-minutes: 5760 # 4 days
     runs-on: [self-hosted, linux, x64]
     steps:
