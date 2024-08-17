@@ -1,20 +1,20 @@
 ---
-title:  xPack WineHQ v{{ XBB_RELEASE_VERSION }} released
+title:  xPack WineHQ v{{releaseVersion}} released
 
-summary: "Version **{{ XBB_RELEASE_VERSION }}** is a new release; it follows the upstream release."
+summary: "Version **{{releaseVersion}}** is a new release; it follows the upstream release."
 
 upstream_version: "8.0"
 upstream_version_major: "2"
 upstream_release_date: "19 Jul 2023"
 
-version: "{{ XBB_RELEASE_VERSION }}"
+version: "{{releaseVersion}}"
 npm_subversion: "1"
 
-download_url: https://github.com/xpack-dev-tools/wine-xpack/releases/tag/v{{ XBB_RELEASE_VERSION }}/
+download_url: https://github.com/xpack-dev-tools/wine-xpack/releases/tag/v{{releaseVersion}}/
 
 comments: true
 
-date: {{ RELEASE_DATE }}
+date: {{releaseDate}}
 
 # For Jekyll releases selection.
 categories:
@@ -37,7 +37,7 @@ There are binaries **GNU/Linux** (Intel 64-bit).
 
 ## Download
 
-The binary files are available from GitHub [Releases]({% raw %}{{ page.download_url }}{% endraw %}).
+The binary files are available from GitHub [Releases]({% raw %}{{page.download_url}}{% endraw %}).
 
 ## Prerequisites
 
@@ -49,12 +49,12 @@ The binary files are available from GitHub [Releases]({% raw %}{{ page.download_
 
 The full details of installing the **xPack WineHQ** on various platforms
 are presented in the separate
-[Install]({% raw %}{{ site.baseurl }}{% endraw %}/dev-tools/wine/install/) page.
+[Install]({% raw %}{{site.baseurl}}{% endraw %}/dev-tools/wine/install/) page.
 
 ### Easy install
 
 The easiest way to install WineHQ is with
-[`xpm`]({% raw %}{{ site.baseurl }}{% endraw %}/xpm/)
+[`xpm`]({% raw %}{{site.baseurl}}{% endraw %}/xpm/)
 by using the **binary xPack**, available as
 [`@xpack-dev-tools/wine`](https://www.npmjs.com/package/@xpack-dev-tools/wine)
 from the [`npmjs.com`](https://www.npmjs.com) registry.
@@ -75,7 +75,7 @@ ls -l xpacks/.bin
 To install this specific version, use:
 
 ```sh
-xpm install @xpack-dev-tools/wine@{% raw %}{{ page.version }}.{{ page.npm_subversion }}{% endraw %} --verbose
+xpm install @xpack-dev-tools/wine@{% raw %}{{page.version}}.{{page.npm_subversion}}{% endraw %} --verbose
 ```
 
 It is also possible to install Meson Build globally, in the user home folder,
@@ -110,8 +110,8 @@ The **xPack WineHQ** is based on the official
 The current version is based on:
 
 - WineHQ release
-[{% raw %}{{ page.upstream_version }}{% endraw %}](https://dl.winehq.org/wine/source/{% raw %}{{ page.upstream_version_major }}{% endraw %}.x/)
-from {% raw %}{{ page.upstream_release_date }}{% endraw %}.
+[{% raw %}{{page.upstream_version}}{% endraw %}](https://dl.winehq.org/wine/source/{% raw %}{{page.upstream_version_major}}{% endraw %}.x/)
+from {% raw %}{{page.upstream_release_date}}{% endraw %}.
 
 ## Changes
 
