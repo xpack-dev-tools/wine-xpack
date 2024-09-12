@@ -17,6 +17,7 @@ To check if the {props.appName} installed manually starts properly, use somethin
 
 
 
+
   
   
   
@@ -35,7 +36,7 @@ To check if the {props.appName} installed manually starts properly, use somethin
 <TabItem value="linux" label="GNU/Linux">
 
 <CodeBlock language="console"> {
-`$ ~/.local/xPacks/${props.appLcName}/xpack-${props.appLcName}-${customField('upstreamVersion')}-${customField('xpackSubversion')}/bin/${props.programName} --version
+`$ ~/.local/xPacks/${props.appLcName}/xpack-${props.appLcName}-${customField('xpackVersion')}/bin/${props.programName} --version
 ${props.branding}${customField('upstreamVersion')}
 `} </CodeBlock>
 

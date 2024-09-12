@@ -228,6 +228,7 @@ The next step is to install the
 
 
 
+
   
   
   
@@ -320,7 +321,7 @@ The result looks like this:
     "dependencies": {},
     "devDependencies": {
       "@xpack-dev-tools/wine": {
-        "specifier": "${customField('upstreamVersion')}-${customField('xpackSubversion')}.${customField('npmSubversion')}",
+        "specifier": "${customField('xpackVersion')}.${customField('npmSubversion')}",
         "local": "link",
         "platforms": "all"
       }
@@ -382,7 +383,7 @@ the project build configurations need a PATH adjustment:
 <TabItem value="linux" label="GNU/Linux">
 
 <CodeBlock language="sh"> {
-`export PATH=$HOME/.local/xPacks/@xpack-dev-tools/wine/${customField('upstreamVersion')}-${customField('xpackSubversion')}.${customField('npmSubversion')}/.content/bin:$PATH
+`export PATH=$HOME/.local/xPacks/@xpack-dev-tools/wine/${customField('xpackVersion')}.${customField('npmSubversion')}/.content/bin:$PATH
 `} </CodeBlock>
 
 </TabItem>
@@ -480,9 +481,19 @@ The GNU/Linux versions of **xPack WineHQ**
 are packed as `.tar.gz` archives.
 Download the latest version named like:
 
-* <code>xpack-wine-{customField('upstreamVersion')}-{customField('xpackSubversion')}-darwin-x64.tar.gz</code>
-* <code>xpack-wine-{customField('upstreamVersion')}-{customField('xpackSubversion')}-darwin-arm64.tar.gz</code>
-* <code>xpack-wine-{customField('upstreamVersion')}-{customField('xpackSubversion')}-darwin-arm.tar.gz</code>
+
+
+
+
+
+
+
+
+
+
+- <code>xpack-wine-{customField('xpackVersion')}-linux-x64.tar.gz</code>
+
+
 
 :::note
 
@@ -496,14 +507,14 @@ unpack the archive and move it to a location of your choice.
 
 The recommended location is
 the <code>~/.local/xPacks/wine</code> folder, for
-example <code>/home/ilg/.local/xPacks/wine/xpack-wine-{customField('upstreamVersion')}-{customField('xpackSubversion')}</code>:
+example <code>/home/ilg/.local/xPacks/wine/xpack-wine-{customField('xpackVersion')}</code>:
 
 <CodeBlock language="console"> {
 `mkdir -p ~/.local/xPacks/wine
 cd ~/.local/xPacks/wine
 
-tar xvf ~/Downloads/xpack-wine-${customField('upstreamVersion')}-${customField('xpackSubversion')}-linux-x64.tar.gz
-chmod -R -w xpack-wine-${customField('upstreamVersion')}-${customField('xpackSubversion')}
+tar xvf ~/Downloads/xpack-wine-${customField('xpackVersion')}-linux-x64.tar.gz
+chmod -R -w xpack-wine-${customField('xpackVersion')}
 `} </CodeBlock>
 
 </TabItem>

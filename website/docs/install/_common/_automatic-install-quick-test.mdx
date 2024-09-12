@@ -17,6 +17,7 @@ To check if the {props.appName} installed by **xpm** starts properly, use someth
 
 
 
+
   
   
   
@@ -35,7 +36,7 @@ To check if the {props.appName} installed by **xpm** starts properly, use someth
 <TabItem value="linux" label="GNU/Linux">
 
 <CodeBlock language="console"> {
-`$ ~/.local/xPacks/@xpack-dev-tools/${props.appLcName}/${customField('upstreamVersion')}-${customField('xpackSubversion')}.${customField('npmSubversion')}/.content/bin/${props.programName} --version
+`$ ~/.local/xPacks/@xpack-dev-tools/${props.appLcName}/${customField('xpackVersion')}.${customField('npmSubversion')}/.content/bin/${props.programName} --version
 ${props.branding}${customField('upstreamVersion')}
 `} </CodeBlock>
 
