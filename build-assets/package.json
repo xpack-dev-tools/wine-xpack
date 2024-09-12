@@ -15,7 +15,9 @@
       "platforms": "linux-x64",
       "customFields": {
         "programName": "wine",
-        "branding": "wine-"
+        "branding": "wine-",
+        "$link": "https://dl.winehq.org/wine/source/",
+        "upstreamReleaseDate": "16 Jan 2024"
       },
       "buildFolderRelativePath": "{{ 'build' | path_join: configuration.name | to_filename | downcase }}",
       "buildFolderRelativePathPosix": "{{ 'build' | path_posix_join: configuration.name | downcase }}",
