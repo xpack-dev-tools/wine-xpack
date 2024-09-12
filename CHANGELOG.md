@@ -2,9 +2,181 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2024-09-12
+
+* v9.0.0-1 prepared
+* d789f1b build-assets/package.json: bump deps
+* 520e89a re-generate workflows
+* e935753 update scripts copyright notices
+
+## 2024-08-17
+
+* 908ce80 website remove preliminary
+* f740195 build-assets/package.json: updates
+* b47c712 templates/body-blog update
+* 1bbdb03 templates/body-github: update
+* a35803c re-generate workflows
+
+## 2024-08-16
+
+* 327089a templates/body-github: update
+
+## 2024-08-14
+
+* 416d6b2 build-assets/package.json: updates
+
+## 2024-08-10
+
+* 2888032 website: re-generate commons
+
+## 2024-08-09
+
+* 3033e83 re-generate workflows
+* 08eddc2 READMEs update
+* d2d41f1 package.json: git+https
+* c390c02 build-assets/package.json: updates
+* aced466 templates/body-blog update
+
+## 2024-08-07
+
+* 04fadd1 build-assets/package.json: updates
+* 7943087 build-assets/package.json: updates
+* f3bfb9e build-assets/package.json: updates
+* 07a5e30 website: preliminary content
+
+## 2024-08-06
+
+* 1584819 move to build-assets
+* a3c86ff package.json: bump deps
+
+## 2024-08-04
+
+* 6b307f1 package.json: bump deps
+* 2ae18de wine.sh: use is_development
+* f57701b templates/jekyll update
+* f515ee5 READMEs update
+* 3edaedd package.json: add actions, bump deps
+
+## 2024-07-27
+
+* 1dd1276 package.json: add actions, bump deps
+* a963696 templates/jekyll update
+
+## 2024-07-23
+
+* 23d779c READMEs update
+* 90d8bdb re-generate scripts
+* 845cc64 body-jekyll update
+* fe6755f re-generate workflows
+* f127d34 package.json: loglevel info
+* 41f737b package.json: bump deps
+
+## 2024-06-18
+
+* 1329f41 package.json: rework generate workflows
+* 084731d READMEs update
+
+## 2024-06-17
+
+* ec465dd package.json: bump deps
+* d2712cc application.sh: update
+
+## 2024-05-18
+
+* 498eb28 READMEs update
+* 4487bc7 package.json: XBB_ENVIRONMENT_SKIP_CHECKS
+
+## 2024-05-16
+
+* d33839c READMEs update
+
+## 2024-05-09
+
+* 5a8fb77 use is_develop and with_strip
+
+## 2024-05-03
+
+* 1cd22af package.json: add bison to deps
+
+## 2024-05-02
+
+* c476d33 package.json: add m4 to deps
+
+## 2024-04-22
+
+* 87843cb package.json: bump deps
+
+## 2024-03-08
+
+* 6406dfa package.json: xpm-version 0.18.0
+
+## 2024-03-07
+
+* 6a9c8dc package.json: xpm-version 0.18.0
+* d2f4286 package.json: bump deps
+
+## 2024-03-06
+
+* 4c527ed body-jekyll update
+* 638e7d8 package.json: bump deps
+
+## 2024-02-07
+
+* f6d6657 READMEs update
+* 7386b56 package.json: bump deps
+
+## 2023-12-03
+
+* eb25d13 package.json: bump deps
+* bc50ff6 re-generate workflows
+
+## 2023-11-12
+
+* a175b3c package.json: bump deps
+
+## 2023-09-25
+
+* 8a46225 body-jekyll update
+
+## 2023-09-20
+
+* 4293867 package.json: bump deps
+
+## 2023-09-16
+
+* eb1a92d package.json: add linux32
+* 066a6a7 body-jekyll update
+
+## 2023-09-15
+
+* 7142258 README update
+
+## 2023-09-11
+
+* 5843a39 package.json: bump deps
+
+## 2023-09-08
+
+* fdb897b package.json: bump deps
+
+## 2023-09-06
+
+* e01d28d package.json: bump deps
+* bd6a8f4 READMEs update
+* 8fe07f0 body-jekyll update
+
+## 2023-09-05
+
+* 326d6f4 re-generate workflows
+* 9c77084 re-generate workflows
+* bf2da8b READMEs update
+* 1488b29 package.json: bump deps
+
 ## 2023-09-04
 
-* v8.0.2-1.1 published on npmjs.com
+* f02e7f6 package.json cleanup
+* a049ff6 8.0.2-1.1
+* c00fa88 CHANGELOG: publish npm v8.0.2-1.1
 * 30abf3f package.json: update urls for 8.0.2-1.1 release
 * 33278cb READMEs updates
 * 629c0be re-generate workflows

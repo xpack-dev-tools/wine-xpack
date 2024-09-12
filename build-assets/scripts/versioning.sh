@@ -11,16 +11,17 @@
 
 function application_build_versioned_components()
 {
-  XBB_WINE_VERSION="$(echo "${XBB_RELEASE_VERSION}" | sed -e 's|[.][0-9][0-9]*-.*||')"
+  XBB_WINE_VERSION="$(echo "${XBB_RELEASE_VERSION}" | sed -e 's|[.][0-9][0-9]*-.*||' | sed -e 's|[.]0[.]0$|.0|')"
 
   if [ "${XBB_REQUESTED_HOST_PLATFORM}" != "linux" ] || [ "${XBB_REQUESTED_HOST_ARCH}" != "x64" ]
   then
-    echo "This package can be built only on Intel Linux"
+    echo "This package can be built only on x64 Linux"
     exit 1
   fi
 
   # Keep them in sync with the combo archive content.
-  if [[ "${XBB_RELEASE_VERSION}" =~ 8[.].*[.].* ]]
+  if [[ "${XBB_RELEASE_VERSION}" =~ 9[.][0-9]*[.][0-9]* ]] \
+     [[ "${XBB_RELEASE_VERSION}" =~ 8[.][0-9]*[.][0-9]* ]]
   then
     # -------------------------------------------------------------------------
     # Build the native dependencies.
@@ -45,7 +46,7 @@ function application_build_versioned_components()
     run_verbose rm -rfv "${XBB_APPLICATION_INSTALL_FOLDER_PATH}/share/man"
 
     # -------------------------------------------------------------------------
-  elif [[ "${XBB_RELEASE_VERSION}" =~ 7[.].*[.].* ]]
+  elif [[ "${XBB_RELEASE_VERSION}" =~ 7[.][0-9]*[.][0-9]* ]]
   then
     # -------------------------------------------------------------------------
     # Build the native dependencies.
@@ -76,7 +77,7 @@ function application_build_versioned_components()
     run_verbose rm -rfv "${XBB_APPLICATION_INSTALL_FOLDER_PATH}/share/man"
 
     # -------------------------------------------------------------------------
-  elif [[ "${XBB_RELEASE_VERSION}" =~ 6[.].*[.].* ]]
+  elif [[ "${XBB_RELEASE_VERSION}" =~ 6[.][0-9]*[.][0-9]* ]]
   then
     # -------------------------------------------------------------------------
     # Build the native dependencies.

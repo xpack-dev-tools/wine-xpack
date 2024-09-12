@@ -1,6 +1,6 @@
 {
   "name": "@xpack-dev-tools/wine",
-  "version": "8.0.2-1.1",
+  "version": "9.0.0-1.1.pre",
   "description": "A binary xPack with the WineHQ executables",
   "main": "",
   "scripts": {
