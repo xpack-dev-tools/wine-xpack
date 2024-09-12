@@ -4,7 +4,13 @@ Entries in this file are in reverse chronological order.
 
 ## 2024-09-12
 
-* v9.0.0-1 prepared
+* v9.0.0-1 released
+* 604f5b6 website update
+* 118fcaf build-assets/package.json: update customFields
+* 02c0e1b website: preliminary content
+* d18d017 build-assets/package.json: bump deps
+* 012779d versioning.sh: fix syntax
+* 8c2b22f prepare v9.0.0-1
 * d789f1b build-assets/package.json: bump deps
 * 520e89a re-generate workflows
 * e935753 update scripts copyright notices
