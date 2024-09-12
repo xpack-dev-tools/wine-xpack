@@ -20,7 +20,7 @@ function application_build_versioned_components()
   fi
 
   # Keep them in sync with the combo archive content.
-  if [[ "${XBB_RELEASE_VERSION}" =~ 9[.][0-9]*[.][0-9]* ]] \
+  if [[ "${XBB_RELEASE_VERSION}" =~ 9[.][0-9]*[.][0-9]* ]] || \
      [[ "${XBB_RELEASE_VERSION}" =~ 8[.][0-9]*[.][0-9]* ]]
   then
     # -------------------------------------------------------------------------
