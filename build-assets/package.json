@@ -15,7 +15,7 @@
       "platforms": "linux-x64",
       "customFields": {
         "programName": "wine",
-        "branding": ""
+        "branding": "wine-"
       },
       "buildFolderRelativePath": "{{ 'build' | path_join: configuration.name | to_filename | downcase }}",
       "buildFolderRelativePathPosix": "{{ 'build' | path_posix_join: configuration.name | downcase }}",
