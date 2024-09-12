@@ -4,7 +4,9 @@ Entries in this file are in reverse chronological order.
 
 ## 2024-09-12
 
-* v9.0.0-1 released
+* v9.0.0-1 published on npmjs.com
+* 0aa996a package.json: update urls for 9.0.0-1.1 release
+* b5b3579 CHANGELOG update
 * 604f5b6 website update
 * 118fcaf build-assets/package.json: update customFields
 * 02c0e1b website: preliminary content
