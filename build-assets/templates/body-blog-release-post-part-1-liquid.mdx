@@ -11,8 +11,8 @@ tags:
 
 # ----- Custom properties -----------------------------------------------------
 
-upstream_version: "{{upstreamVersion}}"
-ninja_release_date: "{{customFields.upstreamReleaseDate}}"
+wine_version: "{{upstreamVersion}}"
+wine_release_date: "{{customFields.upstreamReleaseDate}}"
 
 version: "{{releaseVersion}}"
 npm_subversion: "1"
@@ -57,7 +57,7 @@ The **xPack WineHQ** is based on the official
 The current version is based on:
 
 - WineHQ release
-[{frontMatter.upstream_version}](https://dl.winehq.org/wine/source/{frontMatter.upstream_version_major}.0/) from {frontMatter.upstream_release_date}.
+[{frontMatter.wine_version}](https://dl.winehq.org/wine/source/{frontMatter.wine_version}/) from {frontMatter.wine_release_date}.
 
 ## Changes
 
