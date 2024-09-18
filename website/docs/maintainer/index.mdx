@@ -44,8 +44,8 @@ project and documents how to make new releases.
 
 ## Prerequisites
 
-The build scripts run on GNU/Linux and macOS. The Windows binaries are
-compiled on x64 GNU/Linux, using [mingw-w64](https://mingw-w64.org).
+The build scripts run on GNU/Linux.
+
 
 For details on installing the prerequisites, please read the
 [XBB prerequisites page](https://xpack.github.io/xbb/prerequisites/).
@@ -202,8 +202,40 @@ and fix them; assign them to a milestone (like <code>{customField('xpackVersion'
 
 - open the `CHANGELOG.md` file
 - check if all previous fixed issues are in
+- check the latest commits `xpm run git-log`; if necessary, copy/paste lines,
+  group by dates and edit them using the below regular expressions
 - add a new entry like _**\* v{customField('xpackVersion')} prepared**_
 - commit with a message like _**prepare v{customField('xpackVersion')}**_
+
+To turn the dates into headings, change from:
+
+```txt
+
+
+([0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]) [*]
+```
+
+to:
+
+```txt
+
+
+## $1
+
+*
+```
+
+To remove the rest of the dates, change from:
+
+```txt
+^[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [*]
+```
+
+to:
+
+```txt
+*
+```
 
 ### Push the changes to the `xpack-development` branch
 
@@ -218,20 +250,6 @@ will build again the previous release!
 :::
 
 ## Run the development builds
-
-
-
-
-
-
-  
-  
-  
-  
-  
-
-
-
 
 The build currently runs on the x64 GNU/Linux machine.
 
@@ -267,14 +285,6 @@ on the `xpack-development` branch and the latest
 commits are pushed to GitHub.
 
 
-
-
-
-
-
-
-
-
 ### Build the x64 GNU/Linux binaries
 
 Run the docker build on the production machine (`xbbli`);
@@ -285,14 +295,6 @@ caffeinate ssh xbbli
 ```
 
 <PlatformDockerBuild platform="linux-x64"/>
-
-
-
-
-
-
-
-
 
 
 ### Update the trees in the Install Guide page
@@ -318,16 +320,6 @@ via HomeBrew, and make a link to `/usr/local/bin`.
 :::
 
 ### Update the list of links in top package.json
-
-
-
-
-  
-  
-  
-
-
-
 
 Copy/paste the full list of links displayed at the end of the build, in
 sequence, 
@@ -371,23 +363,6 @@ The automation is provided by GitHub Actions and three self-hosted runners.
 
 ### Start the self-hosted runners
 
-
-
-
-
-
-
-
-  
-  
-  
-  
-  
-
-
-
-
-
 - on the development machine (`wksi`) open
 a ssh session to the build machine `xbbli`:
 
@@ -404,14 +379,12 @@ screen -S ga
 
 To quit it, use `# Ctrl-a Ctrl-d`.
 
-
 For `xbbli`, which has more memory, start two runners:
 
 ```sh
 ~/actions-runners/xpack-dev-tools/1/run.sh &
 ~/actions-runners/xpack-dev-tools/2/run.sh &
 ```
-
 
 
 
@@ -456,17 +429,7 @@ xpm run check-space -C ~/Work/xpack-dev-tools/wine-xpack.git/build-assets
 
 This is equivalent to running a `df` command.
 
-
-
-
-
-
-
-
-
 <Tabs groupId="operating-systems">
-
-
 
 
 <TabItem value="linux" label="GNU/Linux">
@@ -476,7 +439,6 @@ df -BG -H /
 ```
 
 </TabItem>
-
 
 </Tabs>
 
@@ -512,8 +474,8 @@ xpm run generate-workflows -C ~/Work/xpack-dev-tools/wine-xpack.git/build-assets
 
 To trigger the GitHub Actions builds, use the xPack actions:
 
-
 - **trigger-workflow-build-linux-x64**
+
 
 ```sh
 xpm run trigger-workflow-build-linux-x64 -C ~/Work/xpack-dev-tools/wine-xpack.git/build-assets
@@ -547,21 +509,13 @@ The resulting binaries are available for testing from
 
 The automation is provided by GitHub Actions.
 
-
-
-
-
-
-
-
-
-
-
 To trigger the GitHub Actions tests, run the xPack actions:
 
-- **trigger-workflow-test-prime**
-- **trigger-workflow-test-docker-linux-x64**
+<ul>
+<li><b>trigger-workflow-test-prime</b></li>
+<li><b>trigger-workflow-test-docker-linux-x64</b></li>
 
+</ul>
 
 ```sh
 xpm run trigger-workflow-test-prime -C ~/Work/xpack-dev-tools/wine-xpack.git/build-assets
@@ -595,16 +549,12 @@ xpm run install -C ~/Work/xpack-dev-tools/wine-xpack.git/build-assets
 xpm run test-pre-release -C ~/Work/xpack-dev-tools/wine-xpack.git/build-assets
 ```
 
-For even more tests, on each platform (MacOS, GNU/Linux, Windows),
+For even more tests, on each platform,
 download the archive from
 [pre-releases/test](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/)
 and check the binaries.
 
-On macOS, remove the `com.apple.quarantine` flag:
 
-```sh
-xattr -cr ${HOME}/Downloads/xpack-*
-```
 
 <MoreTests/>
 
@@ -690,7 +640,7 @@ xpm run update-package-binaries -C ~/Work/xpack-dev-tools/wine-xpack.git/build-a
 ### Publish on the npmjs.com server
 
 - select the `xpack-development` branch
-- check the latest commits `npm run git-log`
+- check the latest commits `xpm run git-log`
 - update `CHANGELOG.md`, add a line like _**\* v{customField('xpackVersion')} published on npmjs.com**_
 - commit with a message like _**CHANGELOG: publish npm v{customField('xpackVersion')}.{customField('npmSubversion')}**_
 - `npm pack` and check the content of the archive, which should list

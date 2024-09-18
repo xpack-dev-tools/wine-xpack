@@ -21,6 +21,7 @@ import LinksVsForwarders from '@site/src/components/LinksVsForwarders'
 
 import AutomaticInstallQuickTest from './_automatic-install-quick-test.mdx'
 import ManualInstallQuickTest from './_manual-install-quick-test.mdx'
+import FolderHierarchies from './_folder-hierarchies.mdx'
 import Miscellaneous from './_miscellaneous.mdx'
 import Testing from './_testing.mdx';
 
@@ -224,25 +225,7 @@ The next step is to install the
 `xpm install @xpack-dev-tools/wine@latest --verbose
 `} </CodeBlock>
 
-
-
-
-
-
-  
-  
-  
-
-
-
-
 <Tabs groupId="operating-systems">
-
-
-
-
-
-
 
 <TabItem value="linux" label="GNU/Linux">
 
@@ -266,8 +249,6 @@ export PATH=<...project-path...>/xpacks/.bin:$PATH
 </details>
 
 </TabItem>
-
-
 
 </Tabs>
 
@@ -374,12 +355,6 @@ the project build configurations need a PATH adjustment:
 
 <Tabs groupId="operating-systems">
 
-
-
-
-
-
-
 <TabItem value="linux" label="GNU/Linux">
 
 <CodeBlock language="sh"> {
@@ -387,8 +362,6 @@ the project build configurations need a PATH adjustment:
 `} </CodeBlock>
 
 </TabItem>
-
-
 
 </Tabs>
 
@@ -430,20 +403,12 @@ For a thorough clean-up, please note that **xpm** uses only two folders:
 
 <Tabs groupId="operating-systems">
 
-
-
-
-
-
-
 <TabItem value="linux" label="GNU/Linux">
 
 - `${HOME}/.local/xPacks`
 - `${HOME}/.cache/xPacks`
 
 </TabItem>
-
-
 
 </Tabs>
 
@@ -469,31 +434,13 @@ the <a href={`https://github.com/xpack-dev-tools/wine-xpack/releases/`}>GitHub R
 
 <Tabs groupId="operating-systems">
 
-
-
-
-
-
-
 <TabItem value="linux" label="GNU/Linux">
 
 The GNU/Linux versions of **xPack WineHQ**
 are packed as `.tar.gz` archives.
 Download the latest version named like:
 
-
-
-
-
-
-
-
-
-
-
 - <code>xpack-wine-{customField('xpackVersion')}-linux-x64.tar.gz</code>
-
-
 
 :::note
 
@@ -519,8 +466,6 @@ chmod -R -w xpack-wine-${customField('xpackVersion')}
 
 </TabItem>
 
-
-
 </Tabs>
 
 :::info
@@ -533,6 +478,8 @@ and `.content` to store the unpacked archive.
 :::
 
 <ManualInstallQuickTest/>
+
+<FolderHierarchies/>
 
 <Miscellaneous/>
 
