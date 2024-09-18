@@ -17,7 +17,8 @@
         "programName": "wine",
         "branding": "wine-",
         "$link": "https://dl.winehq.org/wine/source/",
-        "upstreamReleaseDate": "16 Jan 2024"
+        "upstreamReleaseDate": "16 Jan 2024",
+        "hasTwoNumbersVersion": "true"
       },
       "buildFolderRelativePath": "{{ 'build' | path_join: configuration.name | to_filename | downcase }}",
       "buildFolderRelativePathPosix": "{{ 'build' | path_posix_join: configuration.name | downcase }}",
