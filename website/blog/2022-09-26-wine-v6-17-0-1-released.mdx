@@ -26,12 +26,13 @@ Version **6.17.0-1** is the first release.
 <!-- truncate -->
 
 import Image from '@theme/IdealImage';
+import CodeBlock from '@theme/CodeBlock';
 
 The [xPack WineHQ](https://xpack-dev-tools.github.io/wine-xpack)
 is a standalone binary distribution of
 [WineHQ](https://www.winehq.org).
 
-There are binaries **GNU/Linux** (Intel 64-bit).
+There are binaries **GNU/Linux** (x64).
 
 ## Download
 
@@ -45,8 +46,14 @@ The binary files are available from <a href={frontMatter.download_url}>GitHub Re
 
 ## Install
 
-The full details of installing the **xPack WineHQ** on various platforms
-are presented in the [Install Guide](/docs/install/).
+The easiest way to install this specific version, is by using **xpm**:
+
+<CodeBlock language="console"> {
+`xpm install @xpack-dev-tools/wine@${frontMatter.version}.${frontMatter.npm_subversion} -verbose
+`} </CodeBlock>
+
+Comprehensive instructions for installing **xPack WineHQ** on different platforms
+can be found in the [Install Guide](/docs/install/).
 
 ## Compliance
 
@@ -120,11 +127,11 @@ xpack-wine-6.17.0-1-linux-x64.tar.gz
 
 ### 32-bit support
 
-Support for 32-bit Intel Linux and Intel Windows was
-dropped in 2022. Support for 32-bit Arm Linux (armv7l) will be preserved
+Support for 32-bit x86 GNU/Linux and x86 Windows was
+dropped in 2022. Support for 32-bit Arm GNU/Linux (armv7l) will be preserved
 for a while, due to the large user base of 32-bit Raspberry Pi systems.
 
-### Linux minimum requirements
+### GNU/Linux minimum requirements
 
 Support for RedHat 7 was dropped in 2022 and the
 minimum requirement was raised to GLIBC 2.27, available starting
