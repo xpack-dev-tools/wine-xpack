@@ -24,6 +24,9 @@
 # -----------------------------------------------------------------------------
 
 
+
+
+
 name: 'Deep clean xPack WineHQ'
 
 on:
@@ -35,6 +38,7 @@ on:
         default: 'current'
 
 jobs:
+
 
   linux-x64:
     name: 'linux-x64 wine ${{github.event.inputs.version}} clean'
@@ -54,6 +58,17 @@ jobs:
         run: |
           chmod -Rf a+w * || true
           rm -rf * .git*
+
+
+
+
+
+
+
+
+
+
+
 
 
 
