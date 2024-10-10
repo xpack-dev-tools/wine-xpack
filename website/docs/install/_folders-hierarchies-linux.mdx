@@ -1,20 +1,9 @@
 
 import CodeBlock from '@theme/CodeBlock';
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 import customField from '@site/src/libs/customField';
 
 {/* ------------------------------------------------------------------------ */}
-
-## Folder hierarchy
-
-After install, the package creates a folder hierarchy like the following
-(only the first two depth levels are shown):
-
-<Tabs groupId="operating-systems">
-
-<TabItem value="linux" label="GNU/Linux">
 
 <CodeBlock language="console"> {
 `$ tree -L 2 ~/.local/xPacks/\@xpack-dev-tools/wine/${customField('version')}/.content/
@@ -65,8 +54,3 @@ After install, the package creates a folder hierarchy like the following
 
 12 directories, 31 files
 `} </CodeBlock>
-
-</TabItem>
-
-</Tabs>
-
