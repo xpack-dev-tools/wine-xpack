@@ -42,7 +42,7 @@ export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout 
-      title={`Hello from wine`}
+      title={`Welcome to wine`}
       description="A binary package with the wine executables">
       <HomepageHeader />
       <main>
