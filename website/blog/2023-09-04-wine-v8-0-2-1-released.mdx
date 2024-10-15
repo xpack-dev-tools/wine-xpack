@@ -1,5 +1,6 @@
 ---
 title: xPack WineHQ v8.0.2-1 released
+seo_title: Version 8.0.2-1 released
 description: Version 8.0.2-1 is a new release of xPack WineHQ.
 keywords:
   - xpack
@@ -27,17 +28,15 @@ download_url: https://github.com/xpack-dev-tools/wine-xpack/releases/tag/v8.0.2-
 
 ---
 
-<head>
-  <title>{frontMatter.title}</title>
-  <meta property="og:title" content={frontMatter.title} />
-</head>
+import {PageMetadata} from '@docusaurus/theme-common';
+import Image from '@theme/IdealImage';
+import CodeBlock from '@theme/CodeBlock';
 
 Version **8.0.2-1** is a new release; it follows the upstream release.
 
 <!-- truncate -->
 
-import Image from '@theme/IdealImage';
-import CodeBlock from '@theme/CodeBlock';
+<PageMetadata title={frontMatter.seo_title} />
 
 The [xPack WineHQ](https://xpack-dev-tools.github.io/wine-xpack/)
 is a standalone binary distribution of
