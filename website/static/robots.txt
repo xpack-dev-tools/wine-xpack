@@ -1,0 +1,7 @@
+Sitemap: https://xpack-dev-tools.github.io/wine-xpack/sitemap.xml
+
+User-agent: *
+Disallow: /wine-xpack/blog/archive/
+Disallow: /wine-xpack/blog/authors/
+Disallow: /wine-xpack/blog/page/
+Disallow: /wine-xpack/blog/tags/
