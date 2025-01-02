@@ -4,10 +4,14 @@
   "private": true,
   "scripts": {
   },
+  "dependencies": {
+    "json": "^11.0.0",
+    "liquidjs": "^10.18.0"
+  },
   "xpack": {
     "minimumXpmRequired": "0.16.3",
     "devDependencies": {
-      "@xpack-dev-tools/xbb-helper": "^3.0.17"
+      "@xpack-dev-tools/xbb-helper": "^3.1.1"
     },
     "properties": {
       "appName": "WineHQ",
@@ -44,6 +48,9 @@
       "link-deps": [
         "xpm link @xpack-dev-tools/xbb-helper"
       ],
+      "npm-link-helpers": [
+        "npm link @xpack/npm-packages-helper @xpack/docusaurus-template-liquid"
+      ],
       "git-pull-helper": [
         "git -C ${HOME}/Work/xpack-dev-tools/xbb-helper-xpack.git pull"
       ],
@@ -66,8 +73,9 @@
       "test-release": "bash {{ properties.dbg }} scripts/test.sh --base-url pre-release --develop --cache",
       "test-xpm": "bash {{ properties.dbg }} scripts/test.sh --xpm",
       "build-native": "bash {{ properties.dbg }} scripts/build.sh",
-      "build-native-develop": "bash {{ properties.dbg }} scripts/build.sh --develop"
-    },
+      "build-native-develop": "bash {{ properties.dbg }} scripts/build.sh --develop",
+      "generate-top-commons": "bash node_modules/@xpack/npm-packages-helper/maintenance-scripts/generate-top-commons.sh --xpack-dev-tools"
+     },
     "buildConfigurations": {
       "common-dependencies": {
         "hidden": true,
