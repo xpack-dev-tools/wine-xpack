@@ -10,12 +10,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xpack-dev-tools/wine-xpack.git/"
+    "url": "git+https://github.com/xpack-dev-tools/wine-xpack.git"
   },
   "bugs": {
-    "url": "https://github.com/xpack-dev-tools/wine-xpack/issues/"
+    "url": "https://github.com/xpack-dev-tools/wine-xpack/issues"
   },
-  "homepage": "https://github.com/xpack-dev-tools/wine-xpack.git#readme",
+  "homepage": "https://xpack-dev-tools.github.io/wine-xpack/",
   "keywords": [
     "xpack",
     "wine",
@@ -24,7 +24,7 @@
   "author": {
     "name": "Liviu Ionescu",
     "email": "ilg@livius.net",
-    "url": "https://github.com/ilg-ul/"
+    "url": "https://github.com/ilg-ul"
   },
   "license": "MIT",
   "xpack": {
