@@ -5,8 +5,7 @@
 
 # The xPack WineHQ
 
-A standalone cross-platform (Windows, macOS, GNU/Linux)
-binary distribution of WineHQ,
+A standalone GNU/Linux binary distribution of WineHQ,
 intended for reproducible builds.
 
 ## Project documentation
