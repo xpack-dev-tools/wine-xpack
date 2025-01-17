@@ -80,7 +80,8 @@
     "liquidjs": "^10.19.1"
   },
   "topConfig": {
-    "longName": "WineHQ"
+    "longName": "WineHQ",
+    "shortName": "wine"
   },
   "engines": {
     "node": " >=18.0.0"
