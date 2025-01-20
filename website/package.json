@@ -57,14 +57,12 @@
     ]
   },
   "websiteConfig": {
-    "customFields": {
-      "programName": "wine",
-      "branding": "wine-",
-      "$link": "https://dl.winehq.org/wine/source/",
-      "upstreamReleaseDate": "16 Jan 2024",
-      "hasTwoNumbersVersion": "true",
-      "isSecondaryTool": "true"
-    }
+    "programName": "wine",
+    "branding": "wine-",
+    "isSecondaryTool": "true",
+    "$link": "https://dl.winehq.org/wine/source/",
+    "wineReleaseDate": "16 Jan 2024",
+    "hasTwoNumbersVersion": "true"
   },
   "engines": {
     "node": ">=18.0"
