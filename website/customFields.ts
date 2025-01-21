@@ -17,42 +17,43 @@ export function getCustomFields() {
   const topFileContent = fs.readFileSync(topFilePath);
 
   const topPackageJson = JSON.parse(topFileContent.toString());
-  const releaseVersion = topPackageJson.version.replace(/[.-]pre/, '');
+  const packageVersion = topPackageJson.version;
+  // Remove the pre used during development.
+  const releaseVersion = packageVersion.replace(/[.-]pre.*/, '');
+  // Remove the pre-release.
+  const releaseSemver = releaseVersion.replace(/[-].*$/, '');
+
+  let upstreamVersion = releaseSemver;
+  if (releaseSemver.endsWith('.0')) {
+    // Remove the patch number if zero (wine uses both 2 and 3 numbers).
+    upstreamVersion = releaseSemver.replace(/[.]0*$/, '');
+  }
+
+  let versionFields = {
+    packageVersion,
+    releaseVersion,
+    releaseSemver,
+    upstreamVersion,
+  }
 
   console.log(`package version: ${topPackageJson.version}`);
 
-  let versionFields;
-
   if (topPackageJson.xpack && !releaseVersion.startsWith('0.0.0')) {
+
     // Remove the first part, up to the last dot.
     const npmSubversion = releaseVersion.replace(/^.*[.]/, '');
 
     // Remove from the last dot to the end.
     const xpackVersion = releaseVersion.replace(/[.][0-9]*$/, '');
 
-    // Remove the pre-release.
-    const xpackSemver = xpackVersion.replace(/[-].*$/, '');
-
     // Remove the first part, up to the dash.
     const xpackSubversion = xpackVersion.replace(/^.*[-]/, '');
 
-    let upstreamVersion = xpackSemver;
-    if (xpackSemver.endsWith('.0')) {
-      // Remove the patch number if zero (wine uses both 2 and 3 numbers).
-      upstreamVersion = xpackSemver.replace(/[.]0*$/, '');
-    }
-
     versionFields = {
-      releaseVersion,
+      ...versionFields,
       xpackVersion,
-      xpackSemver,
       xpackSubversion,
       npmSubversion,
-      upstreamVersion,
-    }
-  } else {
-    versionFields = {
-      releaseVersion
     }
   }
 
