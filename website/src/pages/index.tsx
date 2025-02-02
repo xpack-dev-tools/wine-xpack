@@ -30,7 +30,11 @@ function HomepageHeader() {
       <HeadTitle title="Welcome to the xPack WineHQ!" />
       <div className="container">
         <Heading as="h1" className="hero__title">{siteConfig.title}</Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <p className="hero__subtitle">{siteConfig.tagline}
+        <span className="margin-left-platforms">
+          <span className="tagline-platform-linux"></span>
+        </span>
+        </p>
         <div className={styles.installWithCopy}>
           <InstallWithCopy>xpm install @xpack-dev-tools/wine@9.0.0-1.1 --verbose</InstallWithCopy>
         </div>
