@@ -4,7 +4,10 @@ Entries in this file are in reverse chronological order.
 
 ## 2025-02-03
 
-* v10.0.0-1 released
+* v10.0.0-1.1 published on npmjs.com
+* e934724 package.json: update urls for 10.0.0-1.1 release
+* bfdfca5 website: blog post release 10.0.0-1 published
+* 286e7a4 CHANGELOG update
 * 7604ccf build-assets/package.json: bump deps
 * d1ead19 package.json: update executables links
 * 99b2af8 website: update development durations
