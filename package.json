@@ -46,12 +46,13 @@
       }
     },
     "bin": {
+      "function_grep.pl": "./.content/bin/function_grep.pl",
       "msidb": "./.content/bin/msidb",
       "msiexec": "./.content/bin/msiexec",
       "notepad": "./.content/bin/notepad",
       "regedit": "./.content/bin/regedit",
       "regsvr32": "./.content/bin/regsvr32",
-      "winewidl": "./.content/bin/widl",
+      "widl": "./.content/bin/widl",
       "wine": "./.content/bin/wine",
       "wine-preloader": "./.content/bin/wine-preloader",
       "wine64": "./.content/bin/wine64",
