@@ -2,8 +2,214 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2025-02-03
+
+* v10.0.0-1 prepared
+
+## 2025-02-02
+
+* 206cbfc website: re-generate commons
+
+## 2025-01-31
+
+* ebc1369 website: updates and final common rework
+
+## 2025-01-30
+
+* db2ac61 website: rework getting-started
+* a751050 website: more rework with commons
+
+## 2025-01-29
+
+* 935af9c website: more rework with commons
+
+## 2025-01-27
+
+* 67a7fba website: cosmetise imports
+
+## 2025-01-26
+
+* 42dcddc website: rework with _project
+
+## 2025-01-23
+
+* f0bd23c website: re-generate commons
+
+## 2025-01-22
+
+* 8964031 website: re-generate commons
+
+## 2025-01-21
+
+* a429d51 build-assets: cleanup actions
+* 1866834 website: re-generate commons
+* a8749cc website: re-generate commons
+* ed595a0 website: re-generate commons
+
+## 2025-01-20
+
+* b6fc4d4 re-generate commons
+* 9f8f9cf website: re-generate commons
+
+## 2025-01-19
+
+* 856c1f9 website: remove unused customField.js
+* ce01e50 build-assets: move customFields to websiteConfig
+* d0858f0 website: re-generate commons
+
+## 2025-01-17
+
+* 2542157 website: re-generate commons
+* fa8ce25 re-generate commons
+* b2a019a website: re-generate commons
+
+## 2025-01-16
+
+* 732e153 website: re-generate commons
+
+## 2025-01-15
+
+* 95a0f7b re-generate commons
+
+## 2025-01-14
+
+* a83621d re-generate commons
+* beae552 re-generate commons
+
+## 2025-01-13
+
+* cac34fb website: re-generate commons remove Windows
+* b35e8d9 website: re-generate commons remove Windows
+* d45636f re-generate workflows
+* f88f83a copyright updates
+* fe31c3a copyright updates
+
+## 2025-01-10
+
+* 2bb1644 website: updates
+* 1de5615 website: updates
+* e6b53d6 website: updates
+
+## 2025-01-09
+
+* 5b95250 build-assets/package.json: bump deps
+* 4f8e0e1 website: updates
+
+## 2025-01-02
+
+* 9230653 package.json: cosmetics
+* 77bd28d website: updates
+* c1d88a6 build-assets/package.json: bump deps
+
+## 2024-12-31
+
+* 887488f website: updates
+
+## 2024-12-30
+
+* c6958c6 package.json: bump deps
+* 4aced13 website: updates
+
+## 2024-12-24
+
+* 9b8a573 website: updates
+* 7d1027e website: updates
+
+## 2024-12-22
+
+* 2c523f7 website: updates
+* d4e35eb website: add _xpack.github.io
+
+## 2024-12-20
+
+* 856ce4c website: updates
+* 674300f website: updates
+
+## 2024-12-11
+
+* e07aba2 website: updates
+* f72cb65 website: re-generate commons
+* 38331fd website/blog updates
+* 6289a8a website/blog/_templates/blog-post-release*
+* 56a038d build-assets/package.json: bump deps
+
+## 2024-12-04
+
+* 768b679 website: updates
+
+## 2024-10-15
+
+* 642dc94 website: updates
+* bccf360 website: updates
+
+## 2024-10-14
+
+* 574bdd5 website: updates
+
+## 2024-10-13
+
+* 2270bee website: updates
+* 253b47d website: updates
+* 0d8d96f website: updates
+
+## 2024-10-12
+
+* 7aa2091 website: fix broken link
+
+## 2024-10-11
+
+* 0edef11 website: updates
+* aa7d294 website/blog/_templates/blog-post-release*
+* 3e11236 website/blog/_templates/blog-post-release*
+
+## 2024-10-10
+
+* 9c8927f website: updates
+* 62ad25d website: updates
+
+## 2024-10-09
+
+* 0dc56e2 website move blog post templates
+* 806f63e website: updates
+* b224301 website: updates
+
+## 2024-10-07
+
+* 0f7a4b1 website: updates
+* e436736 website: updates
+
+## 2024-10-06
+
+* 71d6a1b website: updates
+* 8cb6df6 website: updates
+* 4ad0c60 re-generate workflows
+
+## 2024-10-04
+
+* 7026b10 website: updates
+* 9b4948e build-assets/package.json update customFields
+* 34233bf templates/body-blog update
+
+## 2024-09-18
+
+* 7bb93dc website: updates
+* 62f9723 website update
+* e44e1a6 build-assets/package.json update customFields
+* 7d591b1 build-assets/templates updates
+
+## 2024-09-17
+
+* 609e603 website update
+
 ## 2024-09-12
 
+* e1bac5f website update
+* 9a27b79 re-generate workflows
+* b67e01c 9.0.0-1.1
+* c0b7875 website updates
+* 327b945 package.json: update customFields
+* e7e57bc templates updates
+* 9a6ffd1 CHANGELOG: publish npm v9.0.0-1.1
 * v9.0.0-1 published on npmjs.com
 * 0aa996a package.json: update urls for 9.0.0-1.1 release
 * b5b3579 CHANGELOG update

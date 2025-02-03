@@ -215,7 +215,7 @@ The command to install the **latest** available version of **wine** is:
 To install a **specific version**, specify it explicitly:
 
 <CodeBlock language="sh"> {
-`xpm install @xpack-dev-tools/wine@9.0.0-1.1 --verbose
+`xpm install @xpack-dev-tools/wine@10.0.0-1.1 --verbose
 `} </CodeBlock>
 
 <Tabs groupId="operating-systems">
@@ -295,7 +295,7 @@ The result looks like this:
     "dependencies": {},
     "devDependencies": {
       "@xpack-dev-tools/wine": {
-        "specifier": "9.0.0-1.1",
+        "specifier": "10.0.0-1.1",
         "local": "link",
         "platforms": "all"
       }
@@ -351,7 +351,7 @@ the project build configurations need a PATH adjustment:
 <TabItem value="linux" label="GNU/Linux">
 
 <CodeBlock language="sh"> {
-`export PATH=$HOME/.local/xPacks/@xpack-dev-tools/wine/9.0.0-1.1/.content/bin:$PATH
+`export PATH=$HOME/.local/xPacks/@xpack-dev-tools/wine/10.0.0-1.1/.content/bin:$PATH
 `} </CodeBlock>
 
 </TabItem>
@@ -434,7 +434,7 @@ are packed as `.tar.gz` archives.
 Download the latest version named like:
 
 <ul>
-<li><code>xpack-wine-9.0.0-1-linux-x64.tar.gz</code></li>
+<li><code>xpack-wine-10.0.0-1-linux-x64.tar.gz</code></li>
 </ul>
 
 :::note
@@ -449,14 +449,14 @@ unpack the archive and move it to a location of your choice.
 
 The recommended location is
 the <code>~/.local/xPacks/wine</code> folder, for
-example <code>/home/ilg/.local/xPacks/wine/xpack-wine-9.0.0-1</code>:
+example <code>/home/ilg/.local/xPacks/wine/xpack-wine-10.0.0-1</code>:
 
 <CodeBlock language="console"> {
 `mkdir -p ~/.local/xPacks/wine
 cd ~/.local/xPacks/wine
 
-tar xvf ~/Downloads/xpack-wine-9.0.0-1-linux-x64.tar.gz
-chmod -R -w xpack-wine-9.0.0-1
+tar xvf ~/Downloads/xpack-wine-10.0.0-1-linux-x64.tar.gz
+chmod -R -w xpack-wine-10.0.0-1
 `} </CodeBlock>
 
 </TabItem>
