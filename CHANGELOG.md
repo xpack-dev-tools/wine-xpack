@@ -4,7 +4,11 @@ Entries in this file are in reverse chronological order.
 
 ## 2025-02-03
 
-* v10.0.0-1 prepared
+* v10.0.0-1 released
+* 7604ccf build-assets/package.json: bump deps
+* d1ead19 package.json: update executables links
+* 99b2af8 website: update development durations
+* 3c5e134 prepare v10.0.0-1
 
 ## 2025-02-02
 
