@@ -303,13 +303,7 @@ If present, replace the actual version
 ${customField('upstreamVersion')}
 ```
 
-:::tip
 
-macOS does not have a `tree` command; either compile it from
-[sources](https://github.com/Old-Man-Programmer/tree), or install it
-via HomeBrew, and make a link to `/usr/local/bin`.
-
-:::
 
 Commit with the message _**website: update folder hierarchies**_.
 
@@ -349,6 +343,9 @@ place them in the XBB cache (`Work/cache`) and restart the build.
 The automation is provided by GitHub Actions and three self-hosted runners.
 
 ### Start the self-hosted runners
+
+If the runners expired (more than 2 weeks since last use), run the
+`github-runner-configure.sh` script to reconfigure them
 
 - on the development machine (`wksi`) open
 a ssh session to the build machine `xbbli`:
@@ -393,15 +390,14 @@ The status of all self-hosted runners is available at the [GitHub Runners](https
 
 Publish a new release of the helper on **npmjs**.
 
-### Update the dependency to the new helper
+### In `npm-packages-helper.git`, update the dependency to the new helper
 
-In `build-assets/package.json`, update the reference
-to `"@xpack-dev-tools/xbb-helper":`
-(possibly in all xPack projects).
+In `templates/_xpack-dev-tools/build-assets/package-merge-liquid.json`, update the reference
+to `"@@xpack-dev-tools/xbb-helper":`.
 
 ### Commit the changes to `build-assets/package.json`
 
-Commit with the message _**build-assets/package.json: bump deps**_.
+Commit with the message _**template: build-assets/package-merge-liquid.json: bump deps**_.
 
 ### Check for disk space
 
@@ -440,11 +436,11 @@ rm -rf ~/Work/xpack-dev-tools/*/build-assets/build
 
 ### Generate the GitHub workflows
 
-Run the **generate-workflows** xpm/xPack action to update the
+Run the top **generate-top-commons** npm script to update the
 GitHub workflow files.
 
 ```sh
-xpm run generate-workflows -C ~/Work/xpack-dev-tools/wine-xpack.git/build-assets
+npm run generate-workflows -C ~/Work/xpack-dev-tools/wine-xpack.git
 ```
 
 ### Commit and push
@@ -481,7 +477,7 @@ These commands use the `xpack-development` branch of this repo.
 The workflow results and logs are available from the
 [GitHub Actions](https://github.com/xpack-dev-tools/wine-xpack/actions) page.
 
-Update the values in `website/docs/maintainer/_github-actions-durations.mdx`
+Update the values in `website/docs/_shared/_github-actions-durations.mdx`
 with those shown by GitHub Actions.
 
 Commit with the message _**website: update actions durations**_.
@@ -599,14 +595,15 @@ xpm run generate-website-blog-post -C ~/Work/xpack-dev-tools/wine-xpack.git/buil
 ### Update the web install page
 
 - check and possibly update the output of the `--version` runs in
-  - `website/docs/install/_automatic-install-quick-test.mdx`
-  - `website/docs/install/_manual-install-quick-test.mdx`
+  - `website/docs/install/_project/_automatic-install-quick-test.mdx`
+  - `website/docs/install/_project/_manual-install-quick-test.mdx`
 - commit with the message _**website: update quick tests**_
 
 ### Check the list of links in top package.json
 
 - open the top `package.json` file
 - check if the links in the `bin` property cover the actual binaries
+- rename `widl` -> `winewidl`
 - if necessary, also check on Windows
 
 ### Update the package.json list of binaries
