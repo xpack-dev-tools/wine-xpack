@@ -380,7 +380,10 @@ function wine_test()
   run_host_app_verbose "${test_bin_path}/wine64" ${netstat_64}
 
   local netstat_32="$(dirname ${wine64_realpath})/../lib32/wine/i386-windows/netstat.exe"
-  run_host_app_verbose "${test_bin_path}/wine64" ${netstat_32} || true
+  if [ -f "${netstat_32}" ]
+  then
+    run_host_app_verbose "${test_bin_path}/wine" ${netstat_32} || true
+  fi
 
   echo
   echo "Testing if wine binary starts properly..."
