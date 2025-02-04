@@ -13,10 +13,17 @@ function application_build_versioned_components()
 {
   XBB_WINE_VERSION="$(echo "${XBB_RELEASE_VERSION}" | sed -e 's|[.][0-9][0-9]*-.*||' | sed -e 's|[.]0[.]0$|.0|')"
 
+  # The 64-bit build passes on macOS, but the binary hangs.
   if [ "${XBB_REQUESTED_HOST_PLATFORM}" != "linux" ] || [ "${XBB_REQUESTED_HOST_ARCH}" != "x64" ]
   then
     echo "This package can be built only on x64 Linux"
     exit 1
+  fi
+
+  if [ "${XBB_REQUESTED_HOST_PLATFORM}" == "darwin" ]
+  then
+    # On macOS, the 32-bit Wine build fails when compiling Carbon.h.
+    XBB_WINE_SKIP_WIN32="y"
   fi
 
   # Keep them in sync with the combo archive content.
