@@ -42,6 +42,10 @@ export const redirects = {
       from: '/docs/about',
       to: '/docs/project/about',
     },
+    {
+      from: '/blog/2025/02/03/wine-v10-0-0-released/',
+      to: '/blog/2025/02/03/wine-v10-0-0-1-released/',
+    }
   ],
   createRedirects(existingPath) {
     console.log(existingPath);
