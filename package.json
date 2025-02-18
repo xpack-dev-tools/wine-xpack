@@ -33,7 +33,7 @@
   },
   "license": "MIT",
   "xpack": {
-    "minimumXpmRequired": "0.16.3",
+    "minimumXpmRequired": "0.20.5",
     "binaries": {
       "destination": "./.content",
       "baseUrl": "https://github.com/xpack-dev-tools/wine-xpack/releases/download/v10.0.0-1",
@@ -45,7 +45,7 @@
         }
       }
     },
-    "bin": {
+    "executables": {
       "function_grep.pl": "./.content/bin/function_grep.pl",
       "msidb": "./.content/bin/msidb",
       "msiexec": "./.content/bin/msiexec",
