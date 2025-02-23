@@ -178,7 +178,7 @@ or run the following in a terminal:
 ```
 
 Navigate to the **Maintainer Info** page,
-the **[Update the version specific code](http://localhost:3000/openocd-xpack/docs/maintainer/#update-the-version-specific-code)** section.
+the **[Update the version specific code](http://localhost:3000/wine-xpack/docs/maintainer/#update-the-version-specific-code)** section.
 
 <UpdateVersionSpecific/>
 
@@ -272,7 +272,7 @@ commits are pushed to GitHub.
 
 :::caution
 
-This is particularly crucial for extensive projects; otherwise,
+This is particularly crucial for large projects; otherwise,
 the build may proceed with the previous version.
 
 :::
@@ -446,6 +446,13 @@ rm -rf ~/Work/xpack-dev-tools/*/build-assets/build
 
 - **push** the `xpack-development` branch to GitHub
 
+:::caution
+
+This is particularly crucial for large projects; otherwise,
+the build may proceed with the previous version.
+
+:::
+
 ### Check if the helper is pushed and published
 
 The helper `xpack` branch must be updated and the npm package published.
@@ -512,13 +519,6 @@ These actions use the `xpack-development` branch of this repo and the
 [pre-releases/test](https://github.com/xpack-dev-tools/pre-releases/releases/tag/test/)
 binaries.
 
-:::caution
-
-Some of the `docker-linux-arm` tests have an issue on Debian and the
-**Clean working area** step fails.
-
-:::
-
 The tests results are available from the
 [GitHub Actions](https://github.com/xpack-dev-tools/wine-xpack/actions) page.
 
@@ -568,10 +568,6 @@ with all binaries attached.
 
 - edit the draft and be sure it is attached to the `xpack-development` branch (important!)
 - perform the final edits (maintenance vs. new release) and check if everything is fine
-- add entries in the **Bug fixes**; use the following syntax
-  ```
-  - [[#N](https://github.com/xpack-dev-tools/wine-xpack/issues/N)]:
-  ```
 - **keep the pre-release button enabled**
 - do **not** enable Discussions yet
 - click the **Publish release** button
@@ -593,6 +589,10 @@ this will add a file in the `website/blog` folder:
   ```
 - edit the `description` property in the post front matter
 - select the correct summary (maintenance vs. new release)
+- add entries in the **Bug fixes**; use the following syntax
+  ```
+  - [[#N](https://github.com/xpack-dev-tools/wine-xpack/issues/N)]:
+  ```
 - copy/paste the folders hierarchies from the install guide
 - **commit** with the message _**website: blog post release 10.0.0-1 published**_
 
