@@ -81,8 +81,9 @@
     "liquidjs": "^10.19.1"
   },
   "topConfig": {
-    "longName": "WineHQ",
-    "shortName": "wine"
+    "descriptiveName": "WineHQ",
+    "permalinkName": "wine",
+    "useSelfHostedRunners": "true"
   },
   "engines": {
     "node": " >=18.0.0"
