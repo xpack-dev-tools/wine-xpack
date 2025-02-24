@@ -9,14 +9,14 @@ import TabItem from '@theme/TabItem';
 
 ### Quick test {#manual-install-quick-test}
 
-To check if the {props.longName} installed manually starts properly, use something like:
+To check if the {props.descriptiveName} installed manually starts properly, use something like:
 
 <Tabs groupId="operating-systems">
 
 <TabItem value="linux" label="GNU/Linux">
 
 <CodeBlock language="console"> {
-`$ ~/.local/xPacks/${props.shortName}/xpack-${props.shortName}-10.0.0-1/bin/${props.programName} --version
+`$ ~/.local/xPacks/${props.permalinkName}/xpack-${props.permalinkName}-10.0.0-1/bin/${props.programName} --version
 ${props.branding}10.0
 `} </CodeBlock>
 
