@@ -77,7 +77,8 @@
     "isSecondaryTool": "true",
     "$link": "https://dl.winehq.org/wine/source/",
     "wineReleaseDate": "21 Jan 2025",
-    "hasTwoNumbersVersion": "true"
+    "hasTwoNumbersVersion": "true",
+    "shareOnTwitter": "true"
   },
   "engines": {
     "node": ">=18.0"
