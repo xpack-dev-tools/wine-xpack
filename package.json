@@ -83,6 +83,7 @@
   "topConfig": {
     "descriptiveName": "WineHQ",
     "permalinkName": "wine",
+    "skipCiTests": "true",
     "useSelfHostedRunners": "true"
   },
   "engines": {
