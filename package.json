@@ -81,12 +81,13 @@
     "liquidjs": "^10.19.1"
   },
   "topConfig": {
-    "descriptiveName": "WineHQ",
+    "descriptiveName": "xPack WineHQ",
+    "upstreamDescriptiveName": "WineHQ",
     "permalinkName": "wine",
     "skipCiTests": "true",
-    "useSelfHostedRunners": "true"
+    "useSelfHostedRunners": "false"
   },
   "engines": {
-    "node": " >=18.0.0"
+    "node": " >=20.0"
   }
 }
