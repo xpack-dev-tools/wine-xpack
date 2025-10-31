@@ -308,6 +308,9 @@ function wine_build()
 
         run_verbose make install
 
+        run_verbose cp -f ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine64 ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine
+        run_verbose cp -f ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine64-preloader ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine-preloader
+
         run_verbose x86_64-w64-mingw32-strip --strip-unneeded "${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}"/lib/wine/x86_64-windows/*.dll
 
       ) 2>&1 | tee "${XBB_LOGS_FOLDER_PATH}/${wine_folder_name}/make-install-output-64-$(ndate).txt"
