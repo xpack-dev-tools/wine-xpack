@@ -2,8 +2,96 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2025-10-31
+
+* v10.0.0-2 prepared
+* 3507fd1 build-assets/package.json bump helper
+* 026bd16 package.json add wine32, wine -> win64
+* bc31f48 wine.sh run_verbose *-strip
+* 87279bb wine.sh rename win32
+* 5176576 wine.sh: test hello-*.exe
+* 148095c wine.sh: use local WINEPREFIX
+
+## 2025-10-26
+
+* dbf4233 re-generate top commons
+
+## 2025-10-24
+
+* 7d12cfd website: re-generate commons
+* 8cbf755 re-generate top commons
+* 36526fe re-generate top commons
+
+## 2025-10-19
+
+* 33532cb website: re-generate commons
+* 5414f99 re-generate commons
+* d66ca58 re-generate commons
+
+## 2025-10-16
+
+* 7ac5aec add tests-assets
+* 1682a11 re-generate website commons
+* eaf4465 re-generate top commons
+
+## 2025-10-04
+
+* c6c5ded re-generate website commons
+* 1501aa1 re-generate top commons
+
+## 2025-03-23
+
+* 9a29b70 update /licenses/MIT
+* 79e2c42 website: re-generate commons
+* 0f567b2 re-generate commons
+* 5c8f6b3 website package.json shareOnTwitter update
+* 287f7ca website package.json author update
+* b23ddf8 website generate-website-commons update
+
+## 2025-02-24
+
+* bb197d8 website: re-generate descriptive & permalink names
+* 5c0b762 re-generate descriptive & permalink names
+
+## 2025-02-23
+
+* 23f1db2 website: re-generate commons
+
+## 2025-02-18
+
+* 97ba3d1 package.json: bump minimumXpmRequired 0.20.5
+* 8d9308e package.json: bump xpm 0.20.5
+
+## 2025-02-14
+
+* 2f4f089 re-generate commons
+
+## 2025-02-13
+
+* 30fa93d re-generate commons
+
+## 2025-02-07
+
+* d39d60b website: re-generate commons
+
+## 2025-02-05
+
+* 3b7169d website: fix blog permalink
+
+## 2025-02-04
+
+* 6080434 website: re-generate commons
+* 10d96c3 build-assets: update generate-website-blog-post
+* 8ff6879 versioning.sh: try to build on macOS; unsuccessful
+* 1412517 wine.sh: skip netstat_32 test if no 32-bit
+
 ## 2025-02-03
 
+* 52ab904 website update
+* 78203f4 website: update bloc post
+* f82e4ad 10.0.0-1.1
+* fb00be3 website update
+* 3ef900c CHANGELOG: publish npm v10.0.0-1.1
 * v10.0.0-1.1 published on npmjs.com
 * e934724 package.json: update urls for 10.0.0-1.1 release
 * bfdfca5 website: blog post release 10.0.0-1 published
