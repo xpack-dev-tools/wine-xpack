@@ -365,7 +365,8 @@ function wine_test()
   # When running in Docker with the home mounted, wine throws:
   # wine: '/github/home' is not owned by you, refusing to create a configuration directory there
   # To avoid it, create the .wine folder beforehand.
-  run_verbose mkdir -p "${HOME}/.wine"
+  export WINEPREFIX="${XBB_TESTS_FOLDER_PATH}/.wine"
+  run_verbose mkdir -p "${WINEPREFIX}"
 
   # This is a script that tries to access the wine and win64
   # binaries, but wine fails on machines which do not support 32-bit.
