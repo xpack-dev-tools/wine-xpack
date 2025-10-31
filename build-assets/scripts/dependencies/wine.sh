@@ -289,7 +289,7 @@ function wine_build()
 
             run_verbose make install
 
-            i686-w64-mingw32-strip --strip-unneeded "${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}"/lib32/wine/i386-windows/*.dll
+            run_verbose i686-w64-mingw32-strip --strip-unneeded "${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}"/lib32/wine/i386-windows/*.dll
 
             run_verbose mv ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine32
             run_verbose mv ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine-preloader ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine32-preloader
@@ -308,7 +308,7 @@ function wine_build()
 
         run_verbose make install
 
-        x86_64-w64-mingw32-strip --strip-unneeded "${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}"/lib/wine/x86_64-windows/*.dll
+        run_verbose x86_64-w64-mingw32-strip --strip-unneeded "${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}"/lib/wine/x86_64-windows/*.dll
 
       ) 2>&1 | tee "${XBB_LOGS_FOLDER_PATH}/${wine_folder_name}/make-install-output-64-$(ndate).txt"
     )
