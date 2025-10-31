@@ -291,6 +291,9 @@ function wine_build()
 
             i686-w64-mingw32-strip --strip-unneeded "${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}"/lib32/wine/i386-windows/*.dll
 
+            run_verbose mv ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine32
+            run_verbose mv ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine-preloader ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine32-preloader
+
             # wine: Unhandled page fault on read access to 0000000000000108 at address 000000038B5B4C00 (thread 0114), starting debugger...
             # run_verbose make test
 
