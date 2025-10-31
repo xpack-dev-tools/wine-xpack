@@ -2,9 +2,12 @@
 
 Entries in this file are in reverse chronological order.
 
-
 ## 2025-10-31
 
+* v10.0.0-2.1 published on npmjs.com
+* 2749340 package.json: update URLs for 10.0.0-2.1 release
+* 3816ada website: blog post release 10.0.0-2.1 published
+* 8d18d9c CHANGELOG update
 * v10.0.0-2 released
 * 7beda4b re-generate top commons
 * beea209 website: update actions durations
