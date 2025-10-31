@@ -2,8 +2,17 @@
 
 Entries in this file are in reverse chronological order.
 
+
 ## 2025-10-31
 
+* v10.0.0-2 released
+* 7beda4b re-generate top commons
+* beea209 website: update actions durations
+* 3fc4a2c website update folder hierarchy
+* ba1d399 package.json cleanups
+* 479b755 package.json bump deps
+* a73c029 copy wine64 -> wine
+* ade4698 prepare v10.0.0-2
 * v10.0.0-2 prepared
 * 3507fd1 build-assets/package.json bump helper
 * 026bd16 package.json add wine32, wine -> win64
