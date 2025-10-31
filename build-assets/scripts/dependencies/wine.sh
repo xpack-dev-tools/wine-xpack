@@ -353,6 +353,12 @@ function wine_test()
   echo
   echo "Testing if wine64 binaries start properly..."
 
+  # This test should check if the program is able to start
+  # a simple executable.
+  # As a side effect, the "${HOME}/.wine" folder is created
+  # and populated with lots of files., so subsequent runs
+  # will no longer have to do it.
+
   # First check if the program is able to tell its version.
   run_host_app_verbose "${test_bin_path}/wine64" --version
 
@@ -370,28 +376,14 @@ function wine_test()
 
   # This is a script that tries to access the wine and win64
   # binaries, but wine fails on machines which do not support 32-bit.
-  run_host_app_verbose "${test_bin_path}/winecfg" --version || true
+  run_host_app_verbose "${test_bin_path}/winecfg" /? || true
+  run_host_app_verbose "${test_bin_path}/winecfg" /v || true
 
-  # This test should check if the program is able to start
-  # a simple executable.
-  # As a side effect, the "${HOME}/.wine" folder is created
-  # and populated with lots of files., so subsequent runs
-  # will no longer have to do it.
-  local netstat_64="$(dirname ${wine64_realpath})/../lib/wine/x86_64-windows/netstat.exe"
-  run_host_app_verbose "${test_bin_path}/wine64" ${netstat_64}
+  run_host_app_verbose "${test_bin_path}/wine64" --version
 
-  local netstat_32="$(dirname ${wine64_realpath})/../lib32/wine/i386-windows/netstat.exe"
-  if [ -f "${netstat_32}" ]
-  then
-    run_host_app_verbose "${test_bin_path}/wine" ${netstat_32} || true
-  fi
+  run_host_app_verbose "${test_bin_path}/wine64" "${XBB_BUILD_ROOT_PATH}/test-assets/hello-ia32.exe" || true
+  run_host_app_verbose "${test_bin_path}/wine64" "${XBB_BUILD_ROOT_PATH}/test-assets/hello-x64.exe"
 
-  echo
-  echo "Testing if wine binary starts properly..."
-
-  # The `wine` executable is a 32-bit program; running it requires the 32-bit
-  # libraries, not available on some systems, thus it is not enforced.
-  run_host_app_verbose "${test_bin_path}/wine" --version || true
 }
 
 # -----------------------------------------------------------------------------
