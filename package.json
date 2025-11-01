@@ -36,12 +36,12 @@
     "minimumXpmRequired": "0.20.5",
     "binaries": {
       "destination": "./.content",
-      "baseUrl": "https://github.com/xpack-dev-tools/wine-xpack/releases/download/v10.0.0-2",
+      "baseUrl": "https://github.com/xpack-dev-tools/wine-xpack/releases/download/v10.0.0-3",
       "skip": 1,
       "platforms": {
         "linux-x64": {
-          "fileName": "xpack-wine-10.0.0-2-linux-x64.tar.gz",
-          "sha256": "09191af0225d109bee2ebaed791a60e67ff52c18bbec5ce572c728940abc8322"
+          "fileName": "xpack-wine-10.0.0-3-linux-x64.tar.gz",
+          "sha256": "d764273856cf2eea93c1d65abbc0f6210899ab801c331cb51b75c38b50fefc9d"
         }
       }
     },
