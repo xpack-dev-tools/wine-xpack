@@ -4,6 +4,10 @@ Entries in this file are in reverse chronological order.
 
 ## 2025-11-01
 
+* v10.0.0-3.1 published on npmjs.com
+* 3ff0711 package.json: update URLs for 10.0.0-3.1 release
+* ac66674 website: blog post release 10.0.0-3.1 published
+* d1e7620 CHANGELOG update
 * v10.0.0-3 released
 * 13caa7f website: update folder hierarchies
 * bd50f96 build-assets/package*.json bump deps
