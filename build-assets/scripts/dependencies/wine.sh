@@ -291,8 +291,12 @@ function wine_build()
 
             run_verbose i686-w64-mingw32-strip --strip-unneeded "${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}"/lib32/wine/i386-windows/*.dll
 
-            run_verbose mv ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine32
-            run_verbose mv ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine-preloader ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine32-preloader
+            # Failed experiment.
+            if [ "${XBB_RELEASE_VERSION}" == "10.0.0-2" ]
+            then
+              run_verbose mv ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine32
+              run_verbose mv ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine-preloader ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine32-preloader
+            fi
 
             # wine: Unhandled page fault on read access to 0000000000000108 at address 000000038B5B4C00 (thread 0114), starting debugger...
             # run_verbose make test
@@ -308,8 +312,12 @@ function wine_build()
 
         run_verbose make install
 
-        run_verbose cp -f ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine64 ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine
-        run_verbose cp -f ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine64-preloader ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine-preloader
+        # Failed experiment.
+        if [ "${XBB_RELEASE_VERSION}" == "10.0.0-2" ]
+        then
+          run_verbose cp -f ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine64 ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine
+          run_verbose cp -f ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine64-preloader ${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}/bin/wine-preloader
+        fi
 
         run_verbose x86_64-w64-mingw32-strip --strip-unneeded "${XBB_EXECUTABLES_INSTALL_FOLDER_PATH}"/lib/wine/x86_64-windows/*.dll
 

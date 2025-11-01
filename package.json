@@ -1,6 +1,6 @@
 {
   "name": "@xpack-dev-tools/wine",
-  "version": "10.0.0-2.1",
+  "version": "10.0.0-3.1.pre",
   "description": "A binary xpm package with the WineHQ executables",
   "main": "",
   "scripts": {
@@ -54,8 +54,6 @@
       "winewidl": "./.content/bin/widl",
       "wine": "./.content/bin/wine",
       "wine-preloader": "./.content/bin/wine-preloader",
-      "wine32": "./.content/bin/wine32",
-      "wine32-preloader": "./.content/bin/wine32-preloader",
       "wine64": "./.content/bin/wine64",
       "wine64-preloader": "./.content/bin/wine64-preloader",
       "wineboot": "./.content/bin/wineboot",

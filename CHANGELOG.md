@@ -2,8 +2,14 @@
 
 Entries in this file are in reverse chronological order.
 
+## 2025-11-01
+
+* v10.0.0-3 prepared
+
 ## 2025-10-31
 
+* 7c2eb5f 10.0.0-2.1
+* cf32260 CHANGELOG: publish npm v10.0.0-2.1
 * v10.0.0-2.1 published on npmjs.com
 * 2749340 package.json: update URLs for 10.0.0-2.1 release
 * 3816ada website: blog post release 10.0.0-2.1 published
