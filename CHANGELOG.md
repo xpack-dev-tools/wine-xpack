@@ -4,6 +4,10 @@ Entries in this file are in reverse chronological order.
 
 ## 2025-11-01
 
+* v10.0.0-3 released
+* 13caa7f website: update folder hierarchies
+* bd50f96 build-assets/package*.json bump deps
+* 904f8f5 prepare v10.0.0-3
 * v10.0.0-3 prepared
 
 ## 2025-10-31
