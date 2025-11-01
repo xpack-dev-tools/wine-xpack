@@ -1,0 +1,201 @@
+---
+
+title: xPack WineHQ v10.0.0-3 released
+seo_title: Version 10.0.0-3 released
+description: Version 10.0.0-3 is a maintenance release.
+keywords:
+  - xpack
+  - wine
+  - release
+
+date: 2025-11-01 12:35:17 +0200
+
+authors: ilg-ul
+
+# To be listed in the Releases page.
+tags:
+  - releases
+
+# ----- Custom properties -----------------------------------------------------
+
+wine_version: "10.0"
+wine_release_date: "21 Jan 2025"
+
+version: "10.0.0-3"
+npm_subversion: "1"
+
+download_url: https://github.com/xpack-dev-tools/wine-xpack/releases/tag/v10.0.0-3/
+
+---
+
+import {PageMetadata} from '@docusaurus/theme-common';
+import Image from '@theme/IdealImage';
+import CodeBlock from '@theme/CodeBlock';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+import customField from '@site/src/libs/customField';
+
+import Prerequisites from './_common/_prerequisites-glib-2.28.mdx';
+import DeprecationNotices from './_common/_deprecation-notices-glib-2.28.mdx';
+import DownloadAnalytics from './_common/_download-analytics.mdx';
+
+Version **10.0.0-3** is a maintenance release; it reverts to using the original executable names.
+
+<!-- truncate -->
+
+<PageMetadata title={frontMatter.seo_title} />
+
+The [xPack WineHQ](https://xpack-dev-tools.github.io/wine-xpack/)
+is a standalone binary distribution of
+[WineHQ](https://www.winehq.org).
+
+There are binaries for **x64 GNU/Linux**.
+
+## Download
+
+The binary files are available from <a href={frontMatter.download_url}>GitHub Releases</a>.
+
+<Prerequisites/>
+
+## Install
+
+The easiest way to install this specific version, is by using **xpm**:
+
+<CodeBlock language="console"> {
+`xpm install @xpack-dev-tools/wine@${frontMatter.version}.${frontMatter.npm_subversion} -verbose
+`} </CodeBlock>
+
+Comprehensive instructions for installing **xPack xPack WineHQ** on different platforms
+can be found in the [Install Guide](/docs/install/).
+
+## Compliance
+
+The **xPack WineHQ** is based on the official
+[WineHQ](https://www.winehq.org), with no changes.
+
+The current version is based on:
+
+- WineHQ release
+[{frontMatter.wine_version}](https://dl.winehq.org/wine/source/{frontMatter.wine_version}/) from {frontMatter.wine_release_date}.
+
+## Changes
+
+- none
+
+## Bug fixes
+
+- none
+
+## Enhancements
+
+- none
+
+## Known problems
+
+- none
+
+## Documentation
+
+The current WineHQ documentation is available online from:
+
+- https://www.winehq.org/documentation/
+
+## Build
+
+The binaries for all supported platforms
+(Windows, macOS and GNU/Linux) were built using the
+[xPack Build Box (XBB)](https://xpack.github.io/xbb/), a set
+of build environments based on slightly older distributions, that should be
+compatible with most recent systems.
+
+For the prerequisites and more details on the build procedure, please see the
+[Maintainer Info](/docs/maintainer/) page.
+
+## CI tests
+
+Before publishing, a set of simple tests were performed on an exhaustive
+set of platforms. The results are available from:
+
+- [GitHub Actions](https://github.com/xpack-dev-tools/wine-xpack/actions/)
+
+## Tests
+
+TBD
+
+## Checksums
+
+The SHA-256 hashes for the files are:
+
+```txt
+d764273856cf2eea93c1d65abbc0f6210899ab801c331cb51b75c38b50fefc9d
+xpack-wine-10.0.0-3-linux-x64.tar.gz
+
+```
+
+## Folders hierarchy
+
+After install, the package creates a hierarchy of folders like the following
+(only the first two depth levels are shown):
+
+<Tabs groupId="operating-systems">
+
+<TabItem value="linux" label="GNU/Linux">
+
+<CodeBlock language="console"> {
+`$ tree -L 2 ~/.local/xPacks/\@xpack-dev-tools/wine/${frontMatter.version}.${frontMatter.npm_subversion}/.content/
+/home/ilg/.local/xPacks/\@xpack-dev-tools/wine/${frontMatter.version}.${frontMatter.npm_subversion}/.content/
+├── README.md
+├── bin
+│   ├── function_grep.pl
+│   ├── msidb
+│   ├── msiexec
+│   ├── notepad
+│   ├── regedit
+│   ├── regsvr32
+│   ├── widl
+│   ├── wine
+│   ├── wine-preloader
+│   ├── wine64
+│   ├── wine64-preloader
+│   ├── wineboot
+│   ├── winebuild
+│   ├── winecfg
+│   ├── wineconsole
+│   ├── winecpp -> winegcc
+│   ├── winedbg
+│   ├── winedump
+│   ├── winefile
+│   ├── wineg++ -> winegcc
+│   ├── winegcc
+│   ├── winemaker
+│   ├── winemine
+│   ├── winepath
+│   ├── wineserver
+│   ├── wmc
+│   └── wrc
+├── distro-info
+├── include
+│   └── wine
+├── lib
+│   └── wine
+├── lib32
+│   └── wine
+├── libexec
+│   ├── libgcc_s.so.1
+│   ├── libresolv-2.28.so
+│   └── libresolv.so.2 -> libresolv-2.28.so
+└── share
+    ├── applications
+    └── wine
+
+12 directories, 31 files
+`} </CodeBlock>
+
+</TabItem>
+
+</Tabs>
+
+<DeprecationNotices/>
+
+<DownloadAnalytics version={frontMatter.version}/>
