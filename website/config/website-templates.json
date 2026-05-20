@@ -1,0 +1,9 @@
+{
+  "branding": "wine-",
+  "programName": "wine",
+  "wineReleaseDate": "21 Jan 2025",
+  "$link": "https://dl.winehq.org/wine/source/",
+  "hasTwoNumbersVersion": true,
+  "isSecondaryTool": true,
+  "shareOnTwitter": true
+}
