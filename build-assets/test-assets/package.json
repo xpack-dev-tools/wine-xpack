@@ -2,7 +2,6 @@
   "name": "test-assets",
   "version": "0.1.0",
   "description": "An internal project used to generate the binaries.",
-  "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

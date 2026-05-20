@@ -1,0 +1,8 @@
+{
+  "descriptiveName": "xPack WineHQ",
+  "permalinkName": "wine",
+  "preferredName": "xPack WineHQ",
+  "upstreamDescriptiveName": "WineHQ",
+  "skipCiTests": true,
+  "useSelfHostedRunners": false
+}
